@@ -12,30 +12,30 @@ import { useState } from 'react'
 
 const Navigation = ({ user }) => {
     const { logout } = useAuth()
-
     const [open, setOpen] = useState(false)
 
     return (
-        <nav className="bg-white border-b border-gray-100">
+        <nav className="bg-white w-72 min-h-screen border-gray-100">
             {/* Primary Navigation Menu */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex">
-                        {/* Logo */}
-                        <div className="flex-shrink-0 flex items-center">
-                            <Link href="/dashboard">
-                                <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
-                            </Link>
-                        </div>
+                <div className="flex flex-col items-center gap-6 h-16">
+                    {/* Logo */}
+                    <div className="flex-shrink-0 flex items-center">
+                        <Link href="/dashboard">
+                            <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
+                        </Link>
+                    </div>
 
-                        {/* Navigation Links */}
-                        <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <NavLink
-                                href="/dashboard"
-                                active={usePathname() === '/dashboard'}>
-                                Dashboard
-                            </NavLink>
-                        </div>
+                    {/* Navigation Links */}
+                    <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-col gap-5">
+                        <NavLink
+                            href="/dashboard"
+                            active={usePathname() === '/dashboard'}>
+                            Dashboard
+                        </NavLink>
+                        <NavLink href="/dashboard/products">Products</NavLink>
+                        <NavLink href="">Blogs</NavLink>
+                        <NavLink href="">Contacts</NavLink>
                     </div>
 
                     {/* Settings Dropdown */}

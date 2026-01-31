@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    font-family: var(--font-montserat);
+}
+
+h1 {
+    font-family: var(--font-montserat-alternative);
+}
+
+body {
+    overflow-x: hidden;
+}
