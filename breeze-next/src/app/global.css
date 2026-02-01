@@ -10,6 +10,7 @@ h1 {
     font-family: var(--font-montserat-alternative);
 }
 
-body {
+body,
+html {
     overflow-x: hidden;
 }
