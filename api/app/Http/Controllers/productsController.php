@@ -87,4 +87,78 @@ class productsController extends Controller
             ], 201);
         }
     }
+
+    public function edit($id, Request $request) {
+        $product = Product::findOrFail($id);
+
+        $validate = $request->validate([
+            'name' => 'required|max:100',
+            'description' => 'required',
+            'colors' => ['required', 'array', 'min:1'],
+            'colors.*' => ['string', 'max:50'],
+            'type' => 'required',
+            'subtype' => 'required',
+            'price' => 'required|numeric'
+        ]);
+
+        $colors = $validate['colors'] ?? [];
+
+        // create slug
+        $slug = Str::slug($request->name);
+
+        $product->update([
+            'name' => $validate['name'],
+            'description' => $validate['description'],
+            'colors' => $colors,
+            'type' => $validate['type'],
+            'subtype' => $validate['subtype'],
+            'price' => $validate['price'],
+            'slug' => $slug
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product updated successfully',
+        ], 201);
+    }
+
+    public function addImage($id, Request $request) {
+        $validateImage = [
+            'images'   => ['required', 'array', 'min:1'],
+            'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        ];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('products', 'public');
+
+                Image::create([
+                    'path' => $path,
+                    'product_id' => $id,
+                ]);
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Image Added successfully',
+        ], 201);
+    }
+
+    public function deleteImage($id) {
+        $image = Image::findOrFail($id);
+
+        if($image) {
+            // find image data
+            $file = public_path('/storage/'.$image->path);
+            unlink($file);
+
+            $image->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Image deleted successfully',
+            ], 201);
+        }
+    }
 }

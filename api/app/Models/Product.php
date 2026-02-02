@@ -16,6 +16,10 @@ class Product extends Model
         'slug'
     ];
 
+    protected $attributes = [
+        'colors' => '[]',
+    ];
+
     protected $casts = [
         'colors' => 'array',
     ];
