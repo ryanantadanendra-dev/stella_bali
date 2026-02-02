@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Image;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class productsController extends Controller
 {
@@ -19,7 +21,7 @@ class productsController extends Controller
 
     public function add(Request $request) {
         $validatedData = $request->validate([
-            'name' => 'required|max:100',
+            'name' => ['max:100', Rule::unique('products', 'name')],
             'description' => 'required',
             'colors' => ['required', 'array', 'min:1'],
             'colors.*' => ['string', 'max:50'],
@@ -32,12 +34,12 @@ class productsController extends Controller
         $slug = Str::slug($request->name);
 
         $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'colors' => $request->colors,
-            'type' => $request->type,
-            'subtype' => $request->subtype,
-            'price' => $request->price,
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'colors' => $validatedData['colors'],
+            'type' => $validatedData['type'],
+            'subtype' => $validatedData['subtype'],
+            'price' => $validatedData['price'],
             'slug' => $slug
         ]);
 
@@ -72,9 +74,9 @@ class productsController extends Controller
             $images = Image::where('product_id', $id)->get();    
 
             foreach($images as $image) {
-                // find image data
-                $file = public_path('/storage/'.$image->path);
-                unlink($file);
+                if ($image && Storage::disk('public')->exists($image->path)) {
+                    Storage::disk('public')->delete($image->path);
+                }
 
                 $image->delete();
             }
@@ -123,22 +125,40 @@ class productsController extends Controller
     }
 
     public function addImage($id, Request $request) {
-        $validateImage = [
-            'images'   => ['required', 'array', 'min:1'],
-            'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-        ];
+        $count = Image::where('product_id', $id)->get()->count();
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $file) {
-                $path = $file->store('products', 'public');
-
-                Image::create([
-                    'path' => $path,
-                    'product_id' => $id,
-                ]);
-            }
+        if ($count >= 5) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Can only have 5 images',
+            ], 422);
         }
 
+            $validateImage = $request->validate([
+                'images'   => ['required', 'array', 'min:1'],
+                'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            ]);
+
+        $remain = 5 - $count;
+
+        if (count($request->file('images')) > $remain) {
+            return response()->json([
+                'success' => false,
+                'message' => "You can only upload {$remain} more images",
+            ], 422);
+        }
+    
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $file) {
+                    $path = $file->store('products', 'public');
+    
+                    Image::create([
+                        'path' => $path,
+                        'product_id' => $id,
+                    ]);
+                }
+            }
+    
         return response()->json([
             'success' => true,
             'message' => 'Image Added successfully',

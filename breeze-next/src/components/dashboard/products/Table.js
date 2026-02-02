@@ -40,7 +40,7 @@ const Table = ({ setIsOpen }) => {
                 } catch (error) {
                     Swal.fire({
                         title: 'Error!',
-                        text: error,
+                        text: error.response?.data.message,
                         icon: 'error',
                     })
                 } finally {

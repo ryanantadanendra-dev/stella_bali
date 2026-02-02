@@ -34,7 +34,7 @@ const Navigation = ({ user }) => {
                             Dashboard
                         </NavLink>
                         <NavLink href="/dashboard/products">Products</NavLink>
-                        <NavLink href="">Blogs</NavLink>
+                        <NavLink href="/dashboard/blogs">Blogs</NavLink>
                         <NavLink href="">Contacts</NavLink>
                     </div>
 

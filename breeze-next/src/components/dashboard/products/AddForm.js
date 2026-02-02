@@ -98,7 +98,7 @@ const AddForm = ({ setIsOpen }) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: error.response?.data,
+                text: error.response?.data.message,
             })
         } finally {
             setIsLoading(false)
