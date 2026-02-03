@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\productsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogsController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
@@ -23,4 +24,8 @@ Route::post('/dashboard/blogs/add', [BlogsController::class, 'add'])->middleware
 Route::delete('/dashboard/blogs/delete/{id}', [BlogsController::class, 'delete'])->middleware('auth:sanctum');
 Route::put('dashboard/blogs/edit/{id}', [BlogsController::class, 'edit'])->middleware('auth:sanctum');
 Route::put('dashboard/blogs/edit/image/{id}', [BlogsController::class, 'editImage'])->middleware('auth:sanctum');
+
+// CONTACT
+Route::get('/dashboard/contact', [ContactController::class, 'get']);
+Route::put('/dashboard/contact/edit/{id}', [ContactController::class, 'edit'])->middleware('auth:sanctum');
 
