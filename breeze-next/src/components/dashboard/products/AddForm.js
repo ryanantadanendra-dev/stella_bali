@@ -129,6 +129,7 @@ const AddForm = ({ setIsOpen }) => {
                     <input
                         type="description"
                         name="description"
+                        value={formData.description}
                         onChange={handleChange}
                         className="ms-3 w-full h-10 border-2 border-black"
                     />

@@ -11,7 +11,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 // PRODUCTS
-Route::get('/dashboard/products', [productsController::class, 'get'])->middleware('auth:sanctum');
+Route::get('/dashboard/products', [productsController::class, 'get']);
 Route::post('/dashboard/product/add', [productsController::class, 'add'])->middleware('auth:sanctum');
 Route::delete('/dashboard/product/delete/{id}', [productsController::class, 'delete'])->middleware('auth:sanctum');
 Route::put('/dashboard/product/edit/{id}', [productsController::class, 'edit'])->middleware('auth:sanctum');

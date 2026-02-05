@@ -8,11 +8,7 @@ export const useProduct = () => {
     const params = useParams()
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
-    const {
-        data: products,
-        error,
-        mutate,
-    } = useSWR(
+    const { data, error, mutate } = useSWR(
         '/api/dashboard/products',
         async () =>
             await axios
@@ -144,7 +140,8 @@ export const useProduct = () => {
     }
 
     return {
-        products,
+        products: data?.data,
+        categories: data?.categories,
         add,
         deleteData,
         edit,

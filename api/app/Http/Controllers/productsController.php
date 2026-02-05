@@ -8,14 +8,26 @@ use App\Models\Image;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class productsController extends Controller
 {
     public function get() {
         $products = Product::with('images')->get();
 
+        $column = DB::select("SHOW COLUMNS FROM products WHERE Field = 'subtype'")[0]->Type;
+
+        $categories = collect(
+            str_getcsv(
+            preg_replace("/^enum\(|\)$/", '', $column),
+            ',',
+            "'"
+            )
+        );
+
         return response()->json([
-            'data' => $products
+            'data' => $products,
+            'categories' => $categories
         ]);
     }
 
