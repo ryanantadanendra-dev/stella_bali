@@ -5,11 +5,10 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 
-export function Carousel({ datas }) {
-    const [emblaRef, emblaApi] = useEmblaCarousel(
-        { loop: true, draggable: false },
-        [Autoplay({ delay: 6000 })],
-    )
+export function Carousel({ datas, place }) {
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+        Autoplay({ delay: 6000 }),
+    ])
 
     useEffect(() => {
         if (!emblaApi) return
@@ -31,7 +30,7 @@ export function Carousel({ datas }) {
     return (
         <div className="embla mt-12 relative">
             <div
-                className="embla__viewport mx-auto w-full min-h-[75vh] overflow-hidden px-12"
+                className={`embla__viewport mx-auto w-full ${place == 'top' ? 'min-h-[75vh]' : 'min-h-[90vh]'}  overflow-hidden ${place == 'top' ? 'px-12' : ''}`}
                 ref={emblaRef}>
                 <div className="embla__container flex h-full w-full ">
                     {datas?.map((data, index) => (
@@ -49,10 +48,26 @@ export function Carousel({ datas }) {
 
                             <div className="absolute inset-0 z-10 overlay" />
 
-                            <div className="absolute inset-0 z-20 flex items-center px-4 pb-8">
-                                <h1 className="text-white text-5xl md:text-6xl font-semibold leading-tight mt-auto">
-                                    Bali Breeze Everyday Ease
-                                </h1>
+                            <div
+                                className={`absolute inset-0 z-20 flex items-center ${place == 'top' ? '' : 'flex-col justify-center'} px-4 pb-8`}>
+                                {place == 'top' ? (
+                                    <h1
+                                        className={`text-white text-5xl md:text-6xl font-semibold leading-tight mt-auto`}>
+                                        Bali Breeze Everyday Ease
+                                    </h1>
+                                ) : (
+                                    <>
+                                        <h2
+                                            className={`text-white text-5xl md:text-6xl font-semibold leading-tight `}>
+                                            Learn About Us
+                                        </h2>
+                                        <p className="text-lg">
+                                            Lorem ipsum dolor sit amet
+                                            consectetur.
+                                        </p>
+                                        <button></button>
+                                    </>
+                                )}
                             </div>
                         </div>
                     ))}

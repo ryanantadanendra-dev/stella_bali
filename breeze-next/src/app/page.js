@@ -7,6 +7,7 @@ import Hero3 from '../../public/Assets/hero3.jpg'
 import SearchBar from '@/components/SearchBar'
 import NewArrival from '@/components/NewArrival'
 import Collections from '@/components/Collections'
+import Blogs from '@/components/Blogs'
 
 export const metadata = {
     title: 'Laravel',
@@ -20,12 +21,16 @@ const Home = () => {
             <header>
                 <div className="w-screen h-screen flex flex-col items-center">
                     <SearchBar />
-                    <Carousel datas={datas} />
+                    <Carousel datas={datas} place="top" />
                 </div>
             </header>
-            <main className="px-12 overflow-hidden py-12">
-                <NewArrival />
-                <Collections />
+            <main className="w-screen py-12 pb-72 overflow-hidden">
+                <div className="px-12">
+                    <NewArrival />
+                    <Collections />
+                    <Blogs />
+                </div>
+                <Carousel datas={datas} place="bottom" />
             </main>
         </>
     )

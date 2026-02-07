@@ -26,7 +26,7 @@ class BlogsController extends Controller
                 'max:100',
                 Rule::unique('blogs', 'title'),
             ],
-            "subtitle" => 'max:150',
+            "subtitle" => 'required',
             'content' => 'required',
             'image' => 'image|mimes:jpeg,jpg,png|max:2048'
         ]);
@@ -46,7 +46,7 @@ class BlogsController extends Controller
             'slug' => $slug
         ]);
 
-            return response().json([
+            return response()->json([
                 'success' => true,
                 'message' => "Blog Created Successfully!"
             ], 201);
