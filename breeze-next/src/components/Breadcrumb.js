@@ -9,6 +9,7 @@ import {
     BreadcrumbSeparator,
 } from './ui/breadcrumb'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 export default function BreadcrumbComp() {
     const pathName = usePathname()
@@ -27,6 +28,8 @@ export default function BreadcrumbComp() {
                 {segments.map((segment, index) => {
                     const href = '/'
                     const isLast = index === segments.length - 1
+
+                    console.log(segment)
 
                     return (
                         <span key={href} className="flex items-center">

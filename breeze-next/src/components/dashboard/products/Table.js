@@ -102,7 +102,7 @@ const Table = ({ setIsOpen }) => {
                 </tr>
             </thead>
             <tbody>
-                {products?.data?.map((product, index) => (
+                {products?.map((product, index) => (
                     <tr
                         className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'}`}>
                         <td className="text-center">{product.id}</td>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useProduct } from '@/hooks/product'
 import { useSearchParams, useRouter } from 'next/navigation'
 
@@ -11,6 +11,7 @@ const Sidebar = ({ onChange }) => {
     const { categories } = useProduct()
     const searchParams = useSearchParams()
     const router = useRouter()
+    const sort = searchParams.get('sort')
     const [formData, setFormData] = useState({
         sort: '',
         collections: '',
@@ -22,6 +23,13 @@ const Sidebar = ({ onChange }) => {
 
         router.push(`?${params.toString()}`)
     }
+
+    useEffect(() => {
+        if (sort) {
+            handleChange('sort', sort)
+            setSortOpen(true)
+        }
+    }, [sort])
 
     return (
         <div className="min-h-screen w-56 bg-white pt-7">
@@ -52,6 +60,7 @@ const Sidebar = ({ onChange }) => {
                                     type="radio"
                                     name="sort"
                                     value="new-arrivals"
+                                    checked={sort === 'new-arrivals'}
                                     onChange={e =>
                                         handleChange('sort', e.target.value)
                                     }

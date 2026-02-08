@@ -1,6 +1,7 @@
 'use client'
 
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/auth'
 import Image from 'next/image'
 import Logo from '../../public/Assets/Logo.png'
@@ -9,20 +10,25 @@ import Link from 'next/link'
 const Navbar = () => {
     const isMobile = useIsMobile(1024)
     const { user } = useAuth({ middlewate: 'guest' })
+    const router = useRouter()
 
     if (!isMobile && !user) {
         return (
-            <nav className="w-screen h-20 bg-white flex justify-between items-center px-8">
-                <figure className="relative w-32 h-20">
-                    <Image src={Logo} fill className="object-contain" />
-                </figure>
-                <div className="flex gap-8 text-xs">
+            <nav className="w-screen h-20 bg-white flex items-center px-8">
+                <div className="w-1/3">
+                    <figure className="relative w-32 h-20">
+                        <Image src={Logo} fill className="object-contain" />
+                    </figure>
+                </div>
+                <div className="flex gap-8 text-xs w-1/3 justify-center">
                     <Link href="/">Home</Link>
-                    <Link href="/">New Arrival</Link>
-                    <Link href="/">Product</Link>
+                    <Link href={`/products?sort=new-arrivals`}>
+                        New Arrival
+                    </Link>
+                    <Link href="/products">Products</Link>
                     <Link href="/">About Us</Link>
                 </div>
-                <div>
+                <div className="w-1/3 flex justify-end">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 512 512"
