@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Card from './Card'
 import { useProduct } from '@/hooks/product'
 
-const ProductsComponent = ({ sort, collections }) => {
+const ProductsComponent = ({ sort, collections, type }) => {
     const { products } = useProduct()
     const [filtered, setFiltered] = useState([])
 
@@ -19,12 +19,16 @@ const ProductsComponent = ({ sort, collections }) => {
             )
         }
 
+        if (type) {
+            result = result.filter(product => product.type == type)
+        }
+
         if (collections) {
             result = result.filter(product => product.subtype == collections)
         }
 
         setFiltered(result)
-    }, [sort, collections, products])
+    }, [sort, collections, type, products])
 
     return (
         <section className="flex justify-center gap-4">

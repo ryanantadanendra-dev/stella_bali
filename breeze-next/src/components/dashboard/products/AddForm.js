@@ -213,11 +213,12 @@ const AddForm = ({ setIsOpen }) => {
                         value={formData.subtype}
                         onChange={handleChange}
                         className="w-full ms-3">
-                        <option value="top">Top</option>
-                        <option value="bottom">Bottom</option>
-                        <option value="swimwear">Swimwear</option>
-                        <option value="outerwear">Outerwear</option>
-                        <option value="footwear">Footwear</option>
+                        <option value="tops">Tops</option>
+                        <option value="bottoms">Bottoms</option>
+                        <option value="swimsuits">Swimsuits</option>
+                        {formData.type == 'woman' ? (
+                            <option value="dresses">Dresses</option>
+                        ) : null}
                         <option value="accessories">Accessories</option>
                     </select>
                 </li>

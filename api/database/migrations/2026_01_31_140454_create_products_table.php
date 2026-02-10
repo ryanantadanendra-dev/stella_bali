@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('description');
             $table->json('colors');
             $table->enum('type', ['man', 'woman']);
-            $table->enum('subtype', ['Top', 'Bottom', 'Swimwear', 'Dresses', 'Outerwear', 'Footwear', 'Accessories']);
+            $table->enum('subtype', ['Tops', 'Bottoms', 'Swimsuits', 'Dresses', 'Accessories']);
             $table->double('price');
             $table->string('slug');
             $table->timestamps();

@@ -104,11 +104,11 @@ const Table = ({ setIsOpen }) => {
             <tbody>
                 {products?.map((product, index) => (
                     <tr
-                        className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'}`}>
+                        className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'} h-52`}>
                         <td className="text-center">{product.id}</td>
                         <td className="text-center">{product.name}</td>
                         <td className="text-center">{product.description}</td>
-                        <td className="flex gap-2  justify-center">
+                        <td className="flex gap-2  justify-center items-center h-52">
                             {product?.colors?.map((color, i) => (
                                 <div
                                     key={i}

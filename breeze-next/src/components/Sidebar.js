@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react'
 import { useProduct } from '@/hooks/product'
 import { useSearchParams, useRouter } from 'next/navigation'
 
+const types = ['man', 'woman']
+
 const Sidebar = ({ onChange }) => {
     const [buttonName, setButtonName] = useState('')
     const [sortOpen, setSortOpen] = useState(false)
     const [collectionsOpen, setCollectionsOpen] = useState(false)
+    const [extendCollection, setExtendCollection] = useState('')
     const { categories } = useProduct()
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -15,6 +18,7 @@ const Sidebar = ({ onChange }) => {
     const [formData, setFormData] = useState({
         sort: '',
         collections: '',
+        type: '',
     })
 
     const handleChange = (name, value) => {
@@ -30,6 +34,49 @@ const Sidebar = ({ onChange }) => {
             setSortOpen(true)
         }
     }, [sort])
+
+    const displayCollections = types.map(type => (
+        <>
+            <li className="flex gap-2 mt-3">
+                <input
+                    onChange={e => {
+                        handleChange('type', e.target.value)
+                        setExtendCollection(type)
+                    }}
+                    type="radio"
+                    value={type}
+                    name="type"
+                />
+                <label>{type}</label>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 320 512"
+                    // onClick={prev =>
+                    //     setExtendCollection(prev =>
+                    //         prev === type ? null : type,
+                    //     )
+                    // }
+                    className="w-3">
+                    <path d="M140.3 376.8c12.6 10.2 31.1 9.5 42.8-2.2l128-128c9.2-9.2 11.9-22.9 6.9-34.9S301.4 192 288.5 192l-256 0c-12.9 0-24.6 7.8-29.6 19.8S.7 237.5 9.9 246.6l128 128 2.4 2.2z" />
+                </svg>
+            </li>
+            {extendCollection == type
+                ? categories?.map((category, index) => (
+                      <li key={index} className="mt-3 ms-5">
+                          <input
+                              onChange={e =>
+                                  handleChange('collections', e.target.value)
+                              }
+                              type="radio"
+                              value={category}
+                              name="collections"
+                          />
+                          <label>{category}</label>
+                      </li>
+                  ))
+                : null}
+        </>
+    ))
 
     return (
         <div className="min-h-screen w-56 bg-white pt-7">
@@ -111,24 +158,7 @@ const Sidebar = ({ onChange }) => {
                 </div>
                 {collectionsOpen && (
                     <form className="mt-8">
-                        <ul>
-                            {categories?.map((category, index) => (
-                                <li key={index} className="mt-3">
-                                    <input
-                                        onChange={e =>
-                                            handleChange(
-                                                'collections',
-                                                e.target.value,
-                                            )
-                                        }
-                                        type="radio"
-                                        value={category}
-                                        name="collections"
-                                    />
-                                    <label>{category}</label>
-                                </li>
-                            ))}
-                        </ul>
+                        <ul>{displayCollections}</ul>
                     </form>
                 )}
             </div>

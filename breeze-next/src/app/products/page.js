@@ -3,7 +3,7 @@ import Sidebar from '@/components/Sidebar'
 import ProductsComponent from '@/components/Products'
 
 const Products = ({ searchParams }) => {
-    const { sort = '', collections = '' } = searchParams
+    const { sort = '', collections = '', type = '' } = searchParams
 
     return (
         <>
@@ -14,7 +14,11 @@ const Products = ({ searchParams }) => {
             </header>
             <main className="w-screen h-full flex">
                 <Sidebar />
-                <ProductsComponent sort={sort} collections={collections} />
+                <ProductsComponent
+                    sort={sort}
+                    collections={collections}
+                    type={type}
+                />
             </main>
         </>
     )

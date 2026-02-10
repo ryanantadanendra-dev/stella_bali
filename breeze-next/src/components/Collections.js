@@ -5,7 +5,6 @@ import Wrapper from './Wrapper'
 
 const Collections = () => {
     const { categories } = useProduct()
-    console.log(categories)
 
     return (
         <section className="w-screen py-32 pe-28">
