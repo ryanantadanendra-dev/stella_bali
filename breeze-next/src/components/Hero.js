@@ -3,11 +3,17 @@ import Bg from '../../public/Assets/hero.png'
 
 const Hero = ({ title }) => {
     return (
-        <header
-            className="w-screen h-96 bg-center bg-no-repeat bg-cover"
-            style={{ backgroundImage: `url(${Bg.src})` }}>
-            <h1 className="text-center">{title}</h1>
-        </header>
+        <>
+            <header
+                className="w-screen h-80 bg-center bg-no-repeat bg-cover flex justify-center items-center flex-col gap-3 text-white relative"
+                style={{ backgroundImage: `url(${Bg.src})` }}>
+                <div className="absolute text-center z-10">
+                    <h1 className="font-bold text-5xl">{title}</h1>
+                    <p>Where Bali's spirit meets contemporary summer style</p>
+                </div>
+                <div className="bg-[#00000030] w-full h-full absolute z-0"></div>
+            </header>
+        </>
     )
 }
 export default Hero
