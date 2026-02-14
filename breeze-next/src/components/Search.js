@@ -8,7 +8,6 @@ const Search = ({ datas, isActive }) => {
             {datas?.map((data, index) => (
                 <>
                     <Card data={data} />
-                    <Card data={data} />
                 </>
             ))}
         </div>

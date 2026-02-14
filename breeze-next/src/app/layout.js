@@ -12,7 +12,7 @@ const montserratAlternates = Montserrat_Alternates({
     subsets: ['latin'],
     weight: '400',
     display: 'swap',
-    variable: '--font-montserat-alternative',
+    variable: '--font-montserrat-alternative',
 })
 
 const RootLayout = ({ children }) => {

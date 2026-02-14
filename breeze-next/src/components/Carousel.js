@@ -30,7 +30,7 @@ export function Carousel({ datas, place }) {
     return (
         <div className="embla mt-12 relative">
             <div
-                className={`embla__viewport mx-auto w-full ${place == 'top' ? 'min-h-[75vh]' : 'min-h-[90vh]'}  overflow-hidden ${place == 'top' ? 'px-12' : ''}`}
+                className={`embla__viewport mx-auto w-full ${place == 'top' ? 'min-h-[75vh]' : 'min-h-[90vh]'}  overflow-hidden ${place == 'top' ? 'lg:px-12' : ''}`}
                 ref={emblaRef}>
                 <div className="embla__container flex h-full w-full ">
                     {datas?.map((data, index) => (

@@ -7,7 +7,7 @@ import Search from './Search'
 const SearchBar = () => {
     const { products } = useProduct()
     const [search, setResusetSearchlt] = useState('')
-    const [result, setResult] = useState(products?.slice(0, 5))
+    const [result, setResult] = useState(products?.slice(0, 7))
     const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const SearchBar = () => {
                     ),
             )
         }
-    }, [search])
+    }, [search, products])
 
     return (
         <div className="w-96 h-10 flex justify-around px-4 relative">

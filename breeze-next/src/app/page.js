@@ -19,13 +19,13 @@ const Home = () => {
     return (
         <>
             <header>
-                <div className="w-screen h-screen flex flex-col items-center">
+                <div className="w-screen h-screen flex flex-col items-center py-32">
                     <SearchBar />
                     <Carousel datas={datas} place="top" />
                 </div>
             </header>
             <main className="w-screen py-12 pb-72 overflow-hidden">
-                <div className="px-12">
+                <div className="">
                     <NewArrival />
                     <Collections />
                     <Blogs />

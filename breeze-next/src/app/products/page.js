@@ -12,7 +12,7 @@ const Products = ({ searchParams }) => {
                     <BreadcrumbComp />
                 </div>
             </header>
-            <main className="w-screen h-full flex">
+            <main className="w-screen h-full md:pt-28 md:flex">
                 <Sidebar />
                 <ProductsComponent
                     sort={sort}

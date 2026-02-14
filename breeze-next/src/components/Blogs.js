@@ -12,13 +12,13 @@ const Blogs = () => {
         .slice(0, 4)
 
     return (
-        <section className="w-full h-full">
+        <section className="w-full h-full py-32">
             <h2 className="text-center text-3xl font-bold">News & Articles</h2>
-            <p className="text-center px-56 mt-3">
+            <p className="text-center md:px-56 px-12 text-xs md:text-lg mt-3">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.{' '}
             </p>
-            <div className="flex justify-center">
+            <div className="flex justify-center flex-wrap mt-8 gap-4 md:gap-12">
                 {latests?.map((blog, index) => (
                     <Card key={index} data={blog} />
                 ))}

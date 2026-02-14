@@ -13,10 +13,18 @@ const ProductsComponent = ({ sort, collections, type }) => {
 
         let result = [...products]
 
-        if (sort) {
+        if (sort == 'new-arrivals') {
             result.sort(
                 (a, b) => new Date(b.created_at) - new Date(a.created_at),
             )
+        }
+
+        if (sort == 'price-low-to-high') {
+            result.sort((a, b) => a.price - b.price)
+        }
+
+        if (sort == 'price-high-to-low') {
+            result.sort((a, b) => b.price - a.price)
         }
 
         if (type) {
@@ -31,10 +39,12 @@ const ProductsComponent = ({ sort, collections, type }) => {
     }, [sort, collections, type, products])
 
     return (
-        <section className="flex justify-center gap-4">
-            {filtered?.map((product, index) => (
-                <Card data={product} />
-            ))}
+        <section className="w-full flex justify-center flex-wrap gap-4">
+            {filtered.length > 0 ? (
+                filtered?.map((product, index) => <Card data={product} />)
+            ) : (
+                <p className="text-center">No Products Available!</p>
+            )}
         </section>
     )
 }

@@ -7,36 +7,47 @@ import FounderImg from '../../../public/Assets/founder.png'
 const visionMissions = [
     {
         title: 'Our Vision',
-        text: 'Lorem ipsum dolor sit amet consectetur. Vehicula fames in tincidunt erat id. Habitant dignissim nibh viverra diam blandit at ultricies laoreet.',
+        text: 'To become a sustainable handmade fashion brand from Bali with a strong identity and competitive presence in both national and global markets.',
         path: 'M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z',
     },
     {
         title: 'Our Mission',
-        text: 'Lorem ipsum dolor sit amet consectetur. Vitae massa netus arcu vel sed feugiat nullam in fermentum. Pellentesque non ipsum varius fringilla turpis at. Proin bibendum auctor turpis sagittis libero interdum fermentum at.',
+        text: [
+            '•	To create high-quality handmade fashion products that reflect Balinese local identity.',
+            '•	To empower home-based workers through fair, collaborative, and sustainable partnerships.',
+            '•	To prioritize ethical, responsible, and detail-oriented production processes.',
+            '•	To continuously innovate in design while preserving local values.',
+            '•	To support an inclusive and collaborative UMKM ecosystem.',
+        ],
         path: 'M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z',
     },
 ]
 
 const brandValues = [
     {
+        title: 'Local & Handmade',
+        description:
+            'Every product is handmade by local artisans with great care for quality and detail.',
+    },
+    {
+        title: 'Community Empowerment',
+        description:
+            'We are committed to empowering home-based workers and creating meaningful social impact.',
+    },
+    {
+        title: 'Quality & Comfort',
+        description:
+            'Comfort, durability, and functionality are essential in every Stella Bali collection.',
+    },
+    {
+        title: 'Collaboration',
+        description:
+            'Stella Bali grows through collaboration between designers, artisans, and local communities.',
+    },
+    {
         title: 'Sustainability',
         description:
-            "We prioritize eco-friendly materials and processes, ensuring our fashion choices don't come at the planet's expense.",
-    },
-    {
-        title: 'Quality',
-        description:
-            'Every piece is crafted with meticulous attention to detail, designed to last beyond just one summer season.',
-    },
-    {
-        title: 'Authenticity',
-        description:
-            'We stay true to our Balinese roots, creating designs that genuinely reflect island culture and lifestyle.',
-    },
-    {
-        title: 'Community',
-        description:
-            'We support local artisans and fair labor practices, building meaningful relationships with everyone in our supply chain.',
+            'We strive to build a responsible and sustainable fashion practice for the long term.',
     },
 ]
 
@@ -69,34 +80,29 @@ const About = () => {
                             Our Story
                         </h2>
                         <article className="text-center w-[40rem] mx-auto mt-10">
-                            Lorem ipsum dolor sit amet consectetur. Ultricies
-                            leo ut quam nisl felis enim tempor quis. Eu sit
-                            ipsum consectetur dapibus. Nunc adipiscing morbi
-                            tincidunt etiam ut volutpat consectetur rutrum mi.
-                            Risus massa amet tortor orci ultrices convallis.
-                            Turpis cras eget a sagittis turpis. Amet.
+                            Stella Bali is a local Balinese fashion brand rooted
+                            in handmade craftsmanship, collaboration, and
+                            community empowerment. What began as a home-based
+                            business has grown into a creative UMKM that focuses
+                            on producing thoughtfully designed apparel made by
+                            skilled home-based artisans in Bali.
                             <br />
                             <br />
-                            Lorem ipsum dolor sit amet consectetur. Etiam felis
-                            dui bibendum venenatis tincidunt molestie tristique
-                            est. Massa a lectus ultrices tempus et amet.
-                            Consectetur turpis enim in donec fermentum
-                            suspendisse quisque. Est volutpat leo purus lorem
-                            cursus volutpat fermentum nibh.
-                            <br />
-                            <br />
-                            Lorem ipsum dolor sit amet consectetur. Fermentum
-                            sed blandit egestas egestas donec a egestas nulla.
-                            Praesent bibendum consequat orci arcu sollicitudin
-                            malesuada ac egestas. Sit.
+                            Each Stella Bali piece is handcrafted with attention
+                            to detail, comfort, and quality. We believe fashion
+                            is more than a product—it is a story shaped by
+                            people, processes, and values. With a strong sense
+                            of local pride, Stella Bali represents an authentic
+                            Balinese brand that connects traditional
+                            craftsmanship with contemporary needs.
                         </article>
                     </section>
                     <section className="vision-mission w-full h-full flex justify-center gap-12 mt-40">
                         {visionMissions.map((data, index) => (
                             <div
                                 key={index}
-                                className="w-80 h-64 bg-white shadow-lg shadow-gray-400 flex flex-col items-center justify-around px-3">
-                                <div>
+                                className="w-96 h-96 bg-white shadow-lg shadow-gray-400 px-3">
+                                <div className="mt-10">
                                     <div className="w-14 h-14 rounded-full bg-[#269795] mx-auto flex justify-center items-center pe-1">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -108,13 +114,24 @@ const About = () => {
                                             />
                                         </svg>
                                     </div>
-                                    <h2 className="text-xl font-bold mt-8">
+                                    <h2 className="text-xl font-bold mt-8 text-center">
                                         {data.title}
                                     </h2>
                                 </div>
-                                <p className="text-center text-xs">
-                                    {data.text}
-                                </p>
+                                {data.title == 'Our Mission' ? (
+                                    <ul className="text-[0.8rem] mt-10">
+                                        {data.text.map((item, i) => (
+                                            <li key={index}>{item}</li>
+                                        ))}
+                                    </ul>
+                                ) : data.title == 'Our Vision' ? (
+                                    <p
+                                        className={` ${data.title == 'Our Vision' ? 'text-center' : 'text-left'} text-[0.8rem] mt-10`}>
+                                        {data.title == 'Our Vision'
+                                            ? data.text
+                                            : null}
+                                    </p>
+                                ) : null}
                             </div>
                         ))}
                     </section>
@@ -122,7 +139,7 @@ const About = () => {
                         <h2 className="text-3xl font-bold text-center">
                             Our Values
                         </h2>
-                        <div className="flex justify-center gap-12 mt-20">
+                        <div className="flex justify-center flex-wrap gap-12 mt-20 px-32">
                             {brandValues.map((data, index) => (
                                 <div
                                     key={index}
@@ -152,64 +169,31 @@ const About = () => {
                             <h2 className="text-4xl font-bold mt-5">
                                 Our Production
                             </h2>
-                            <ul>
-                                {productions.map((data, index) => (
-                                    <li key={index} className="mt-8 ">
-                                        <h2 className="text-[#269795] font-bold text-2xl">
-                                            {data.title}
-                                        </h2>
-                                        <p className="text-[0.9rem] mt-2">
-                                            {data.description}
-                                        </p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </section>
-                    <section className="productions w-full h-full mt-56 flex gap-12">
-                        <div className="w-1/2 ps-12 pe-12">
-                            <h2 className="text-3xl font-bold mt-5">
-                                Meet Our Founder
-                            </h2>
-                            <h3 className="text-2xl text-[#269795] font-bold mt-12">
-                                Founder Name
-                            </h3>
-                            <p className="mt-2 text-[1rem]">
-                                Founder & Creative Director
-                            </p>
-                            <article className="mt-5 text-[1rem]">
-                                Lorem ipsum dolor sit amet consectetur.
-                                Fermentum aenean sed euismod in elit. Pharetra
-                                sed a integer viverra nunc. Et pellentesque mi
-                                diam turpis magnis senectus viverra egestas.
-                                Duis orci at sed sed augue. Faucibus
-                                sollicitudin et commodo at leo vitae ullamcorper
-                                ut eget.
+                            <article className="mt-10">
+                                <span className="font-bold">
+                                    Stella Bali’s{' '}
+                                </span>
+                                production process is handmade and based on
+                                close collaboration with home-based artisans
+                                across Bali. Each stage—from material selection,
+                                pattern making, cutting, and sewing to
+                                finishing—is carefully monitored to ensure
+                                consistent quality.
                                 <br />
                                 <br />
-                                Lorem ipsum dolor sit amet consectetur.
-                                Convallis amet et non iaculis urna magna
-                                facilisis varius nisl. Porttitor pharetra
-                                fermentum eget nullam lectus faucibus commodo.
-                                Metus nunc sit arcu consectetur morbi.
+                                We produce men’s and women’s apparel in limited
+                                quantities to maintain craftsmanship and
+                                exclusivity. Through our home-based production
+                                system, Stella Bali not only creates fashion
+                                products but also supports local livelihoods and
+                                strengthens community-based economies.
                                 <br />
                                 <br />
-                                Lorem ipsum dolor sit amet consectetur. Velit
-                                diam proin sit cursus.
+                                As a Balinese local fashion brand, Stella Bali
+                                is committed to delivering authentic, meaningful
+                                products with positive social impact.
                             </article>
-                            <p className="font-bold mt-4 text-[#404040]">
-                                "Bali Breeze, Everyday Ease"
-                            </p>
                         </div>
-                        <figure className="relative w-[50vw] h-[80vh]">
-                            <Image
-                                src={FounderImg}
-                                alt="Founder Image"
-                                loading="lazy"
-                                fill
-                                className="object-cover"
-                            />
-                        </figure>
                     </section>
                     <CTA
                         heading="Join Our Journey"

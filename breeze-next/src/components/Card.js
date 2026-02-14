@@ -18,9 +18,9 @@ const Card = ({ data }) => {
     return (
         <div
             onClick={() =>
-                data.name ? router.push(`/product/${data?.slug}`) : null
+                data?.name ? router.push(`/product/${data?.slug}`) : null
             }
-            className={`w-64 ${data.name ? 'h-96 cursor-pointer' : 'h-[30rem]'}  bg-white shadow-lg shadow-gray-300 px-3 py-2 flex flex-col justify-around`}>
+            className={`w-80 ${data.name ? 'h-[30rem] cursor-pointer' : 'h-[30rem]'}  bg-white shadow-lg shadow-gray-300 px-3 py-2 flex flex-col justify-around`}>
             <figure className="w-full h-56 relative">
                 <Image
                     src={
