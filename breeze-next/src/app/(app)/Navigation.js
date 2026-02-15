@@ -12,39 +12,58 @@ import { useState } from 'react'
 
 const Navigation = ({ user }) => {
     const { logout } = useAuth()
+
     const [open, setOpen] = useState(false)
 
     return (
-        <nav className="bg-white w-72 min-h-screen border-gray-100 shadow-xl shadow-gray-300">
+        <nav
+            className=" w-screen border-b border-gray-100 fixed z-50"
+            style={{ backgroundColor: '#FFFFFF' }}>
             {/* Primary Navigation Menu */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col items-center gap-6 h-16">
-                    {/* Logo */}
-                    <div className="flex-shrink-0 flex items-center">
-                        <Link href="/dashboard">
-                            <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
-                        </Link>
-                    </div>
+                <div className="flex justify-between h-16">
+                    <div className="flex">
+                        {/* Logo */}
+                        {/* <div className="flex-shrink-0 flex items-center">
+                            <Link href="/dashboard">
+                                <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
+                            </Link>
+                        </div> */}
 
-                    {/* Navigation Links */}
-                    <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex flex-col gap-5">
-                        <NavLink
-                            href="/dashboard"
-                            active={usePathname() === '/dashboard'}>
-                            Dashboard
-                        </NavLink>
-                        <NavLink href="/dashboard/products">Products</NavLink>
-                        <NavLink href="/dashboard/blogs">Blogs</NavLink>
-                        <NavLink href="/dashboard/contact">Contacts</NavLink>
+                        {/* Navigation Links */}
+                        <div className="text-black space-x-8 sm:-my-px ml-10 flex">
+                            <NavLink
+                                href="/dashboard"
+                                active={usePathname() === '/dashboard'}>
+                                Dashboard
+                            </NavLink>
+                            <NavLink
+                                href="/dashboard"
+                                active={
+                                    usePathname() === '/dashboard/products'
+                                }>
+                                Products
+                            </NavLink>
+                            <NavLink
+                                href="/dashboard"
+                                active={usePathname() === '/dashboard/blogs'}>
+                                Blogs
+                            </NavLink>
+                            <NavLink
+                                href="/dashboard"
+                                active={usePathname() === '/dashboard/contact'}>
+                                Contact
+                            </NavLink>
+                        </div>
                     </div>
 
                     {/* Settings Dropdown */}
-                    <div className="hidden sm:flex sm:items-center sm:ml-6">
+                    <div className="flex items-center sm:ml-6">
                         <Dropdown
                             align="right"
                             width="48"
                             trigger={
-                                <button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
+                                <button className="flex items-center text-sm font-medium text-white hover:text-gray-400 focus:outline-none transition duration-150 ease-in-out">
                                     <div>{user?.name}</div>
 
                                     <div className="ml-1">

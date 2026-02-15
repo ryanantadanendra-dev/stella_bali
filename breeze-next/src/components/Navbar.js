@@ -10,7 +10,6 @@ import { useState, useCallback } from 'react'
 import Hamburger from './Hamburger'
 import { useProduct } from '@/hooks/product'
 import Collections from './Collections'
-import Products from '@/app/products/page'
 
 const COLLECTIONS = ['Man', 'Woman']
 
@@ -93,7 +92,7 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <ul className="flex gap-8 text-xs w-1/3 justify-center">
+                        <ul className="flex gap-8 text-[0.8rem] w-1/3 justify-center">
                             <li>
                                 <Link href="/">Home</Link>
                             </li>
@@ -139,6 +138,12 @@ const Navbar = () => {
                                             className="h-[44.8px] text-black bg-white hover:bg-white hover:text-black px-6 transition-colors flex items-center"
                                             role="none">
                                             <button
+                                                onClick={() => {
+                                                    router.push(
+                                                        `/products?type=${type}`,
+                                                    )
+                                                    setIsDesktopMenuOpen(false)
+                                                }}
                                                 className="w-full text-left"
                                                 type="button"
                                                 role="menuitem">
@@ -165,6 +170,14 @@ const Navbar = () => {
                                                 className="h-[44.8px] text-black hover:bg-white hover:text-black px-6 transition-colors flex items-center"
                                                 role="none">
                                                 <button
+                                                    onClick={() => {
+                                                        router.push(
+                                                            `/products?type=${isHovered}&collections=${subtype}`,
+                                                        )
+                                                        setIsDesktopMenuOpen(
+                                                            false,
+                                                        )
+                                                    }}
                                                     className="w-full text-left"
                                                     type="button"
                                                     role="menuitem">
@@ -185,6 +198,7 @@ const Navbar = () => {
                         </ul>
                         <div className="w-1/3 flex justify-end">
                             <svg
+                                onClick={() => router.push('/?search=true')}
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512"
                                 className="w-4">

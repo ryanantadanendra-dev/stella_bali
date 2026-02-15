@@ -14,26 +14,33 @@ const ProductsComponent = ({ sort, collections, type }) => {
         let result = [...products]
 
         if (sort == 'new-arrivals') {
-            result.sort(
-                (a, b) => new Date(b.created_at) - new Date(a.created_at),
-            )
+            result = result
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                .slice(0, 5)
         }
 
         if (sort == 'price-low-to-high') {
-            result.sort((a, b) => a.price - b.price)
+            result = result.sort((a, b) => a.price - b.price)
         }
 
         if (sort == 'price-high-to-low') {
-            result.sort((a, b) => b.price - a.price)
+            result = result.sort((a, b) => b.price - a.price)
         }
 
         if (type) {
-            result = result.filter(product => product.type == type)
+            result = result.filter(
+                product => product.type.toLowerCase() == type.toLowerCase(),
+            )
         }
 
         if (collections) {
-            result = result.filter(product => product.subtype == collections)
+            result = result.filter(
+                product =>
+                    product.subtype.toLowerCase() == collections.toLowerCase(),
+            )
         }
+
+        console.log(result)
 
         setFiltered(result)
     }, [sort, collections, type, products])

@@ -13,7 +13,7 @@ const NewArrival = () => {
         .slice(0, 4)
     return (
         <section className="w-full h-full py-32 md:px-12">
-            <div className="flex justify-between">
+            <div className="flex justify-around md:justify-between">
                 <h2 className="text-3xl font-bold">New Arrivals</h2>
                 <Link href="">View All</Link>
             </div>

@@ -16,13 +16,15 @@ const montserratAlternates = Montserrat_Alternates({
     variable: '--font-montserrat-alternative',
 })
 
-const RootLayout = ({ children }) => {
+const UserLayout = ({ children }) => {
     return (
-        <html
-            lang="en"
-            className={`${montserratAlternates.variable} ${montserrat.variable}`}>
-            <body className="antialiased">{children}</body>
-        </html>
+        <div>
+            <header>
+                <Navbar />
+            </header>
+            {children}
+            <Footer />
+        </div>
     )
 }
 
@@ -30,4 +32,4 @@ export const metadata = {
     title: 'Laravel',
 }
 
-export default RootLayout
+export default UserLayout

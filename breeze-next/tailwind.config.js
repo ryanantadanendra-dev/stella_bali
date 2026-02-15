@@ -8,6 +8,10 @@ module.exports = {
                 montserat: ['var(--font-montserat)'],
             },
         },
+        screens: {
+            md: '501px',
+            lg: '1025px',
+        },
         extend: {
             borderRadius: {
                 lg: 'var(--radius)',

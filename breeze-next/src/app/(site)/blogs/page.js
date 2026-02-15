@@ -8,7 +8,7 @@ const Blogs = () => {
             <header>
                 <Hero title="News & Article" />
             </header>
-            <main className="w-full min-h-screen">
+            <main className="w-full h-full lg:h-screen">
                 <HighlightBlogs />
                 <Slider />
             </main>

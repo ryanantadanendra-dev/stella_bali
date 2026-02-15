@@ -30,7 +30,7 @@ export function Carousel({ datas, place }) {
     return (
         <div className="embla mt-12 relative">
             <div
-                className={`embla__viewport mx-auto w-full ${place == 'top' ? 'min-h-[75vh]' : 'min-h-[90vh]'}  overflow-hidden ${place == 'top' ? 'lg:px-12' : ''}`}
+                className={`embla__viewport mx-auto w-full ${place == 'top' ? 'min-h-[75vh] lg:px-12' : 'min-h-[75vh]'}  overflow-hidden`}
                 ref={emblaRef}>
                 <div className="embla__container flex h-full w-full ">
                     {datas?.map((data, index) => (
@@ -49,23 +49,25 @@ export function Carousel({ datas, place }) {
                             <div className="absolute inset-0 z-10 overlay" />
 
                             <div
-                                className={`absolute inset-0 z-20 flex items-center ${place == 'top' ? '' : 'flex-col justify-center'} px-4 pb-8`}>
+                                className={`absolute inset-0 z-20 flex items-center ${place == 'top' ? '' : 'flex-col justify-center'} px-4 pb-8 `}>
                                 {place == 'top' ? (
                                     <h1
-                                        className={`text-white text-5xl md:text-6xl font-semibold leading-tight mt-auto`}>
+                                        className={`text-white text-4xl md:text-6xl font-semibold leading-tight mt-auto`}>
                                         Bali Breeze Everyday Ease
                                     </h1>
                                 ) : (
                                     <>
                                         <h2
-                                            className={`text-white text-5xl md:text-6xl font-semibold leading-tight `}>
+                                            className={`text-white text-center text-4xl md:text-6xl font-semibold leading-tight `}>
                                             Learn About Us
                                         </h2>
-                                        <p className="text-lg">
+                                        <p className="text-lg text-center">
                                             Lorem ipsum dolor sit amet
                                             consectetur.
                                         </p>
-                                        <button></button>
+                                        <button className="px-8 py-5 text-black bg-white mt-5 text-lg font-bold">
+                                            Learn Here
+                                        </button>
                                     </>
                                 )}
                             </div>

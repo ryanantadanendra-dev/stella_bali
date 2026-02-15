@@ -1,8 +1,7 @@
 import Hero from '@/components/Hero'
 import CTA from '@/components/CTA'
 import Image from 'next/image'
-import ProductionImg from '../../../public/Assets/production.png'
-import FounderImg from '../../../public/Assets/founder.png'
+import ProductionImg from '../../../../public/Assets/production.png'
 
 const visionMissions = [
     {
@@ -79,7 +78,7 @@ const About = () => {
                         <h2 className="text-center text-4xl font-bold">
                             Our Story
                         </h2>
-                        <article className="text-center w-[40rem] mx-auto mt-10">
+                        <article className="text-center md:w-[40rem] px-3 text-[0.8rem] md:text-lg mx-auto mt-10">
                             Stella Bali is a local Balinese fashion brand rooted
                             in handmade craftsmanship, collaboration, and
                             community empowerment. What began as a home-based
@@ -97,11 +96,11 @@ const About = () => {
                             craftsmanship with contemporary needs.
                         </article>
                     </section>
-                    <section className="vision-mission w-full h-full flex justify-center gap-12 mt-40">
+                    <section className="vision-mission w-full h-full flex justify-center flex-wrap gap-12 mt-40">
                         {visionMissions.map((data, index) => (
                             <div
                                 key={index}
-                                className="w-96 h-96 bg-white shadow-lg shadow-gray-400 px-3">
+                                className="w-96 h-full md:h-96 py-12 md:py-0 bg-white shadow-lg shadow-gray-400 px-3">
                                 <div className="mt-10">
                                     <div className="w-14 h-14 rounded-full bg-[#269795] mx-auto flex justify-center items-center pe-1">
                                         <svg
@@ -119,14 +118,14 @@ const About = () => {
                                     </h2>
                                 </div>
                                 {data.title == 'Our Mission' ? (
-                                    <ul className="text-[0.8rem] mt-10">
+                                    <ul className="text-[0.8rem] mt-5 md:mt-10">
                                         {data.text.map((item, i) => (
                                             <li key={index}>{item}</li>
                                         ))}
                                     </ul>
                                 ) : data.title == 'Our Vision' ? (
                                     <p
-                                        className={` ${data.title == 'Our Vision' ? 'text-center' : 'text-left'} text-[0.8rem] mt-10`}>
+                                        className={` text-left text-[0.8rem] mt-10`}>
                                         {data.title == 'Our Vision'
                                             ? data.text
                                             : null}
@@ -139,7 +138,7 @@ const About = () => {
                         <h2 className="text-3xl font-bold text-center">
                             Our Values
                         </h2>
-                        <div className="flex justify-center flex-wrap gap-12 mt-20 px-32">
+                        <div className="flex justify-center flex-wrap gap-12 mt-20 md:px-32">
                             {brandValues.map((data, index) => (
                                 <div
                                     key={index}
@@ -155,8 +154,8 @@ const About = () => {
                             ))}
                         </div>
                     </section>
-                    <section className="productions w-full h-full mt-56 flex gap-12">
-                        <figure className="relative w-[50vw] h-[80vh]">
+                    <section className="productions w-full h-full mt-56 flex lg:flex-row flex-col gap-12">
+                        <figure className="relative w-[20rem] h-[20rem] md:w-[40rem] md:h-[30rem] mx-auto lg:mx-0 lg:w-[50vw] lg:h-[80vh]">
                             <Image
                                 src={ProductionImg}
                                 alt="Productions Image"
@@ -165,11 +164,11 @@ const About = () => {
                                 className="object-cover"
                             />
                         </figure>
-                        <div className="w-1/2 pe-12">
-                            <h2 className="text-4xl font-bold mt-5">
+                        <div className="lg:w-1/2 w-full lg:pe-12">
+                            <h2 className="text-4xl text-center font-bold mt-5">
                                 Our Production
                             </h2>
-                            <article className="mt-10">
+                            <article className="mt-10 px-3 lg:px-0 text-center lg:text-left text-[0.8rem] md:text-[1rem]">
                                 <span className="font-bold">
                                     Stella Bali’s{' '}
                                 </span>
