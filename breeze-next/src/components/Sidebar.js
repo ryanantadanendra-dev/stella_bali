@@ -1,14 +1,56 @@
+// components/Sidebar.jsx (optimized version)
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useMemo, memo } from 'react'
 import { useProduct } from '@/hooks/product'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import FilterBtn from './FilterBtn'
+import dynamic from 'next/dynamic'
+
+const FilterBtn = dynamic(() => import('./FilterBtn'), { ssr: false })
 
 const TYPES = ['Man', 'Woman']
+const SORT_OPTIONS = [
+    { id: 'newArrival', value: 'new-arrivals', label: 'New Arrivals' },
+    {
+        id: 'priceLowToHigh',
+        value: 'price-low-to-high',
+        label: 'Price: Low To High',
+    },
+    {
+        id: 'priceHighToLow',
+        value: 'price-high-to-low',
+        label: 'Price: High To Low',
+    },
+]
 
-const Sidebar = ({ onChange }) => {
+// Memoized radio input component
+const RadioInput = memo(({ id, value, name, checked, onClick, label }) => (
+    <div className="flex gap-2 items-center">
+        <input
+            onClick={onClick}
+            type="radio"
+            value={value}
+            name={name}
+            id={id}
+            checked={checked}
+            readOnly
+            className="opacity-0 absolute peer"
+        />
+        <label
+            htmlFor={id}
+            className="w-5 h-5 bg-white border-2 border-black peer-checked:bg-[#225A59] cursor-pointer flex-shrink-0"
+        />
+        <label
+            htmlFor={id}
+            className="text-xs md:text-xl ms-3 cursor-pointer select-none">
+            {label}
+        </label>
+    </div>
+))
+RadioInput.displayName = 'RadioInput'
+
+const Sidebar = () => {
     const [sortOpen, setSortOpen] = useState(false)
     const [collectionsOpen, setCollectionsOpen] = useState(false)
     const [extendCollection, setExtendCollection] = useState('')
@@ -19,159 +61,87 @@ const Sidebar = ({ onChange }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
-    const sort = searchParams.get('sort')
-    const type = searchParams.get('type')
-    const collections = searchParams.get('collections')
+    const currentFilters = useMemo(
+        () => ({
+            sort: searchParams.get('sort'),
+            type: searchParams.get('type'),
+            collections: searchParams.get('collections'),
+        }),
+        [searchParams],
+    )
 
-    // Sync state with URL params
+    const { sort, type, collections } = currentFilters
+
     useEffect(() => {
         setSortOpen(!!sort)
         setCollectionsOpen(!!type)
+        if (type) setExtendCollection(type)
+    }, [sort, type])
 
-        if (type) {
-            setExtendCollection(type)
-        }
-    }, [sort, type, collections])
+    const updateURLParams = useCallback(
+        (updates = {}, deletions = []) => {
+            const params = new URLSearchParams(searchParams.toString())
+            deletions.forEach(key => params.delete(key))
+            Object.entries(updates).forEach(([key, value]) => {
+                value ? params.set(key, value) : params.delete(key)
+            })
+            const queryString = params.toString()
+            router.push(
+                queryString ? `/products?${queryString}` : '/products',
+                { scroll: false },
+            )
+        },
+        [searchParams, router],
+    )
 
-    // Generic URL param update handler
-    const updateURLParams = (updates = {}, deletions = []) => {
-        const params = new URLSearchParams(searchParams.toString())
-
-        // Apply deletions
-        deletions.forEach(key => params.delete(key))
-
-        // Apply updates
-        Object.entries(updates).forEach(([key, value]) => {
-            if (value) {
-                params.set(key, value)
+    const handleTypeClick = useCallback(
+        value => {
+            if (type === value) {
+                updateURLParams({}, ['type', 'collections'])
+                setExtendCollection('')
             } else {
-                params.delete(key)
+                updateURLParams({ type: value }, ['collections'])
+                setExtendCollection(value)
             }
-        })
+        },
+        [type, updateURLParams],
+    )
 
-        const queryString = params.toString()
-        router.push(queryString ? `/products?${queryString}` : '/products')
-    }
+    const handleCollectionClick = useCallback(
+        value => {
+            updateURLParams(
+                collections === value ? {} : { collections: value },
+                collections === value ? ['collections'] : [],
+            )
+        },
+        [collections, updateURLParams],
+    )
 
-    // Handle type click (Man/Woman)
-    const handleTypeClick = value => {
-        const currentType = searchParams.get('type')
+    const handleSortClick = useCallback(
+        value => {
+            updateURLParams(
+                sort === value ? {} : { sort: value },
+                sort === value ? ['sort'] : [],
+            )
+        },
+        [sort, updateURLParams],
+    )
 
-        if (currentType === value) {
-            // Uncheck: remove type and collections
-            updateURLParams({}, ['type', 'collections'])
-            setExtendCollection('')
-        } else {
-            // Change type: remove collections and set new type
-            updateURLParams({ type: value }, ['collections'])
-            setExtendCollection(value)
-        }
-    }
-
-    // Handle collection click
-    const handleCollectionClick = value => {
-        const currentCollection = searchParams.get('collections')
-
-        if (currentCollection === value) {
-            // Uncheck
-            updateURLParams({}, ['collections'])
-        } else {
-            // Check
-            updateURLParams({ collections: value })
-        }
-    }
-
-    // Handle sort click
-    const handleSortClick = value => {
-        const currentSort = searchParams.get('sort')
-
-        if (currentSort === value) {
-            // Uncheck
-            updateURLParams({}, ['sort'])
-        } else {
-            // Check
-            updateURLParams({ sort: value })
-        }
-    }
-
-    // Toggle sort section
-    const toggleSort = () => {
+    const toggleSort = useCallback(() => {
         const newState = !sortOpen
         setSortOpen(newState)
+        if (!newState && sort) updateURLParams({}, ['sort'])
+    }, [sortOpen, sort, updateURLParams])
 
-        if (!newState && sort) {
-            updateURLParams({}, ['sort'])
-        }
-    }
+    const toggleCollections = useCallback(() => {
+        setCollectionsOpen(prev => !prev)
+    }, [])
 
-    // Render type and collection items
-    const displayCollections = TYPES.map(typeValue => (
-        <li key={typeValue}>
-            {/* Type Radio Button */}
-            <div className="flex gap-2 mt-3 items-center">
-                <input
-                    onClick={() => handleTypeClick(typeValue)}
-                    type="radio"
-                    value={typeValue}
-                    name="type"
-                    id={typeValue}
-                    checked={type === typeValue}
-                    readOnly
-                    className="opacity-0 absolute peer"
-                />
-                <label
-                    htmlFor={typeValue}
-                    className="w-5 h-5 bg-white border-2 border-black peer-checked:bg-[#225A59] cursor-pointer"
-                />
-                <label
-                    htmlFor={typeValue}
-                    className="text-xs md:text-xl ms-3 cursor-pointer">
-                    {typeValue}
-                </label>
-            </div>
-
-            {/* Collection Sub-items */}
-            {extendCollection === typeValue &&
-                categories?.map(category => (
-                    <div key={category} className="mt-3 ms-5 flex">
-                        <input
-                            onClick={() => handleCollectionClick(category)}
-                            type="radio"
-                            value={category}
-                            name="collections"
-                            id={category}
-                            checked={collections === category}
-                            readOnly
-                            className="opacity-0 absolute peer"
-                        />
-                        <label
-                            htmlFor={category}
-                            className="w-5 h-5 bg-white border-2 border-black peer-checked:bg-[#225A59] cursor-pointer"
-                        />
-                        <label
-                            htmlFor={category}
-                            className="text-xs md:text-xl ms-3 cursor-pointer">
-                            {category}
-                        </label>
-                    </div>
-                ))}
-        </li>
-    ))
-
-    // Sort options configuration
-    const sortOptions = [
-        { id: 'newArrival', value: 'new-arrivals', label: 'New Arrivals' },
-        {
-            id: 'priceLowToHigh',
-            value: 'price-low-to-high',
-            label: 'Price: Low To High',
-        },
-        {
-            id: 'priceHighToLow',
-            value: 'price-high-to-low',
-            label: 'Price: High To Low',
-        },
-    ]
+    // Memoized icon paths
+    const plusIcon =
+        'M256 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 160-160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l160 0 0 160c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160 160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0 0-160z'
+    const minusIcon =
+        'M0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32z'
 
     return (
         <>
@@ -182,15 +152,16 @@ const Sidebar = ({ onChange }) => {
             )}
 
             <aside
-                className={`md:min-h-screen h-full shadow-lg shadow-gray-400 md:w-80 bg-white pt-7 top-0 fixed z-30 md:block md:static transition-all duration-200 ease-out ${
-                    !isOpen && isMobile ? 'invisible w-0' : 'visible w-32'
+                className={`md:min-h-screen h-full shadow-lg shadow-gray-400 md:w-80 bg-white pt-7 top-0 fixed z-30 md:block md:static transition-transform duration-300 ease-out ${
+                    !isOpen && isMobile
+                        ? '-translate-x-full w-0'
+                        : 'translate-x-0 w-32'
                 }`}>
-                {/* Mobile Close Button */}
                 {isMobile && (
                     <div className="flex justify-end pe-3">
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="mt-12"
+                            className="mt-12 p-2"
                             aria-label="Close filter">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -204,54 +175,36 @@ const Sidebar = ({ onChange }) => {
 
                 {/* Sort Section */}
                 <section
-                    className={`w-32 mt-8 md:w-64 ${
-                        sortOpen ? 'h-44' : 'h-10'
-                    } bg-white px-3 ${isOpen || !isMobile ? 'visible' : 'invisible'}`}>
+                    className={`w-32 mt-8 md:w-64 transition-all duration-300 bg-white px-3 ${isOpen || !isMobile ? 'opacity-100' : 'opacity-0'}`}>
                     <button
                         onClick={toggleSort}
-                        className="flex justify-between items-center w-full h-12">
-                        <h2 className="text-xs md:text-2xl">Sort By</h2>
+                        className="flex justify-between items-center w-full h-12"
+                        aria-expanded={sortOpen}>
+                        <h2 className="text-xs md:text-2xl font-medium">
+                            Sort By
+                        </h2>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
                             className="md:w-4 w-2">
-                            <path
-                                d={
-                                    sortOpen
-                                        ? 'M0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32z'
-                                        : 'M256 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 160-160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l160 0 0 160c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160 160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0 0-160z'
-                                }
-                            />
+                            <path d={sortOpen ? minusIcon : plusIcon} />
                         </svg>
                     </button>
 
                     {sortOpen && (
-                        <ul className="md:mt-8 space-y-3">
-                            {sortOptions.map(option => (
-                                <li
-                                    key={option.id}
-                                    className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="sort"
-                                        value={option.value}
+                        <ul className="md:mt-8 mt-4 space-y-3">
+                            {SORT_OPTIONS.map(option => (
+                                <li key={option.id}>
+                                    <RadioInput
                                         id={option.id}
+                                        value={option.value}
+                                        name="sort"
                                         checked={sort === option.value}
                                         onClick={() =>
                                             handleSortClick(option.value)
                                         }
-                                        readOnly
-                                        className="opacity-0 absolute peer"
+                                        label={option.label}
                                     />
-                                    <label
-                                        htmlFor={option.id}
-                                        className="w-5 h-5 bg-white border-2 border-black peer-checked:bg-[#225A59] cursor-pointer"
-                                    />
-                                    <label
-                                        htmlFor={option.id}
-                                        className="text-xs md:text-xl ms-3 cursor-pointer">
-                                        {option.label}
-                                    </label>
                                 </li>
                             ))}
                         </ul>
@@ -260,31 +213,70 @@ const Sidebar = ({ onChange }) => {
 
                 {/* Collections Section */}
                 <section
-                    className={`w-32 md:w-64 ${
-                        collectionsOpen ? 'h-auto' : 'h-10'
-                    } bg-white px-3 ${
-                        sortOpen ? 'md:mt-20' : 'md:mt-2'
-                    } ${isOpen || !isMobile ? 'visible' : 'invisible'}`}>
+                    className={`w-32 md:w-64 bg-white px-3 ${sortOpen ? 'md:mt-20 mt-8' : 'md:mt-2 mt-4'} ${isOpen || !isMobile ? 'opacity-100' : 'opacity-0'}`}>
                     <button
-                        onClick={() => setCollectionsOpen(!collectionsOpen)}
-                        className="flex justify-between items-center w-full h-10">
-                        <h2 className="text-xs md:text-2xl">Collections</h2>
+                        onClick={toggleCollections}
+                        className="flex justify-between items-center w-full h-10"
+                        aria-expanded={collectionsOpen}>
+                        <h2 className="text-xs md:text-2xl font-medium">
+                            Collections
+                        </h2>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
                             className="w-2 md:w-4">
-                            <path
-                                d={
-                                    collectionsOpen
-                                        ? 'M0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32z'
-                                        : 'M256 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 160-160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l160 0 0 160c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160 160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0 0-160z'
-                                }
-                            />
+                            <path d={collectionsOpen ? minusIcon : plusIcon} />
                         </svg>
                     </button>
 
                     {collectionsOpen && (
-                        <ul className="mt-8">{displayCollections}</ul>
+                        <ul className="mt-8 space-y-3">
+                            {TYPES.map(typeValue => (
+                                <li key={typeValue}>
+                                    <RadioInput
+                                        id={typeValue}
+                                        value={typeValue}
+                                        name="type"
+                                        checked={type === typeValue}
+                                        onClick={() =>
+                                            handleTypeClick(typeValue)
+                                        }
+                                        label={typeValue}
+                                    />
+
+                                    {extendCollection === typeValue &&
+                                        categories && (
+                                            <div className="mt-3 ms-5 space-y-3">
+                                                {categories
+                                                    .filter(
+                                                        cat =>
+                                                            typeValue !==
+                                                                'Man' ||
+                                                            cat !== 'Dresses',
+                                                    )
+                                                    .map(category => (
+                                                        <RadioInput
+                                                            key={category}
+                                                            id={category}
+                                                            value={category}
+                                                            name="collections"
+                                                            checked={
+                                                                collections ===
+                                                                category
+                                                            }
+                                                            onClick={() =>
+                                                                handleCollectionClick(
+                                                                    category,
+                                                                )
+                                                            }
+                                                            label={category}
+                                                        />
+                                                    ))}
+                                            </div>
+                                        )}
+                                </li>
+                            ))}
+                        </ul>
                     )}
                 </section>
             </aside>
@@ -292,4 +284,4 @@ const Sidebar = ({ onChange }) => {
     )
 }
 
-export default Sidebar
+export default memo(Sidebar)

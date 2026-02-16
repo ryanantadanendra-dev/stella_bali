@@ -10,7 +10,7 @@ const AddForm = ({ setIsOpen }) => {
         description: '',
         colors: ['#000000'],
         type: 'man',
-        subtype: 'top',
+        subtype: 'Tops',
         price: '',
         images: [],
     })
@@ -115,6 +115,7 @@ const AddForm = ({ setIsOpen }) => {
                         Name
                     </label>
                     <input
+                        required
                         type="text"
                         name="name"
                         value={formData.name}
@@ -127,6 +128,7 @@ const AddForm = ({ setIsOpen }) => {
                         Description
                     </label>
                     <input
+                        required
                         type="description"
                         name="description"
                         value={formData.description}
@@ -213,13 +215,13 @@ const AddForm = ({ setIsOpen }) => {
                         value={formData.subtype}
                         onChange={handleChange}
                         className="w-full ms-3">
-                        <option value="tops">Tops</option>
-                        <option value="bottoms">Bottoms</option>
-                        <option value="swimsuits">Swimsuits</option>
+                        <option value="Tops">Tops</option>
+                        <option value="Bottoms">Bottoms</option>
+                        <option value="Swimsuits">Swimsuits</option>
                         {formData.type == 'woman' ? (
-                            <option value="dresses">Dresses</option>
+                            <option value="Dresses">Dresses</option>
                         ) : null}
-                        <option value="accessories">Accessories</option>
+                        <option value="Accessories">Accessories</option>
                     </select>
                 </li>
                 <li className="mt-4 flex">
@@ -227,6 +229,7 @@ const AddForm = ({ setIsOpen }) => {
                         Price
                     </label>
                     <input
+                        required
                         type="number"
                         name="price"
                         value={formData.price}
@@ -239,6 +242,7 @@ const AddForm = ({ setIsOpen }) => {
                         Images
                     </label>
                     <input
+                        required
                         type="file"
                         multiple
                         accept="image/*"

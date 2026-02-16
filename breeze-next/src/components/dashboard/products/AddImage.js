@@ -1,5 +1,5 @@
 import { useProduct } from '@/hooks/product'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Swal from 'sweetalert2'
 
 const AddImageForm = ({ productId, setIsOpen }) => {
@@ -9,6 +9,7 @@ const AddImageForm = ({ productId, setIsOpen }) => {
     })
     const [isLoading, setIsLoading] = useState(false)
     const [id, setid] = useState()
+    const inputRef = useRef(null)
 
     useEffect(() => {
         if (productId) {
@@ -77,8 +78,13 @@ const AddImageForm = ({ productId, setIsOpen }) => {
             })
 
             setFormData({
+                ...formData,
                 images: [],
             })
+
+            if (fileRef.current) {
+                fileRef.current.value = ''
+            }
 
             setIsOpen(false)
         } catch (error) {
@@ -87,6 +93,14 @@ const AddImageForm = ({ productId, setIsOpen }) => {
                 title: 'Oops...',
                 text: error.response?.data.message,
             })
+            setFormData({
+                ...formData,
+                images: [],
+            })
+
+            if (fileRef.current) {
+                fileRef.current.value = ''
+            }
         } finally {
             setIsLoading(false)
         }
@@ -103,6 +117,7 @@ const AddImageForm = ({ productId, setIsOpen }) => {
                     Images
                 </label>
                 <input
+                    ref={inputRef}
                     type="file"
                     multiple
                     accept="image/*"

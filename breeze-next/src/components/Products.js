@@ -1,58 +1,72 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMemo, memo } from 'react'
 import Card from './Card'
 import { useProduct } from '@/hooks/product'
+import Loading from '@/app/loading'
+
+// Memoized Card wrapper to prevent unnecessary re-renders
+const MemoizedCard = memo(Card)
 
 const ProductsComponent = ({ sort, collections, type }) => {
-    const { products } = useProduct()
-    const [filtered, setFiltered] = useState([])
+    const { products, isLoading, isError } = useProduct()
 
-    useEffect(() => {
-        if (!Array.isArray(products)) return
+    // Memoize filtered and sorted products
+    const filtered = useMemo(() => {
+        if (!Array.isArray(products)) return []
 
         let result = [...products]
 
-        if (sort == 'new-arrivals') {
-            result = result
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .slice(0, 5)
-        }
-
-        if (sort == 'price-low-to-high') {
-            result = result.sort((a, b) => a.price - b.price)
-        }
-
-        if (sort == 'price-high-to-low') {
-            result = result.sort((a, b) => b.price - a.price)
-        }
-
+        // Apply type filter first (most restrictive)
         if (type) {
             result = result.filter(
-                product => product.type.toLowerCase() == type.toLowerCase(),
+                product => product.type?.toLowerCase() === type.toLowerCase(),
             )
         }
 
+        // Apply collections filter
         if (collections) {
             result = result.filter(
                 product =>
-                    product.subtype.toLowerCase() == collections.toLowerCase(),
+                    product.subtype?.toLowerCase() ===
+                    collections.toLowerCase(),
             )
         }
 
-        console.log(result)
+        // Apply sorting last
+        if (sort === 'new-arrivals') {
+            result = result
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                .slice(0, 5)
+        } else if (sort === 'price-low-to-high') {
+            result = result.sort((a, b) => a.price - b.price)
+        } else if (sort === 'price-high-to-low') {
+            result = result.sort((a, b) => b.price - a.price)
+        }
 
-        setFiltered(result)
-    }, [sort, collections, type, products])
+        return result
+    }, [products, sort, collections, type])
+
+    if (isLoading) return <Loading />
+    if (isError) return <div>Error loading products</div>
 
     return (
         <section className="w-full flex justify-center flex-wrap gap-4">
             {filtered.length > 0 ? (
-                filtered?.map((product, index) => <Card data={product} />)
+                filtered.map((product, index) => (
+                    <MemoizedCard
+                        key={product.id || product.slug}
+                        data={product}
+                        priority={index < 3}
+                    />
+                ))
             ) : (
-                <p className="text-center">No Products Available!</p>
+                <p className="text-center text-lg mt-10">
+                    No Products Available!
+                </p>
             )}
         </section>
     )
 }
+
 export default ProductsComponent

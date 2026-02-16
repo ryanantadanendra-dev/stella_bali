@@ -71,7 +71,7 @@ const AddForm = ({ setIsOpen }) => {
         try {
             setIsLoading(true)
 
-            const response = await add(formData)
+            await add(formData)
 
             Swal.fire({
                 icon: 'success',
@@ -108,6 +108,7 @@ const AddForm = ({ setIsOpen }) => {
                         Title
                     </label>
                     <input
+                        required
                         type="text"
                         name="title"
                         value={formData.name}
@@ -120,6 +121,7 @@ const AddForm = ({ setIsOpen }) => {
                         Subtitle
                     </label>
                     <input
+                        required
                         type="text"
                         name="subtitle"
                         value={formData.subtitle}
@@ -132,6 +134,7 @@ const AddForm = ({ setIsOpen }) => {
                         Content
                     </label>
                     <textarea
+                        required
                         value={formData.content}
                         onChange={handleChange}
                         name="content"
@@ -142,6 +145,7 @@ const AddForm = ({ setIsOpen }) => {
                         Images
                     </label>
                     <input
+                        required
                         type="file"
                         accept="image/*"
                         name="images"

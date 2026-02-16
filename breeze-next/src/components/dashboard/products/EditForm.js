@@ -50,8 +50,6 @@ const EditForm = ({ product, setIsOpen }) => {
 
             const response = await edit(id, formData)
 
-            console.log(response)
-
             Swal.fire({
                 icon: 'success',
                 title: 'Success',

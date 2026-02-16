@@ -7,6 +7,7 @@ use App\Models\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Mews\Purifier\Facades\Purifier;
 
 class BlogsController extends Controller
 {
@@ -38,10 +39,14 @@ class BlogsController extends Controller
             $path = $request->image->store('blogs', 'public');
         }
 
+        $cleanContent = Purifier::clean($request->content, [
+            'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
+        ]);
+
         $blog = Blog::create([
             'title' => $validatedData['title'],
             'subtitle' => $validatedData['subtitle'],
-            'content' => $validatedData['content'],
+            'content' => $cleanContent,
             'image' => $path,
             'slug' => $slug
         ]);

@@ -63,4 +63,13 @@ module.exports = {
         },
     },
     plugins: [require('@tailwindcss/forms'), require('tailwindcss-animate')],
+    mode: 'jit',
+    future: {
+        hoverOnlyWhenSupported: true,
+        removeDeprecatedGapUtilities: true,
+    },
+    // Optimize production build
+    experimental: {
+        optimizeUniversalDefaults: true,
+    },
 }

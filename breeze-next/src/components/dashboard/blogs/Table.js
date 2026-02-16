@@ -3,7 +3,7 @@
 import { useBlog } from '@/hooks/blog'
 import Modal from '@/components/Modal'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import EditForm from './EditForm'
 import Swal from 'sweetalert2'
 import EditImageForm from './EditImageForm'
@@ -53,7 +53,7 @@ const Table = () => {
     }
 
     return (
-        <table className="mt-12 max-w-screen">
+        <table className="mt-12 max-w-screen mx-auto">
             <thead>
                 <tr>
                     <th className="lg:w-5">Id</th>
@@ -72,11 +72,16 @@ const Table = () => {
                         <td className="text-center">{blog?.id}</td>
                         <td className="text-center">{blog?.title}</td>
                         <td className="text-center">{blog?.subtitle}</td>
-                        <td className="text-center">{blog?.content}</td>
+                        <td className="l">
+                            <div className="max-h-32 overflow-y-auto">
+                                {blog?.content}
+                            </div>
+                        </td>
                         <td>
                             <figure className="w-52 h-20 relative mx-auto">
                                 <Image
                                     src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${blog?.image}`}
+                                    alt="blog image"
                                     fill
                                     className="object-cover"
                                 />

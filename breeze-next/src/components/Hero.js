@@ -1,19 +1,27 @@
+'use client'
+
 import Image from 'next/image'
-import Bg from '../../public/Assets/hero.png'
 
 const Hero = ({ title }) => {
     return (
-        <>
-            <header
-                className="w-screen md:h-80 h-72 bg-center bg-no-repeat bg-cover flex justify-center items-center flex-col gap-3 text-white relative pt-12"
-                style={{ backgroundImage: `url(${Bg.src})` }}>
-                <div className="absolute text-center z-10">
-                    <h1 className="font-bold text-3xl md:text-5xl">{title}</h1>
-                    <p>Where Bali's spirit meets contemporary summer style</p>
-                </div>
-                <div className="bg-[#00000030] w-full h-full bottom-0 absolute z-0"></div>
-            </header>
-        </>
+        <header className="relative flex h-72 w-screen flex-col items-center justify-center gap-3 pt-12 text-white md:h-80">
+            <Image
+                src="/Assets/hero.png"
+                alt={`${title} hero background`}
+                fill
+                priority
+                quality={75}
+                sizes="100vw"
+                className="object-cover"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCgAA8A/9k="
+            />
+            <div className="absolute inset-0 bg-black/40" />
+            <h1 className="relative z-10 text-4xl font-bold md:text-6xl">
+                {title}
+            </h1>
+        </header>
     )
 }
+
 export default Hero

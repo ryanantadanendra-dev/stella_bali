@@ -42,14 +42,14 @@ export default async function Blog({ params }) {
                 <h1 className="text-4xl md:text-5xl text-center font-bold">
                     {blog?.title}
                 </h1>
-                <p className="text-center text-[#ffffff90] text-xl md:text-2xl mt-3">
+                <p className="text-center text-xl md:text-2xl mt-3">
                     {blog?.subtitle}
                 </p>
                 <time className="block text-center text-gray-400 text-[1rem] mt-10">
                     {formatedDate}
                 </time>
             </header>
-            <main>
+            <main className="">
                 <figure className="relative w-[20rem] md:w-[45rem] lg:w-[59rem] h-64 mx-auto mt-10">
                     <Image
                         src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${blog?.image}`}
@@ -62,7 +62,7 @@ export default async function Blog({ params }) {
                 </figure>
                 <div
                     dangerouslySetInnerHTML={{ __html: blog?.content }}
-                    className="content max-w-full px-8 md:px-12 lg:px-0"
+                    className="content max-w-full px-8 md:px-12 lg:px-72"
                 />
             </main>
         </article>

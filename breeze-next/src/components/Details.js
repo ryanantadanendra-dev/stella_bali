@@ -18,8 +18,8 @@ const Details = ({ slug }) => {
     const product = products?.find(product => product.slug == slug)
 
     return (
-        <section className="w-screen flex">
-            <div className="w-1/2 flex h-96 justify-center">
+        <section className="w-screen flex flex-wrap">
+            <div className="md:w-1/2 w-full flex h-96 justify-center">
                 <div className="h-full w-1/4 overflow-y-scroll">
                     {product?.images.map((image, index) => (
                         <figure
@@ -28,6 +28,7 @@ const Details = ({ slug }) => {
                             className={`w-28 h-32 relative mt-5 ${isActive == index ? 'opacity-100' : 'opacity-50'}`}>
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${image.path}`}
+                                alt={`${product?.name} image ${index}`}
                                 fill
                                 className="object-cover"
                             />
@@ -42,8 +43,10 @@ const Details = ({ slug }) => {
                     />
                 </figure>
             </div>
-            <div className="w-1/2">
-                <h1 className="text-2xl font-bold">{product?.name}</h1>
+            <div className="md:w-1/2 w-full px-12 md:px-0">
+                <h1 className="text-2xl font-bold mt-8 md:mt-0">
+                    {product?.name}
+                </h1>
                 <p className="mt-4">{product?.description}</p>
                 <p className="font-bold text-2xl mt-12">
                     {priceFormat(product?.price)}

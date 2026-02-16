@@ -1,3 +1,4 @@
+// components/BreadcrumbComp.jsx - OPTIMIZED
 'use client'
 
 import {
@@ -10,41 +11,53 @@ import {
 } from './ui/breadcrumb'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
 export default function BreadcrumbComp() {
     const pathName = usePathname()
 
-    const segments = pathName.split('/').filter(Boolean)
+    // Memoize segments to prevent recalculation
+    const segments = useMemo(
+        () => pathName.split('/').filter(Boolean),
+        [pathName],
+    )
+
+    // Build full path progressively
+    const buildPath = index => {
+        return '/' + segments.slice(0, index + 1).join('/')
+    }
 
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink render={<a href="/" />}>
-                        Home
+                    <BreadcrumbLink asChild>
+                        <Link href="/" aria-label="Go to home page">
+                            Home
+                        </Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
 
                 {segments.map((segment, index) => {
-                    const href = '/'
+                    const href = buildPath(index)
                     const isLast = index === segments.length - 1
-
-                    console.log(segment)
+                    const label = segment.replace(/-/g, ' ')
 
                     return (
                         <span key={href} className="flex items-center">
-                            <BreadcrumbSeparator />
+                            <BreadcrumbSeparator aria-hidden="true" />
                             <BreadcrumbItem>
                                 {isLast ? (
                                     <BreadcrumbPage className="capitalize">
-                                        {segment.replace(/-/g, ' ')}
+                                        {label}
                                     </BreadcrumbPage>
                                 ) : (
                                     <BreadcrumbLink asChild>
                                         <Link
                                             href={href}
-                                            className="capitalize">
-                                            {segment.replace(/-/g, ' ')}
+                                            className="capitalize"
+                                            aria-label={`Go to ${label}`}>
+                                            {label}
                                         </Link>
                                     </BreadcrumbLink>
                                 )}

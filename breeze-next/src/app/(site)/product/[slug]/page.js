@@ -11,7 +11,7 @@ const Product = ({ params }) => {
                     <BreadcrumbComp />
                 </div>
             </header>
-            <main className="w-screen py-12 pb-72 overflow-hidden">
+            <main className="w-screen h-screen overflow-hidden flex lg:pt-40">
                 <Details slug={slug} />
             </main>
         </>

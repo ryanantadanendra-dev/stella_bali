@@ -1,6 +1,4 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
 import Dropdown from '@/components/Dropdown'
-import Link from 'next/link'
 import NavLink from '@/components/NavLink'
 import ResponsiveNavLink, {
     ResponsiveNavButton,
@@ -31,26 +29,26 @@ const Navigation = ({ user }) => {
                         </div> */}
 
                         {/* Navigation Links */}
-                        <div className="text-black space-x-8 sm:-my-px ml-10 flex">
+                        <div className="text-black gap-1 md:gap-8 sm:-my-px lg:ml-10 flex">
                             <NavLink
                                 href="/dashboard"
                                 active={usePathname() === '/dashboard'}>
                                 Dashboard
                             </NavLink>
                             <NavLink
-                                href="/dashboard"
+                                href="/dashboard/products"
                                 active={
                                     usePathname() === '/dashboard/products'
                                 }>
                                 Products
                             </NavLink>
                             <NavLink
-                                href="/dashboard"
+                                href="/dashboard/blogs"
                                 active={usePathname() === '/dashboard/blogs'}>
                                 Blogs
                             </NavLink>
                             <NavLink
-                                href="/dashboard"
+                                href="/dashboard/contact"
                                 active={usePathname() === '/dashboard/contact'}>
                                 Contact
                             </NavLink>

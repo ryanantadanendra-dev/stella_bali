@@ -4,8 +4,8 @@ import Image from 'next/image'
 
 const Footer = () => {
     return (
-        <footer className="w-screen h-96 bg-[#404040] flex justify-between items-center text-white">
-            <div className="w-1/4 px-12">
+        <footer className="w-screen md:h-full lg:h-96 py-12 md:px-12 lg:px-2 lg:py-0 bg-[#404040] flex lg:gap-0 md:gap-12 flex-wrap justify-between items-center text-white">
+            <div className="lg:w-1/4 md:w-full lg:px-12">
                 <p className="text-5xl font-bold">StellaBali.</p>
                 <p className="mt-3">
                     Bali-based summerwear with light, casual designs for
@@ -41,7 +41,7 @@ const Footer = () => {
                     </svg>
                 </div>
             </div>
-            <div className="w-1/4">
+            <div className="lg:w-1/4 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">Products</p>
                 <ul className="mt-5 text-xl">
                     <li>
@@ -57,7 +57,7 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-            <div className="w-1/4">
+            <div className="lg:w-1/4 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">About Us</p>
                 <ul className="mt-5 text-xl">
                     <li>
@@ -74,7 +74,7 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-            <div className="w-1/4">
+            <div className="lg:w-1/4 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">Contact Us</p>
                 <ul className="mt-5">
                     <li className="flex items-center gap-2">

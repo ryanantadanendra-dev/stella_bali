@@ -1,35 +1,33 @@
-import { Montserrat, Montserrat_Alternates } from 'next/font/google'
 import Navbar from '@/components/Navbar'
-import '@/app/global.css'
 import Footer from '@/components/Footer'
-
-const montserrat = Montserrat({
-    subsets: ['latin'],
-    display: 'swap',
-    variable: '--font-montserat',
-})
-
-const montserratAlternates = Montserrat_Alternates({
-    subsets: ['latin'],
-    weight: '400',
-    display: 'swap',
-    variable: '--font-montserrat-alternative',
-})
-
-const UserLayout = ({ children }) => {
-    return (
-        <div>
-            <header>
-                <Navbar />
-            </header>
-            {children}
-            <Footer />
-        </div>
-    )
-}
+import { Suspense } from 'react'
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'Stella Bali',
 }
 
-export default UserLayout
+function NavbarSkeleton() {
+    return <div className="h-20 w-full bg-gray-100 animate-pulse" />
+}
+
+function FooterSkeleton() {
+    return <div className="h-64 w-full bg-gray-100 animate-pulse" />
+}
+
+export default function UserLayout({ children }) {
+    return (
+        <>
+            <header>
+                <Suspense fallback={<NavbarSkeleton />}>
+                    <Navbar />
+                </Suspense>
+            </header>
+
+            <main className="min-h-screen">{children}</main>
+
+            <Suspense fallback={<FooterSkeleton />}>
+                <Footer />
+            </Suspense>
+        </>
+    )
+}

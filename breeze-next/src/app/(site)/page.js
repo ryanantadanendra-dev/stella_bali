@@ -1,13 +1,19 @@
-import LoginLinks from '@/app/LoginLinks'
-import Image from 'next/image'
 import { Carousel } from '@/components/Carousel'
 import Hero1 from '../../../public/Assets/hero1.jpg'
 import Hero2 from '../../../public/Assets/hero2.jpg'
 import Hero3 from '../../../public/Assets/hero3.jpg'
 import SearchBar from '@/components/SearchBar'
 import NewArrival from '@/components/NewArrival'
-import Collections from '@/components/Collections'
-import Blogs from '@/components/Blogs'
+import dynamic from 'next/dynamic'
+
+// Lazy load non-critical components
+const Collections = dynamic(() => import('@/components/Collections'), {
+    loading: () => <div className="h-96 w-full animate-pulse bg-gray-200" />,
+})
+
+const Blogs = dynamic(() => import('@/components/Blogs'), {
+    loading: () => <div className="h-96 w-full animate-pulse bg-gray-200" />,
+})
 
 export const metadata = {
     title: 'Laravel',

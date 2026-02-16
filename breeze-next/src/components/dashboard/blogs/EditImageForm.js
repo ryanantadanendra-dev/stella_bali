@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useBlog } from '@/hooks/blog'
 import Swal from 'sweetalert2'
 
@@ -8,13 +8,6 @@ const EditImageForm = ({ id, setIsOpen }) => {
     const [formData, setFormData] = useState({
         image: null,
     })
-    const [productId, setProductId] = useState(null)
-
-    useEffect(() => {
-        if (id) {
-            setProductId(id)
-        }
-    }, [id])
 
     const handleFileChange = e => {
         const file = e.target.files[0]

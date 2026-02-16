@@ -19,7 +19,9 @@ const Blogs = () => {
                     className="w-10 mt-7">
                     <path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                 </svg>
-                <Table />
+                <div className=" flex md:justify-center overflow-x-auto w-full">
+                    <Table />
+                </div>
                 <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
                     <AddForm setIsOpen={setIsOpen} />
                 </Modal>

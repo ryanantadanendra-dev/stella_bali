@@ -87,27 +87,29 @@ const Table = ({ setIsOpen }) => {
     }
 
     return (
-        <table className="mt-12 w-screen">
+        <table className="mt-12 w-full min-w-[900px]">
             <thead>
                 <tr>
-                    <th className="lg:w-5">Id</th>
-                    <th className="lg:w-16">Name</th>
-                    <th className="lg:w-32">Description</th>
-                    <th className="lg:w-24">Colors</th>
-                    <th className="lg:w-24">Type</th>
-                    <th className="lg:w-24">Subtype</th>
-                    <th className="lg:w-24">Price</th>
-                    <th className="lg:w-56">Images</th>
-                    <th className="lg:w-56">Actions</th>
+                    <th className="px-2 py-2">Id</th>
+                    <th className=" px-2 py-2">Name</th>
+                    <th className="px-2 py-2 max-w-[160px]">Description</th>
+                    <th className=" px-2 py-2">Colors</th>
+                    <th className="px-2 py-2">Type</th>
+                    <th className="px-2 py-2">Subtype</th>
+                    <th className="px-2 py-2">Price</th>
+                    <th className="px-2 py-2 text-center">Images</th>
+                    <th className="px-2 py-2">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="w-full">
                 {products?.map((product, index) => (
                     <tr
-                        className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'} h-52`}>
+                        className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'} min-h-[80px] md:h-52`}>
                         <td className="text-center">{product.id}</td>
                         <td className="text-center">{product.name}</td>
-                        <td className="text-center">{product.description}</td>
+                        <td className="text-center max-w-[160px] truncates">
+                            {product.description}
+                        </td>
                         <td className="flex gap-2  justify-center items-center h-52">
                             {product?.colors?.map((color, i) => (
                                 <div
@@ -120,7 +122,7 @@ const Table = ({ setIsOpen }) => {
                         <td className="text-center">{product.type}</td>
                         <td className="text-center">{product.subtype}</td>
                         <td className="text-center">Rp.{product.price},00</td>
-                        <td className="py-4 align-top">
+                        <td className="py-4 align-top w-56">
                             <div className="max-h-40 overflow-y-auto flex flex-col items-center gap-4">
                                 {product?.images?.map((image, j) => (
                                     <div
@@ -129,6 +131,7 @@ const Table = ({ setIsOpen }) => {
                                         <figure className="w-32 h-32 relative">
                                             <Image
                                                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${image.path}`}
+                                                alt="product image"
                                                 fill
                                                 className="object-contain"
                                             />
@@ -185,11 +188,11 @@ const Table = ({ setIsOpen }) => {
                 ))}
                 <Modal isOpen={open} setIsOpen={setOpen}>
                     {modalName == 'edit' ? (
-                        <EditForm product={product} setIsOpen={setIsOpen} />
+                        <EditForm product={product} setIsOpen={setOpen} />
                     ) : (
                         <AddImageForm
                             productId={productId}
-                            setIsOpen={setIsOpen}
+                            setIsOpen={setOpen}
                         />
                     )}
                 </Modal>
