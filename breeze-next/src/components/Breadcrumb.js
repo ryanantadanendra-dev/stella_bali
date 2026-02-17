@@ -39,7 +39,10 @@ export default function BreadcrumbComp() {
                 </BreadcrumbItem>
 
                 {segments.map((segment, index) => {
-                    const href = buildPath(index)
+                    let href = buildPath(index)
+
+                    if (href == '/product') href = '/products'
+
                     const isLast = index === segments.length - 1
                     const label = segment.replace(/-/g, ' ')
 

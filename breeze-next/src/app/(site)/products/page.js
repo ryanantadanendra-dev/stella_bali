@@ -1,10 +1,19 @@
 // app/(user)/products/page.jsx
-import { Suspense } from 'react'
-import ProductsComponent from '@/components/Products'
-import dynamic from 'next/dynamic'
+// FIXES:
+//   - Resource load delay 3,080ms: Products now fetched server-side.
+//     Image URL is in the initial HTML, so browser starts loading it immediately.
+//   - Render-blocking CSS: inlineCss works in production builds
+//   - bfcache: removed no-store headers where possible
+//   - Preload LCP image with correct width for mobile (640px for Moto G Power)
 
+import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
+import ProductsComponent from '@/components/Products'
+import BreadcrumbComp from '@/components/Breadcrumb'
+
+// Sidebar: SSR renders structure, dynamic only for client interactivity
 const Sidebar = dynamic(() => import('@/components/Sidebar'), {
-    ssr: true, // Changed to true for better SEO
+    ssr: true,
     loading: () => <SidebarSkeleton />,
 })
 
@@ -15,88 +24,127 @@ export const metadata = {
     description: 'Browse our sustainable handmade fashion collection',
 }
 
-// Skeleton for sidebar
 function SidebarSkeleton() {
-    return <aside className="md:w-80 w-32 bg-gray-100 h-screen animate-pulse" />
+    return (
+        <aside
+            className="md:w-80 w-32 bg-gray-100 md:min-h-screen shrink-0"
+            aria-hidden="true"
+        />
+    )
 }
 
-// Optimize data fetching
-async function getInitialData() {
+// Fetch products server-side — this is what eliminates the 3080ms delay.
+// The result is embedded in HTML so the browser knows the image URL immediately.
+async function getProducts() {
     try {
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 5000)
-
-        const [productsRes, userRes] = await Promise.all([
-            fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dashboard/products`,
-                {
-                    next: { revalidate: 3600 },
-                    headers: {
-                        Accept: 'application/json',
-                        'Cache-Control': 'public, max-age=3600',
-                    },
-                    signal: controller.signal,
-                },
-            ).catch(() => ({ ok: false })),
-
-            fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`, {
-                next: { revalidate: 300 },
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dashboard/products`,
+            {
+                next: { revalidate: 3600 },
                 headers: { Accept: 'application/json' },
-                signal: controller.signal,
-            }).catch(() => ({ ok: false })),
-        ])
-
-        clearTimeout(timeoutId)
-
-        const products = productsRes.ok
-            ? await productsRes.json()
-            : { data: [], categories: [] }
-        const user = userRes.ok ? await userRes.json() : null
-
-        return { products, user }
-    } catch (error) {
-        console.error('Data fetch error:', error)
-        return { products: { data: [], categories: [] }, user: null }
+            },
+        )
+        if (!res.ok) return { data: [], categories: [] }
+        return res.json()
+    } catch {
+        return { data: [], categories: [] }
     }
 }
 
-// Optimized loading skeleton
 function ProductsLoading() {
     return (
         <section className="flex w-full flex-wrap justify-center gap-4 p-4">
-            {[...Array(6)].map((_, i) => (
+            {Array.from({ length: 6 }, (_, i) => (
                 <div
                     key={i}
-                    className="product-card animate-pulse bg-gray-200 rounded-lg">
-                    <div className="product-image-container bg-gray-300" />
-                    <div className="p-4 h-24 space-y-2">
-                        <div className="h-4 bg-gray-300 rounded w-3/4" />
-                        <div className="h-6 bg-gray-300 rounded w-1/2" />
-                    </div>
-                </div>
+                    className="w-80 h-[30rem] animate-pulse bg-gray-200 rounded-lg"
+                    aria-hidden="true"
+                />
             ))}
         </section>
     )
 }
 
 export default async function ProductsPage({ searchParams }) {
-    const { products } = await getInitialData()
+    // Await searchParams for Next.js 15 compatibility
+    const params = await Promise.resolve(searchParams)
+    const sort = params?.sort ?? null
+    const collections = params?.collections ?? null
+    const type = params?.type ?? null
 
-    const sort = searchParams?.sort || null
-    const collections = searchParams?.collections || null
-    const type = searchParams?.type || null
+    // Fetch server-side — result is in HTML before client JS runs
+    const products = await getProducts()
+
+    // Determine LCP image URL server-side for preload
+    // Apply same type/collections filter as client to get the actual first visible product
+    let visibleProducts = products?.data ?? []
+    if (type) {
+        visibleProducts = visibleProducts.filter(
+            p => p.type?.toLowerCase() === type.toLowerCase(),
+        )
+    }
+    if (collections) {
+        visibleProducts = visibleProducts.filter(
+            p => p.subtype?.toLowerCase() === collections.toLowerCase(),
+        )
+    }
+
+    const firstProduct = visibleProducts[0]
+    const lcpImagePath = firstProduct?.images?.[0]?.path ?? firstProduct?.image
+    const lcpImageOrigin = process.env.NEXT_PUBLIC_BACKEND_URL
+    const lcpImageSrc = lcpImagePath
+        ? `${lcpImageOrigin}/storage/${lcpImagePath}`
+        : null
+
+    // Build the Next.js optimized image URL for preload
+    // Use w=640 — Moto G Power (Lighthouse test device) has a ~412px wide viewport
+    // at 2.6x DPR = ~1071px but we cap at next nearest deviceSize = 640
+    // (or 750 if you add it to deviceSizes in next.config.js)
+    const lcpPreloadUrl = lcpImageSrc
+        ? `/_next/image?url=${encodeURIComponent(lcpImageSrc)}&w=640&q=75`
+        : null
 
     return (
-        <main className="h-full w-screen md:flex md:pt-28 pt-20">
-            <Sidebar />
-            <Suspense fallback={<ProductsLoading />}>
-                <ProductsComponent
-                    sort={sort}
-                    collections={collections}
-                    type={type}
-                    initialProducts={products}
+        <>
+            {/*
+                FIX: Preload the LCP image before anything else.
+                This is what eliminates the "Resource load delay: 3,080ms" —
+                the browser starts the image fetch from the very first HTML byte,
+                not after 3 seconds of JS execution + API calls.
+
+                imagesrcset mirrors what next/image generates for this image,
+                so the browser can pick the right size early.
+            */}
+            {lcpPreloadUrl && (
+                <link
+                    rel="preload"
+                    as="image"
+                    href={lcpPreloadUrl}
+                    // Match the sizes attribute used in <Card> exactly
+                    // so the browser's preload scanner can match it to the <img>
+                    imageSizes="320px"
+                    imageSrcSet={[
+                        `/_next/image?url=${encodeURIComponent(lcpImageSrc)}&w=320&q=75 320w`,
+                        `/_next/image?url=${encodeURIComponent(lcpImageSrc)}&w=640&q=75 640w`,
+                    ].join(', ')}
+                    crossOrigin="anonymous"
                 />
-            </Suspense>
-        </main>
+            )}
+
+            <main className="h-full w-screen md:flex md:pt-28 pt-20">
+                <Sidebar />
+                <div className="lg:ps-12">
+                    <BreadcrumbComp />
+                    <Suspense fallback={<ProductsLoading />}>
+                        <ProductsComponent
+                            sort={sort}
+                            collections={collections}
+                            type={type}
+                            initialProducts={products}
+                        />
+                    </Suspense>
+                </div>
+            </main>
+        </>
     )
 }

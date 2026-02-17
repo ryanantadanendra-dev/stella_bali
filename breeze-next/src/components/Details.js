@@ -3,6 +3,7 @@
 import { useProduct } from '@/hooks/product'
 import Image from 'next/image'
 import { useState } from 'react'
+import WaButton from './WaButton'
 
 const priceFormat = price => {
     return new Intl.NumberFormat('id-ID', {
@@ -19,13 +20,13 @@ const Details = ({ slug }) => {
 
     return (
         <section className="w-screen flex flex-wrap">
-            <div className="md:w-1/2 w-full flex h-96 justify-center">
-                <div className="h-full w-1/4 overflow-y-scroll">
+            <div className="md:w-1/2 w-full flex flex-col-reverse md:flex-row h-96 items-center justify-center mt-12 md:mt-0">
+                <div className="md:h-[25rem] lg:h-[30rem] h-44 w-96 flex mx-auto gap-5 md:block md:w-1/4 overflow-x-scroll overflow-y-hidden md:overflow-x-hidden md:overflow-y-scroll">
                     {product?.images.map((image, index) => (
                         <figure
                             onClick={() => setIsActive(index)}
                             key={index}
-                            className={`w-28 h-32 relative mt-5 ${isActive == index ? 'opacity-100' : 'opacity-50'}`}>
+                            className={`md:w-28 md:h-32 min-w-32 h-44 relative mt-5 ${isActive == index ? 'opacity-100' : 'opacity-50'}`}>
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${image.path}`}
                                 alt={`${product?.name} image ${index}`}
@@ -35,7 +36,7 @@ const Details = ({ slug }) => {
                         </figure>
                     ))}
                 </div>
-                <figure className="w-80 h-full bg-black relative">
+                <figure className="lg:w-[30rem] lg:h-[30rem] md:w-[20rem] md:h-[25rem] w-[20rem] h-[25rem] bg-black relative">
                     <Image
                         src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${product?.images[isActive].path}`}
                         fill
@@ -43,16 +44,16 @@ const Details = ({ slug }) => {
                     />
                 </figure>
             </div>
-            <div className="md:w-1/2 w-full px-12 md:px-0">
-                <h1 className="text-2xl font-bold mt-8 md:mt-0">
+            <div className="md:w-1/2 w-full px-12 md:px-0 md:ps-12">
+                <h1 className="text-2xl lg:text-4xl font-bold mt-8 md:mt-0">
                     {product?.name}
                 </h1>
                 <p className="mt-4">{product?.description}</p>
-                <p className="font-bold text-2xl mt-12">
+                <p className="font-bold text-xl lg:text-3xl mt-12">
                     {priceFormat(product?.price)}
                 </p>
-                <p className=" mt-9">Colors</p>
-                <div className="flex gap-2">
+                <p className="text-xl mt-9">Colors</p>
+                <div className="flex gap-2 mt-3">
                     {product?.colors.map((color, index) => (
                         <div
                             key={index}
@@ -60,7 +61,7 @@ const Details = ({ slug }) => {
                             style={{ backgroundColor: color }}></div>
                     ))}
                 </div>
-                <button className="mt-9">Whatsapp</button>
+                <WaButton />
             </div>
         </section>
     )
