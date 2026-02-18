@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
     return (
         <html
             lang="en"
-            className={`${montserrat.variable} ${montserratAlternates.variable} antialiased`}>
+            className={`${montserrat.variable} ${montserratAlternates.variable} overflow-x-hidden antialiased`}>
             {/* Next.js handles <head> automatically. 
                 Keep the manual <style> ONLY if you experience a "flash" 
                 of unstyled content before global.css loads.

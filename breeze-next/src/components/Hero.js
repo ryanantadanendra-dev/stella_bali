@@ -17,9 +17,12 @@ const Hero = ({ title }) => {
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCgAA8A/9k="
             />
             <div className="absolute inset-0 bg-black/40" />
-            <h1 className="relative z-10 text-4xl font-bold md:text-6xl">
+            <h1 className="relative z-10 text-4xl font-bold md:text-5xl">
                 {title}
             </h1>
+            <p className="text-white z-10 text-center text-[1rem]">
+                About Bali's Spirit meets contemporary summer style
+            </p>
         </header>
     )
 }

@@ -34,7 +34,7 @@ function filterAndSort(products, { type, collections, sort }) {
     if (sort === 'new-arrivals') {
         result = result
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-            .slice(0, 5)
+            .slice(0, 6)
     } else if (sort === 'price-low-to-high') {
         result = result.sort((a, b) => a.price - b.price)
     } else if (sort === 'price-high-to-low') {
@@ -96,7 +96,7 @@ const ProductsComponent = ({ sort, collections, type, initialProducts }) => {
                     />
                 ))
             ) : (
-                <p className="text-center text-lg mt-10 col-span-full">
+                <p className="ms-12 text-center text-lg mt-10 col-span-full">
                     No Products Available!
                 </p>
             )}

@@ -81,7 +81,7 @@ const EditForm = ({ product, setIsOpen }) => {
         <form onSubmit={handleSubmit} className="py-3 px-10">
             <h2 className="text-center text-2xl font-bold">Add Product</h2>
 
-            <ul className="mt-8">
+            <ul className="mt-8 max-h-[30rem] overflow-y-scroll">
                 <li className="flex items-center">
                     <label htmlFor="name" className="w-32">
                         Name
@@ -98,12 +98,12 @@ const EditForm = ({ product, setIsOpen }) => {
                     <label htmlFor="description" className="w-32">
                         Description
                     </label>
-                    <input
+                    <textarea
                         type="description"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
-                        className="ms-3 w-full h-10 border-2 border-black"
+                        className="ms-3 w-full h-32 border-2 border-black"
                     />
                 </li>
                 <li className="mt-4">

@@ -4,17 +4,36 @@ import { getBlogs } from '@/lib/getBlog'
 export async function generateMetadata({ params }) {
     const { blogs } = await getBlogs()
     const blog = blogs?.find(b => b.slug === params.slug)
+    const imageUrl = blog?.image
+        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${blog?.image}`
+        : `https://stellabali.com/public/Assets/Logo.png`
 
     if (!blog) return { title: 'Not found' }
 
     return {
-        title: blog.title + ' | Bhaliera Blog',
-        description: blog.subtitle,
+        title: blog?.title + ' | Stella Bali Blog',
+        description: blog?.subtitle || `Read More About ${blog?.title}`,
         openGraph: {
-            title: blog.title,
-            description: blog.subtitle,
-            images: [blog.image],
+            title: blog?.title,
+            description: blog?.subtitle,
+            siteName: 'Stella Bali',
             type: 'article',
+            publishedTime: blog?.created_at,
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: blog?.title,
+                },
+            ],
+            type: 'article',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: blog?.title,
+            description: blog?.subtitle,
+            images: [imageUrl],
         },
     }
 }

@@ -4,10 +4,10 @@ import Image from 'next/image'
 
 const Footer = () => {
     return (
-        <footer className="w-screen md:h-full lg:h-96 py-12 md:px-12 lg:px-2 lg:py-0 bg-[#404040] flex lg:gap-0 md:gap-12 flex-wrap justify-between items-center text-white">
-            <div className="lg:w-1/4 md:w-full lg:px-12">
+        <footer className="w-screen md:h-full lg:h-96 py-12 md:px-12 lg:px-2 lg:py-0 bg-[#404040] flex lg:gap-12 md:gap-12 flex-wrap justify-between items-center text-white">
+            <div className="lg:w-64 md:w-full lg:px-2">
                 <p className="text-5xl font-bold">StellaBali.</p>
-                <p className="mt-3">
+                <p className="mt-3 text-[0.9rem]">
                     Bali-based summerwear with light, casual designs for
                     holidays and everyday wear.
                 </p>
@@ -41,9 +41,9 @@ const Footer = () => {
                     </svg>
                 </div>
             </div>
-            <div className="lg:w-1/4 w-full mt-12 lg:mt-0">
+            <div className="lg:w-48 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">Products</p>
-                <ul className="mt-5 text-xl">
+                <ul className="mt-5 text-lg">
                     <li>
                         <Link href={`/products?sort=new-arrivals`}>
                             New Arrival
@@ -57,9 +57,9 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-            <div className="lg:w-1/4 w-full mt-12 lg:mt-0">
+            <div className="lg:w-48 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">About Us</p>
-                <ul className="mt-5 text-xl">
+                <ul className="mt-5 text-[0.9rem]">
                     <li>
                         <Link href="">Our Story</Link>
                     </li>
@@ -74,9 +74,9 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-            <div className="lg:w-1/4 w-full mt-12 lg:mt-0">
+            <div className="lg:w-72 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">Contact Us</p>
-                <ul className="mt-5">
+                <ul className="mt-5 text-[0.9rem]">
                     <li className="flex items-center gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

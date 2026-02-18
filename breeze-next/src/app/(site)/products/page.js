@@ -133,7 +133,7 @@ export default async function ProductsPage({ searchParams }) {
 
             <main className="h-full w-screen md:flex md:pt-28 pt-20">
                 <Sidebar />
-                <div className="lg:ps-12">
+                <div className="lg:ps-0">
                     <BreadcrumbComp />
                     <Suspense fallback={<ProductsLoading />}>
                         <ProductsComponent

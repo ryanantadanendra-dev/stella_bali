@@ -15,11 +15,11 @@ const NewArrival = () => {
         <section className="w-full h-full py-32 md:px-12">
             <div className="flex justify-around md:justify-between">
                 <h2 className="text-3xl font-bold">New Arrivals</h2>
-                <Link href="">View All</Link>
+                <Link href="/products?sort=new-arrivals">View All</Link>
             </div>
             <div className="cards-container flex justify-center flex-wrap gap-12 mt-12">
                 {latests?.map((latest, index) => (
-                    <Card data={latest} />
+                    <Card data={latest} key={latest?.slug} />
                 ))}
             </div>
         </section>

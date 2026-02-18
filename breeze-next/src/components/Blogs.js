@@ -19,7 +19,7 @@ const Blogs = () => {
     return (
         <section className="w-full h-full py-32">
             <h2 className="text-center text-3xl font-bold">News & Articles</h2>
-            <p className="text-center lg:px-[30rem] md:px-12 px-8 text-xs md:text-lg mt-3">
+            <p className="text-center lg:px-[20rem] md:px-0 px-8 text-xs md:text-[1rem] mt-3">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>

@@ -16,7 +16,7 @@ export default function HighlightBlogs() {
     if (!highlight.length) return null
 
     return (
-        <div className="blogs-wrapper flex md:flex-row flex-col items-center justify-center gap-3 pt-12 px-6 md:px-20">
+        <div className="blogs-wrapper flex md:flex-row flex-col items-center justify-center gap-3 lg:pt-12 px-6 md:px-20">
             {highlight.map((blog, index) => (
                 <figure
                     key={blog.slug}

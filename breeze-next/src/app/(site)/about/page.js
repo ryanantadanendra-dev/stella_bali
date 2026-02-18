@@ -2,6 +2,52 @@ import Hero from '@/components/Hero'
 import CTA from '@/components/CTA'
 import Image from 'next/image'
 
+export const metadata = {
+    title: 'About Stella Bali | Our Story, Vision & Craftsmanship',
+    description:
+        'Feel the Bali breeze in every thread. Stella Bali creates effortless, lightweight clothing designed for tropical living and everyday ease. Shop our island-inspired collection.',
+    keywords: [
+        'Stella Bali Story',
+        'Visi Misi Stella Bali',
+        'proses produksi pakaian',
+        'brand values fashion',
+        'ethical fashion Bali',
+        'cerita brand lokal',
+        'behind the scenes Stella Bali',
+        'kualitas produksi lokal',
+        'sustainable resort wear',
+        'kerajinan tangan Bali',
+    ],
+    openGraph: {
+        title: 'The Heart of Stella Bali | Crafting Everyday Ease',
+        description:
+            'Dari proses produksi hingga nilai yang kami pegang. Pelajari bagaimana kami menciptakan pakaian pantai yang nyaman dan berkualitas tinggi langsung dari Bali.',
+        siteName: 'stellabali.com',
+        locale: 'id_ID',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'The Heart of Stella Bali | Crafting Everyday Ease',
+        description:
+            'Dari proses produksi hingga nilai yang kami pegang. Pelajari bagaimana kami menciptakan pakaian pantai yang nyaman dan berkualitas tinggi langsung dari Bali.',
+        creator: '@stellabaligroup',
+        images: [],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        },
+    },
+}
+
 const visionMissions = [
     {
         id: 'vision',
@@ -62,7 +108,7 @@ const VisionMissionCard = ({ data }) => {
     const isList = data.type === 'list'
 
     return (
-        <article className="h-full w-96 bg-white px-3 py-12 shadow-lg shadow-gray-400 md:h-[35rem] md:w-[35rem] md:py-0">
+        <article className="h-full w-96 bg-white px-3 py-12 shadow-lg shadow-gray-400 md:h-[30rem] md:w-[30rem] md:py-2">
             <div className="mt-10">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#269795] pe-1">
                     <svg
@@ -83,13 +129,13 @@ const VisionMissionCard = ({ data }) => {
                     {data.text.map((item, i) => (
                         <li
                             key={i}
-                            className="mb-2 text-[0.8rem] md:text-[1.3rem]">
+                            className="mb-2 text-[0.8rem] md:text-[0.9rem]">
                             • {item}
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p className="mt-10 text-left text-[0.8rem] md:text-[1.3rem]">
+                <p className="mt-10 text-left text-[0.8rem] md:text-[1rem]">
                     {data.text}
                 </p>
             )}
@@ -100,9 +146,7 @@ const VisionMissionCard = ({ data }) => {
 const ValueCard = ({ data }) => (
     <article className="relative h-56 w-56 bg-white">
         <span className="absolute left-1/2 top-0 h-1 w-16 -translate-x-1/2 bg-[#269795]" />
-        <h3 className="mt-6 text-center text-[1.2rem] font-bold">
-            {data.title}
-        </h3>
+        <h3 className="mt-6 text-center text-[1rem] font-bold">{data.title}</h3>
         <p className="mt-4 text-center text-[1rem]">{data.description}</p>
     </article>
 )
@@ -148,7 +192,7 @@ const About = () => {
                     <h2 className="text-center text-3xl font-bold">
                         Our Values
                     </h2>
-                    <div className="mt-20 flex flex-wrap justify-center gap-12 md:px-32">
+                    <div className="mt-20 flex flex-wrap justify-center gap-32 md:px-12">
                         {brandValues.map(data => (
                             <ValueCard key={data.id} data={data} />
                         ))}
@@ -171,7 +215,7 @@ const About = () => {
                         <h2 className="mt-5 text-center md:text-left text-4xl font-bold">
                             Our Production
                         </h2>
-                        <article className="mt-10 px-3 text-center text-[0.8rem] md:text-[1.3rem] lg:px-0 lg:text-left">
+                        <article className="mt-10 px-3 text-center text-[0.8rem] md:text-[1.1rem] lg:px-0 lg:text-left">
                             <span className="font-bold">Stella Bali's </span>
                             production process is handmade and based on close
                             collaboration with home-based artisans across Bali.

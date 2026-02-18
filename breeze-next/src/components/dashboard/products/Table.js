@@ -107,17 +107,21 @@ const Table = ({ setIsOpen }) => {
                         className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'} min-h-[80px] md:h-52`}>
                         <td className="text-center">{product.id}</td>
                         <td className="text-center">{product.name}</td>
-                        <td className="text-center max-w-[160px] truncates">
-                            {product.description}
+                        <td className=" max-w-[160px] h-56">
+                            <div className="max-h-56 overflow-y-auto ">
+                                {product.description}
+                            </div>
                         </td>
-                        <td className="flex gap-2  justify-center items-center h-52">
-                            {product?.colors?.map((color, i) => (
-                                <div
-                                    key={i}
-                                    className={`w-4 h-4 rounded-full border-[1px] border-black`}
-                                    style={{ backgroundColor: color }}
-                                />
-                            ))}
+                        <td className="h-52">
+                            <div className="flex gap-2  justify-center items-center">
+                                {product?.colors?.map((color, i) => (
+                                    <div
+                                        key={i}
+                                        className={`w-4 h-4 rounded-full border-[1px] border-black`}
+                                        style={{ backgroundColor: color }}
+                                    />
+                                ))}
+                            </div>
                         </td>
                         <td className="text-center">{product.type}</td>
                         <td className="text-center">{product.subtype}</td>

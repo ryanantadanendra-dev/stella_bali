@@ -3,6 +3,7 @@
 import { useProduct } from '@/hooks/product'
 import Image from 'next/image'
 import image from '../../public/Assets/hero1.jpg'
+import Link from 'next/link'
 
 // Grid span configuration
 const GRID_SPANS = {
@@ -29,12 +30,20 @@ const Wrapper = ({ index, category }) => {
                 sizes="(max-width: 768px) 50vw, 33vw"
             />
             <div className="overlay absolute inset-0 z-30" />
-            <figcaption className="absolute bottom-0 z-40 flex w-full justify-between px-3 py-2 text-xl font-bold text-white md:text-6xl">
+            <figcaption className="absolute bottom-0 z-40 flex w-full justify-between px-3 py-2 text-xl text-white md:text-6xl">
                 <span>{category}</span>
                 {showSubcategories && (
                     <div className="text-xs md:text-xl">
-                        <p>Man</p>
-                        <p>Woman</p>
+                        <Link
+                            href={`/products?type=Man&collections=${category}`}
+                            className="block">
+                            Man
+                        </Link>
+                        <Link
+                            href={`/products?type=Woman&collections=${category}`}
+                            className="block">
+                            Woman
+                        </Link>
                     </div>
                 )}
             </figcaption>

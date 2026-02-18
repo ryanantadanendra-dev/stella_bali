@@ -16,7 +16,50 @@ const Blogs = dynamic(() => import('@/components/Blogs'), {
 })
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'Stella Bali | Breathable Beachwear for Everyday Ease',
+    description:
+        'Feel the Bali breeze in every thread. Stella Bali creates effortless, lightweight clothing designed for tropical living and everyday ease. Shop our island-inspired collection.',
+    keywords: [
+        'Stella Bali',
+        'Bali Breeze Everyday Ease',
+        'resort wear Bali',
+        'breathable beachwear',
+        'baju pantai Bali',
+        'pakaian resort',
+        'linen clothing Bali',
+        'baju bahan linen',
+        'island essentials',
+        'brand lokal Bali',
+        'pakaian musim panas',
+    ],
+    openGraph: {
+        title: 'Stella Bali | Bali Breeze & Everyday Ease',
+        description:
+            'Effortless, breathable beachwear designed for the tropical soul. Discover lightweight essentials that bring the spirit of Bali to your everyday wardrobe.',
+        siteName: 'stellabali.com',
+        locale: 'id_ID',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Stella Bali | Bali Breeze & Everyday Ease',
+        description:
+            'Effortless, breathable beachwear designed for the tropical soul. Discover lightweight essentials that bring the spirit of Bali to your everyday wardrobe.',
+        creator: '@stellabaligroup',
+        images: [],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        },
+    },
 }
 
 const datas = [Hero1, Hero2, Hero3]

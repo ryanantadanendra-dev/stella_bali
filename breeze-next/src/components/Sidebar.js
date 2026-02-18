@@ -200,11 +200,7 @@ const Sidebar = () => {
             )}
 
             <aside
-                aria-label="Product filters"
-                // FIX: Use translate for mobile show/hide, not opacity.
-                // Opacity changes cause layout shifts; translate does not.
-                // Also: `w-0` was causing the sidebar to collapse which shifts content.
-                className={`md:min-h-screen h-full shadow-lg shadow-gray-400 md:w-80 bg-white pt-7 top-0 fixed z-30 md:block md:static transition-transform duration-300 ease-out ${
+                className={`min-h-screen shadow-lg shadow-gray-400 md:w-80 w-48 bg-white pt-7 top-0 fixed z-30 md:block md:static transition-transform duration-300 ease-out ${
                     !isOpen && isMobile && hydrated
                         ? '-translate-x-full'
                         : 'translate-x-0'
@@ -232,17 +228,17 @@ const Sidebar = () => {
                     The "Sort By" section was listed explicitly as a layout shift source.
                     Content is always visible; mobile hides the whole sidebar via translate.
                 */}
-                <section className="w-32 mt-8 md:w-64 transition-all duration-300 bg-white px-3">
+                <section className="w-48 mt-8 md:w-64 transition-all duration-300 bg-white px-3">
                     <button
                         onClick={toggleSort}
-                        className="flex justify-between items-center w-full h-12"
+                        className="flex justify-between items-center w-full h-10 bg-[#269795] text-white px-3"
                         aria-expanded={sortOpen}
                         aria-label={
                             sortOpen
                                 ? 'Collapse sort options'
                                 : 'Expand sort options'
                         }>
-                        <h2 className="text-xs md:text-2xl font-medium">
+                        <h2 className="text-xs md:text-[1.2rem] font-medium">
                             Sort By
                         </h2>
                         <svg
@@ -250,7 +246,10 @@ const Sidebar = () => {
                             viewBox="0 0 448 512"
                             className="md:w-4 w-2"
                             aria-hidden="true">
-                            <path d={sortOpen ? MINUS_ICON : PLUS_ICON} />
+                            <path
+                                fill="#FFFFFF"
+                                d={sortOpen ? MINUS_ICON : PLUS_ICON}
+                            />
                         </svg>
                     </button>
 
@@ -279,12 +278,12 @@ const Sidebar = () => {
 
                 {/* Collections Section */}
                 <section
-                    className={`w-32 md:w-64 bg-white px-3 ${
+                    className={`w-46 md:w-64 bg-white px-3 ${
                         sortOpen ? 'md:mt-20 mt-8' : 'md:mt-2 mt-4'
                     }`}>
                     <button
                         onClick={toggleCollections}
-                        className="flex justify-between items-center w-full h-10"
+                        className="flex justify-between items-center w-full h-10 bg-[#269795] text-white px-3"
                         aria-expanded={collectionsOpen}
                         aria-label={
                             collectionsOpen
@@ -300,6 +299,7 @@ const Sidebar = () => {
                             className="w-2 md:w-4"
                             aria-hidden="true">
                             <path
+                                fill="#FFFFFF"
                                 d={collectionsOpen ? MINUS_ICON : PLUS_ICON}
                             />
                         </svg>

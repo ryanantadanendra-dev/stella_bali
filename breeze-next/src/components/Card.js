@@ -1,10 +1,9 @@
-// components/Card.jsx - OPTIMIZED
 'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useMemo, memo } from 'react'
+import { useMemo, memo, useState } from 'react'
 
 const priceFormat = price => {
     return new Intl.NumberFormat('id-ID', {
@@ -19,6 +18,7 @@ const Card = ({ data, priority = false }) => {
 
     const isProduct = Boolean(data?.name)
     const isBlog = Boolean(data?.title)
+    const [isHovered, setIsHovered] = useState(false)
 
     const imageSrc = useMemo(() => {
         const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL
@@ -44,7 +44,7 @@ const Card = ({ data, priority = false }) => {
     return (
         <article
             onClick={handleClick}
-            className={`flex h-[30rem] w-80 min-h-[30rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
+            className={`flex ${isBlog ? 'h-[30rem] max-h-[30rem]' : 'h-[25rem]'}  w-72 min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
                 isProduct
                     ? 'cursor-pointer transition-transform hover:scale-105'
                     : ''
@@ -66,7 +66,10 @@ const Card = ({ data, priority = false }) => {
 
             <h3 className="line-clamp-2 text-lg font-semibold">{title}</h3>
 
-            <p className={isProduct ? 'font-bold' : 'font-normal'}>
+            <p
+                className={
+                    isProduct ? 'font-bold truncate' : 'font-normal truncate'
+                }>
                 {subtitle}
             </p>
 
@@ -78,8 +81,10 @@ const Card = ({ data, priority = false }) => {
 
             {isBlog && (
                 <Link
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                     href={`/blog/${data.slug || ''}`}
-                    className="flex h-10 w-36 items-center justify-center gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
+                    className="flex h-10 w-36 text-xs items-center justify-center gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
                     aria-label={`Read more about ${title}`}>
                     Learn More
                     <svg
@@ -87,7 +92,10 @@ const Card = ({ data, priority = false }) => {
                         viewBox="0 0 384 512"
                         className="w-3 rotate-45"
                         aria-hidden="true">
-                        <path d="M214.6 17.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 117.3 160 488c0 17.7 14.3 32 32 32s32-14.3 32-32l0-370.7 105.4 105.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+                        <path
+                            fill={isHovered ? '#FFFFFF' : '#000000'}
+                            d="M214.6 17.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 117.3 160 488c0 17.7 14.3 32 32 32s32-14.3 32-32l0-370.7 105.4 105.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+                        />
                     </svg>
                 </Link>
             )}

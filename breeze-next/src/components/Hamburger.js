@@ -45,13 +45,19 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
             className={`menu-wrapper w-screen ${menuHeight} absolute bg-white transition-all duration-200 ease-out ${isOpen ? 'top-20 opacity-100' : '-top-96 opacity-0'} left-0`}>
             <div className="link-wrapper">
                 <div className="link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center">
-                    <Link href="" className="ms-3">
+                    <Link
+                        onClick={() => setIsOpen(false)}
+                        href="/"
+                        className="ms-3">
                         Home
                     </Link>
                 </div>
                 <div
                     className={`link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center`}>
-                    <Link href="/blogs" className="ms-3">
+                    <Link
+                        onClick={() => setIsOpen(false)}
+                        href="/products?sort=new-arrivals"
+                        className="ms-3">
                         New Arrivals
                     </Link>
                 </div>
@@ -59,7 +65,10 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                     className="link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center gap-1"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}>
-                    <Link href="/services" className="ms-3">
+                    <Link
+                        onClick={() => setIsOpen(false)}
+                        href="/products"
+                        className="ms-3">
                         Products
                     </Link>
                     <svg
@@ -68,7 +77,7 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                         viewBox="0 0 320 512"
                         className="w-3">
                         <path
-                            fill={`${isHovered ? '#000000' : '#FFFFFF'}`}
+                            fill="#000000"
                             d="M140.3 376.8c12.6 10.2 31.1 9.5 42.8-2.2l128-128c9.2-9.2 11.9-22.9 6.9-34.9S301.4 192 288.5 192l-256 0c-12.9 0-24.6 7.8-29.6 19.8S.7 237.5 9.9 246.6l128 128 2.4 2.2z"
                         />
                     </svg>
@@ -79,7 +88,12 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                             <>
                                 <div
                                     className={`link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center gap-1`}>
-                                    <button className="ms-3">{data}</button>
+                                    <Link
+                                        onClick={() => setIsOpen(false)}
+                                        href={`/products?type=${data}`}
+                                        className="ms-3">
+                                        {data}
+                                    </Link>
                                     <svg
                                         onClick={prev =>
                                             setOpenSubtype(prev =>
@@ -100,7 +114,8 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                                     className={`${openSubtype == data ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                                     {filterCategories().map(category => (
                                         <Link
-                                            href=""
+                                            href={`/products?type=${data}&collections=${category}`}
+                                            onClick={() => setIsOpen(false)}
                                             key={category}
                                             className={` block ms-8 ${openSubtype == data ? 'h-[44.8px]' : 'h-0'}`}>
                                             {category}
@@ -113,13 +128,19 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                 )}
                 <div
                     className={`link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center`}>
-                    <Link href="/about" className="ms-3">
+                    <Link
+                        href="/about"
+                        onClick={() => setIsOpen(false)}
+                        className="ms-3">
                         About Us
                     </Link>
                 </div>
                 <div
                     className={`link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center`}>
-                    <Link href="/about" className="ms-3">
+                    <Link
+                        href="/blogs"
+                        onClick={() => setIsOpen(false)}
+                        className="ms-3">
                         Blogs
                     </Link>
                 </div>

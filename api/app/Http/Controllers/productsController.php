@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Mews\Purifier\Facades\Purifier;
 
 class productsController extends Controller
 {
@@ -45,9 +46,13 @@ class productsController extends Controller
         // create slug
         $slug = Str::slug($request->name);
 
+        $cleanContent = Purifier::clean($validatedData['description'], [
+            'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
+        ]);
+
         $product = Product::create([
             'name' => $validatedData['name'],
-            'description' => $validatedData['description'],
+            'description' => $cleanContent,
             'colors' => $validatedData['colors'],
             'type' => $validatedData['type'],
             'subtype' => $validatedData['subtype'],

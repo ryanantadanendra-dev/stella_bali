@@ -5,7 +5,12 @@ import { ChevronRight, MoreHorizontal } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const Breadcrumb = React.forwardRef(({ ...props }, ref) => (
-    <nav ref={ref} aria-label="breadcrumb" className="text-black" {...props} />
+    <nav
+        ref={ref}
+        aria-label="breadcrumb"
+        className="ms-12 mt-12 md:mt-0"
+        {...props}
+    />
 ))
 Breadcrumb.displayName = 'Breadcrumb'
 

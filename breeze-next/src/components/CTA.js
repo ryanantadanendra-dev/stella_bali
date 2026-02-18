@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import WaButton from './WaButton'
 
 const CTA = ({ heading, subheading }) => {
     return (
@@ -21,7 +22,7 @@ const CTA = ({ heading, subheading }) => {
                 <h2 className="text-center text-3xl font-bold md:text-5xl">
                     {heading}
                 </h2>
-                <p className="max-w-2xl text-center text-sm md:text-lg">
+                <p className="max-w-2xl text-center text-sm md:text-[1rem]">
                     {subheading}
                 </p>
                 <div className="flex gap-4">
@@ -30,11 +31,7 @@ const CTA = ({ heading, subheading }) => {
                         className="mt-4 bg-white px-8 py-4 font-bold text-black transition-transform hover:scale-105">
                         Shop Now
                     </Link>
-                    <Link
-                        href="/products"
-                        className="mt-4 px-8 py-4 font-bold text-white bg-transparent border-2 border-white transition-transform hover:scale-105">
-                        Shop Now
-                    </Link>
+                    <WaButton style="mt-4 px-8 py-4 font-bold text-white bg-transparent border-2 border-white transition-transform hover:scale-105" />
                 </div>
             </div>
         </section>

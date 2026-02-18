@@ -4,6 +4,7 @@ import { useEffect, useCallback, useMemo } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function Carousel({ datas, place }) {
     // Memoize autoplay plugin to prevent recreation
@@ -87,11 +88,12 @@ export function Carousel({ datas, place }) {
                                             Lorem ipsum dolor sit amet
                                             consectetur.
                                         </p>
-                                        <button
+                                        <Link
+                                            href="/about"
                                             className="mt-5 bg-white px-8 py-5 text-lg font-bold text-black transition-opacity hover:opacity-90"
                                             aria-label="Learn more about us">
                                             Learn Here
-                                        </button>
+                                        </Link>
                                     </>
                                 )}
                             </div>

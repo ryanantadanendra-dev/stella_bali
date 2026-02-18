@@ -95,7 +95,7 @@ const Navbar = () => {
 
             {/* Center: Desktop Links */}
             {!isMobile && (
-                <ul className="flex gap-8 text-[0.8rem] uppercase tracking-widest font-medium w-1/3 justify-center">
+                <ul className="flex gap-8 text-[0.5rem] uppercase tracking-widest font-medium w-full justify-center">
                     <li>
                         <Link
                             href="/"
