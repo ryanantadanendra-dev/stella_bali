@@ -15,8 +15,6 @@ const Table = () => {
     const [modalName, setModalName] = useState('')
 
     const handleDelete = async id => {
-        console.log(id)
-
         Swal.fire({
             title: 'Are you sure to delete this blog?',
             text: "You won't be able to revert this!",

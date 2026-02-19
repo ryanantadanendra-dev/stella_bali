@@ -42,7 +42,9 @@ const Card = ({ data, priority = false }) => {
     const subtitle = isProduct ? priceFormat(data.price) : data.subtitle
 
     return (
-        <article
+        <div
+            onKeyDown={e => e.key == 'Enter' && handleClick()}
+            tabIndex={0}
             onClick={handleClick}
             className={`flex ${isBlog ? 'h-[30rem] max-h-[30rem]' : 'h-[25rem]'}  w-72 min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
                 isProduct
@@ -52,7 +54,7 @@ const Card = ({ data, priority = false }) => {
             <figure className="relative h-56 w-full overflow-hidden">
                 <Image
                     src={imageSrc}
-                    alt={title}
+                    alt=""
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
@@ -99,7 +101,7 @@ const Card = ({ data, priority = false }) => {
                     </svg>
                 </Link>
             )}
-        </article>
+        </div>
     )
 }
 

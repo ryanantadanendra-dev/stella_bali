@@ -57,7 +57,7 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-            <div className="lg:w-48 w-full mt-12 lg:mt-0">
+            <div className="lg:w-36 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">About Us</p>
                 <ul className="mt-5 text-[0.9rem]">
                     <li>
@@ -74,7 +74,7 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-            <div className="lg:w-72 w-full mt-12 lg:mt-0">
+            <div className="lg:w-96 w-full mt-12 lg:mt-0">
                 <p className="text-2xl font-bold">Contact Us</p>
                 <ul className="mt-5 text-[0.9rem]">
                     <li className="flex items-center gap-2">

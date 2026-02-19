@@ -46,7 +46,14 @@ export const metadata = {
         description:
             'Effortless, breathable beachwear designed for the tropical soul. Discover lightweight essentials that bring the spirit of Bali to your everyday wardrobe.',
         creator: '@stellabaligroup',
-        images: [],
+        images: [
+            {
+                url: '../../../public/Assets/Logo.png',
+                width: 1200,
+                height: 630,
+                alt: 'Stella Logo',
+            },
+        ],
     },
     robots: {
         index: true,

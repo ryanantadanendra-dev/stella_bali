@@ -32,7 +32,14 @@ export const metadata = {
         description:
             'Dari proses produksi hingga nilai yang kami pegang. Pelajari bagaimana kami menciptakan pakaian pantai yang nyaman dan berkualitas tinggi langsung dari Bali.',
         creator: '@stellabaligroup',
-        images: [],
+        images: [
+            {
+                url: '../../../../public/Assets/Logo.png',
+                width: 1200,
+                height: 630,
+                alt: 'Stella Logo',
+            },
+        ],
     },
     robots: {
         index: true,
@@ -108,7 +115,7 @@ const VisionMissionCard = ({ data }) => {
     const isList = data.type === 'list'
 
     return (
-        <article className="h-full w-96 bg-white px-3 py-12 shadow-lg shadow-gray-400 md:h-[30rem] md:w-[30rem] md:py-2">
+        <article className="h-full w-96 bg-white px-3 py-12 shadow-lg shadow-gray-400 md:h-[35rem] md:w-[35rem] md:py-2">
             <div className="mt-10">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#269795] pe-1">
                     <svg
@@ -119,23 +126,23 @@ const VisionMissionCard = ({ data }) => {
                         <path fill="#FFFFFF" d={data.path} />
                     </svg>
                 </div>
-                <h2 className="mt-8 text-center text-xl font-bold">
+                <h2 className="mt-8 text-center text-xl md:text-2xl font-bold">
                     {data.title}
                 </h2>
             </div>
 
             {isList ? (
-                <ul className="mt-5 text-[0.8rem] md:mt-10">
+                <ul className="mt-5 md:mt-10">
                     {data.text.map((item, i) => (
                         <li
                             key={i}
-                            className="mb-2 text-[0.8rem] md:text-[0.9rem]">
+                            className="mb-2 text-[0.8rem] md:text-[1.2rem]">
                             • {item}
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p className="mt-10 text-left text-[0.8rem] md:text-[1rem]">
+                <p className="mt-10 text-left text-[0.8rem] md:text-[1.2rem]">
                     {data.text}
                 </p>
             )}
@@ -146,8 +153,10 @@ const VisionMissionCard = ({ data }) => {
 const ValueCard = ({ data }) => (
     <article className="relative h-56 w-56 bg-white">
         <span className="absolute left-1/2 top-0 h-1 w-16 -translate-x-1/2 bg-[#269795]" />
-        <h3 className="mt-6 text-center text-[1rem] font-bold">{data.title}</h3>
-        <p className="mt-4 text-center text-[1rem]">{data.description}</p>
+        <h3 className="mt-6 text-center text-[1.4rem] font-bold">
+            {data.title}
+        </h3>
+        <p className="mt-4 text-center text-[1.2rem]">{data.description}</p>
     </article>
 )
 
@@ -161,7 +170,7 @@ const About = () => {
                     <h2 className="text-center text-4xl font-bold">
                         Our Story
                     </h2>
-                    <article className="mx-auto mt-10 px-3 text-center text-[0.8rem] md:w-[40rem] md:text-lg">
+                    <article className="mx-auto mt-10 px-3 text-center text-[0.8rem] md:w-[48rem] md:text-2xl">
                         Stella Bali is a local Balinese fashion brand rooted in
                         handmade craftsmanship, collaboration, and community
                         empowerment. What began as a home-based business has
@@ -181,11 +190,11 @@ const About = () => {
                 </section>
 
                 {/* Vision & Mission Section */}
-                <section className="vision-mission mt-40 flex h-full w-full flex-wrap justify-center gap-12">
+                <div className="vision-mission mt-40 flex h-full w-full flex-wrap justify-center gap-12">
                     {visionMissions.map(data => (
                         <VisionMissionCard key={data.id} data={data} />
                     ))}
-                </section>
+                </div>
 
                 {/* Our Values Section */}
                 <section className="mt-64 h-full w-full">
@@ -215,7 +224,7 @@ const About = () => {
                         <h2 className="mt-5 text-center md:text-left text-4xl font-bold">
                             Our Production
                         </h2>
-                        <article className="mt-10 px-3 text-center text-[0.8rem] md:text-[1.1rem] lg:px-0 lg:text-left">
+                        <article className="mt-10 px-3 text-center text-[0.8rem] md:text-[1.3rem] lg:px-0 lg:text-left">
                             <span className="font-bold">Stella Bali's </span>
                             production process is handmade and based on close
                             collaboration with home-based artisans across Bali.

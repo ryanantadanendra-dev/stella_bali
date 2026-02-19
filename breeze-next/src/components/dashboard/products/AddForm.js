@@ -72,8 +72,6 @@ const AddForm = ({ setIsOpen }) => {
         e.preventDefault()
         setIsLoading(true)
 
-        console.log(formData)
-
         try {
             await add(formData)
 
@@ -87,8 +85,8 @@ const AddForm = ({ setIsOpen }) => {
                 name: '',
                 description: '',
                 colors: ['#000000'],
-                type: '',
-                subtype: '',
+                type: 'man',
+                subtype: 'Tops',
                 price: '',
                 images: [],
             })

@@ -34,7 +34,7 @@ function filterAndSort(products, { type, collections, sort }) {
     if (sort === 'new-arrivals') {
         result = result
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-            .slice(0, 6)
+            .slice(0, 10)
     } else if (sort === 'price-low-to-high') {
         result = result.sort((a, b) => a.price - b.price)
     } else if (sort === 'price-high-to-low') {
@@ -85,18 +85,30 @@ const ProductsComponent = ({ sort, collections, type, initialProducts }) => {
 
     return (
         <section
-            className="w-full flex justify-center flex-wrap gap-4 py-4"
+            className="w-full flex justify-center flex-wrap gap-8 py-4 md:ps-12"
             aria-label="Product list">
+            <span aria-live="polite" aria-atomic="true" className="sr-only">
+                {filtered.length > 0
+                    ? `${filtered.length} products found`
+                    : 'No products available'}
+            </span>
             {filtered.length > 0 ? (
-                filtered.map((product, index) => (
-                    <MemoizedCard
-                        key={product.id ?? product.slug}
-                        data={product}
-                        priority={index < PRIORITY_COUNT}
-                    />
-                ))
+                <ul
+                    role="list"
+                    className="flex flex-wrap gap-8 justify-center w-full">
+                    {filtered.map((product, index) => (
+                        <li key={product.id ?? product.slug}>
+                            <MemoizedCard
+                                data={product}
+                                priority={index < PRIORITY_COUNT}
+                            />
+                        </li>
+                    ))}
+                </ul>
             ) : (
-                <p className="ms-12 text-center text-lg mt-10 col-span-full">
+                <p
+                    role="status"
+                    className="ms-12 text-center text-lg mt-10 col-span-full">
                     No Products Available!
                 </p>
             )}

@@ -15,7 +15,6 @@ const AddImageForm = ({ productId, setIsOpen }) => {
         if (productId) {
             setid(productId)
         }
-        console.log(productId)
     }, [productId])
 
     const handleFileChange = e => {

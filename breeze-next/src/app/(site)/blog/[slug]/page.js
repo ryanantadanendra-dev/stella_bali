@@ -40,7 +40,6 @@ export async function generateMetadata({ params }) {
 
 export default async function Blog({ params }) {
     const { blogs } = await getBlogs()
-    console.log(blogs)
     const blog = blogs?.find(b => b.slug === params.slug)
 
     const formatedDate = new Date(blog?.created_at).toLocaleDateString(
@@ -69,7 +68,7 @@ export default async function Blog({ params }) {
                 </time>
             </header>
             <main className="">
-                <figure className="relative w-[20rem] md:w-[45rem] lg:w-[59rem] h-64 mx-auto mt-10">
+                <figure className="relative w-[20rem] md:w-[45rem] lg:w-[59rem] md:h-96 h-64 mx-auto mt-10">
                     <Image
                         src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${blog?.image}`}
                         alt={`${blog?.title} image`}

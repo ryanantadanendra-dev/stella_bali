@@ -17,7 +17,7 @@ const NewArrival = () => {
                 <h2 className="text-3xl font-bold">New Arrivals</h2>
                 <Link href="/products?sort=new-arrivals">View All</Link>
             </div>
-            <div className="cards-container flex justify-center flex-wrap gap-12 mt-12">
+            <div className="cards-container flex justify-center flex-wrap gap-12 md:gap-20 mt-12">
                 {latests?.map((latest, index) => (
                     <Card data={latest} key={latest?.slug} />
                 ))}
