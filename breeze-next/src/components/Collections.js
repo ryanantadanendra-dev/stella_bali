@@ -2,8 +2,12 @@
 
 import { useProduct } from '@/hooks/product'
 import Image from 'next/image'
-import image from '../../public/Assets/hero1.jpg'
 import Link from 'next/link'
+import Img1 from '@/../public/Assets/tops.jpg'
+import Img2 from '@/../public/Assets/bottoms.jpg'
+import Img3 from '@/../public/Assets/swimsuits.jpg'
+import Img4 from '@/../public/Assets/dresses.jpg'
+import Img5 from '@/../public/Assets/accesories.jpg'
 
 // Grid span configuration
 const GRID_SPANS = {
@@ -16,7 +20,7 @@ const GRID_SPANS = {
 
 const getGridSpan = index => GRID_SPANS[index] || GRID_SPANS.default
 
-const Wrapper = ({ index, category }) => {
+const Wrapper = ({ index, category, image }) => {
     const showSubcategories = index !== 3
 
     return (
@@ -31,14 +35,24 @@ const Wrapper = ({ index, category }) => {
             />
             <div className="overlay absolute inset-0 z-30" />
             <figcaption className="absolute bottom-0 z-40 flex w-full justify-between px-3 py-2 text-xl text-white md:text-6xl">
-                <span>{category}</span>
-                {showSubcategories && (
+                <span className="lg:text-5xl md:text-4xl text-lg">
+                    {category}
+                </span>
+                {showSubcategories ? (
                     <div className="text-xs md:text-xl">
                         <Link
                             href={`/products?type=Man&collections=${category}`}
                             className="block">
                             Man
                         </Link>
+                        <Link
+                            href={`/products?type=Woman&collections=${category}`}
+                            className="block">
+                            Woman
+                        </Link>
+                    </div>
+                ) : (
+                    <div className="text-xs md:text-xl">
                         <Link
                             href={`/products?type=Woman&collections=${category}`}
                             className="block">
@@ -53,6 +67,7 @@ const Wrapper = ({ index, category }) => {
 
 const Collections = () => {
     const { categories } = useProduct()
+    const images = [Img1, Img2, Img3, Img4, Img5]
 
     return (
         <section className="w-screen px-2 py-32 md:px-12">
@@ -61,7 +76,12 @@ const Collections = () => {
             </h2>
             <div className="mt-12 grid auto-rows-[200px] grid-cols-2 gap-1 md:gap-6">
                 {categories?.map((category, index) => (
-                    <Wrapper key={category} index={index} category={category} />
+                    <Wrapper
+                        key={category}
+                        index={index}
+                        category={category}
+                        image={images[index]}
+                    />
                 ))}
             </div>
         </section>

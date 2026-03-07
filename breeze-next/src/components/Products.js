@@ -95,7 +95,7 @@ const ProductsComponent = ({ sort, collections, type, initialProducts }) => {
             {filtered.length > 0 ? (
                 <ul
                     role="list"
-                    className="flex flex-wrap gap-8 justify-center w-full">
+                    className="flex flex-wrap gap-1 md:gap-8 justify-center lg:justify=start w-full">
                     {filtered.map((product, index) => (
                         <li key={product.id ?? product.slug}>
                             <MemoizedCard
@@ -108,7 +108,7 @@ const ProductsComponent = ({ sort, collections, type, initialProducts }) => {
             ) : (
                 <p
                     role="status"
-                    className="ms-12 text-center text-lg mt-10 col-span-full">
+                    className="text-center text-lg mt-10 col-span-full">
                     No Products Available!
                 </p>
             )}

@@ -60,7 +60,7 @@ const Table = () => {
                 </tr>
             </thead>
             <tbody>
-                {contact.data.length > 0 ? (
+                {contact?.data?.length > 0 ? (
                     contact?.data.map((c, index) => (
                         <tr>
                             <td className="text-center">{c?.phone}</td>

@@ -46,12 +46,12 @@ const Card = ({ data, priority = false }) => {
             onKeyDown={e => e.key == 'Enter' && handleClick()}
             tabIndex={0}
             onClick={handleClick}
-            className={`flex ${isBlog ? 'h-[30rem] max-h-[30rem]' : 'h-[25rem]'}  w-72 min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
+            className={`flex ${isBlog ? 'h-[30rem] max-h-[30rem] max-w-72 w-72' : 'md:h-[25rem] min-w-44 max-w-44 h-[18rem] md:min-w-72'} md:min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
                 isProduct
                     ? 'cursor-pointer transition-transform hover:scale-105'
                     : ''
             }`}>
-            <figure className="relative h-56 w-full overflow-hidden">
+            <figure className="relative h-44 md:h-56 w-full overflow-hidden">
                 <Image
                     src={imageSrc}
                     alt=""
@@ -66,19 +66,24 @@ const Card = ({ data, priority = false }) => {
                 />
             </figure>
 
-            <h3 className="line-clamp-2 text-lg font-semibold">{title}</h3>
+            <h3 className="line-clamp-2 text-sm md:text-lg font-semibold">
+                {title}
+            </h3>
 
             <p
                 className={
-                    isProduct ? 'font-bold truncate' : 'font-normal truncate'
+                    isProduct
+                        ? 'font-bold truncate text-xs md:text-lg'
+                        : 'font-normal truncate'
                 }>
                 {subtitle}
             </p>
 
             {data.description && (
-                <p className="line-clamp-3 text-sm text-gray-600">
-                    {data.description}
-                </p>
+                <div
+                    dangerouslySetInnerHTML={{ __html: data?.description }}
+                    className="line-clamp-2 text-[0.5rem] md:text-lg"
+                />
             )}
 
             {isBlog && (

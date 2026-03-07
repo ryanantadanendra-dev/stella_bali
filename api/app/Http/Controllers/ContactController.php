@@ -8,7 +8,7 @@ use App\Models\Contact;
 class ContactController extends Controller
 {
     public function get() {
-        $contact = Contact::all();
+        $contact = Contact::firstOrFail();
 
         return response()->json([
             'success' => true,

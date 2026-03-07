@@ -1,7 +1,4 @@
 import { Carousel } from '@/components/Carousel'
-import Hero1 from '../../../public/Assets/hero1.jpg'
-import Hero2 from '../../../public/Assets/hero2.jpg'
-import Hero3 from '../../../public/Assets/hero3.jpg'
 import SearchBar from '@/components/SearchBar'
 import NewArrival from '@/components/NewArrival'
 import dynamic from 'next/dynamic'
@@ -69,7 +66,7 @@ export const metadata = {
     },
 }
 
-const datas = [Hero1, Hero2, Hero3]
+const datas = ['/Assets/hero1.jpg', '/Assets/hero3.jpg', '/Assets/hero2.jpg']
 
 const Home = () => {
     return (

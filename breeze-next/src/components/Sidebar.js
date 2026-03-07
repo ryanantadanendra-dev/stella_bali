@@ -89,7 +89,7 @@ const Sidebar = () => {
     // FIX: Track hydration to avoid opacity-0 CLS flash
     const [hydrated, setHydrated] = useState(false)
 
-    const isMobile = useIsMobile(500)
+    const isMobile = useIsMobile(600)
     const { categories } = useProduct()
     const searchParams = useSearchParams()
     const router = useRouter()

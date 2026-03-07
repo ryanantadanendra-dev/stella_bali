@@ -19,9 +19,9 @@ const Blogs = () => {
     return (
         <section className="w-full h-full py-32">
             <h2 className="text-center text-3xl font-bold">News & Articles</h2>
-            <p className="text-center lg:px-[29rem] md:px-0 px-8 text-xs md:text-[1.3rem] mt-3 leading-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <p className="text-center lg:px-[20rem] md:px-0 px-8 text-xs md:text-[1rem] mt-3 leading-6">
+                Explore our latest news, expert insights, and helpful articles
+                to keep you informed and inspired.
             </p>
             <div className="flex justify-center flex-wrap mt-8 gap-4 md:gap-12">
                 {latestBlogs.map(blog => (

@@ -4,10 +4,10 @@ import { useContact } from '@/hooks/useContact'
 import Link from 'next/link'
 
 const WaButton = ({ product, style }) => {
-    const { data, error } = useContact()
+    const { data } = useContact()
 
-    if (!Array.isArray(data) || data.length === 0) return null
-    const phone = data[0].phone
+    if (data.length === 0) return null
+    const phone = data?.phone
     const message = `Hi! I just saw your post about ${product?.name} and would love to know more. Do you have this in stock?`
 
     return (

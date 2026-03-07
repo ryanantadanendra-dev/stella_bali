@@ -11,7 +11,7 @@ export function Carousel({ datas, place }) {
     const autoplayPlugin = useMemo(() => [Autoplay({ delay: 6000 })], [])
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
-        { loop: true },
+        { loop: true, watchDrag: false },
         autoplayPlugin,
     )
 
@@ -45,6 +45,7 @@ export function Carousel({ datas, place }) {
     return (
         <div className="embla relative mt-12">
             <div
+                onDragStart={e => e.preventDefault()}
                 className={`embla__viewport mx-auto min-h-[75vh] w-full overflow-hidden ${
                     isTopPlacement ? 'lg:px-12' : ''
                 }`}
@@ -59,9 +60,10 @@ export function Carousel({ datas, place }) {
                                     src={data}
                                     alt={`Slide ${index + 1}`}
                                     fill
+                                    draggable={false}
                                     className="object-cover"
                                     priority={index === 0}
-                                    quality={index === 0 ? 85 : 75}
+                                    quality={90}
                                     sizes="100vw"
                                     loading={index === 0 ? 'eager' : 'lazy'}
                                 />
@@ -85,8 +87,8 @@ export function Carousel({ datas, place }) {
                                             Learn About Us
                                         </h2>
                                         <p className="text-center text-lg text-white">
-                                            Lorem ipsum dolor sit amet
-                                            consectetur.
+                                            Get to know who we are, what we do,
+                                            and the values that drive our work.
                                         </p>
                                         <Link
                                             href="/about"

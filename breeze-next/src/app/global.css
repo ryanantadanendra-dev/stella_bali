@@ -96,7 +96,7 @@ h2 {
 }
 
 .content p {
-    @apply text-2xl;
+    @apply text-xl;
 }
 
 .content li {
@@ -125,6 +125,11 @@ h2 {
 
 .embla__slide.is-selected {
     @apply opacity-100 z-[2];
+}
+
+.embla__slide img {
+    pointer-events: none;
+    user-select: none;
 }
 
 /* Utility Classes */

@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import Logo from '../../public/Assets/Logo.png'
 import Image from 'next/image'
+import getContact from '@/lib/getContact'
 
-const Footer = () => {
+const Footer = async () => {
+    const { contact } = await getContact()
+
     return (
         <footer className="w-screen md:h-full lg:h-96 py-12 md:px-12 lg:px-2 lg:py-0 bg-[#404040] flex lg:gap-12 md:gap-12 flex-wrap justify-between items-center text-white">
             <div className="lg:w-64 md:w-full lg:px-2">
@@ -87,7 +90,7 @@ const Footer = () => {
                                 d="M160.2 25C152.3 6.1 131.7-3.9 112.1 1.4l-5.5 1.5c-64.6 17.6-119.8 80.2-103.7 156.4 37.1 175 174.8 312.7 349.8 349.8 76.3 16.2 138.8-39.1 156.4-103.7l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2C233.9 335.4 177.3 277 144.8 205.3L189 169.3c13.9-11.3 18.6-30.4 11.8-47L160.2 25z"
                             />
                         </svg>
-                        <p>(+62) 1234567890</p>
+                        <p>+{contact.data.phone}</p>
                     </li>
                     <li className="flex items-center gap-2 mt-6">
                         <svg
