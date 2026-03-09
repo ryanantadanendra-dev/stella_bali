@@ -13,9 +13,9 @@ const Blogs = dynamic(() => import('@/components/Blogs'), {
 })
 
 export const metadata = {
-    title: 'Stella Bali | Breathable Beachwear for Everyday Ease',
+    title: 'Beach Clothing & Resort Wear — Swimwear, Cover Ups & More | Stella Bali',
     description:
-        'Feel the Bali breeze in every thread. Stella Bali creates effortless, lightweight clothing designed for tropical living and everyday ease. Shop our island-inspired collection.',
+        'Shop premium beach clothing including swimwear, tops, bottoms, dresses & Accessories. Stylish, comfortable & perfect for summer holidays and tropical getaways.',
     keywords: [
         'Stella Bali',
         'Bali Breeze Everyday Ease',
@@ -30,25 +30,25 @@ export const metadata = {
         'pakaian musim panas',
     ],
     openGraph: {
-        title: 'Stella Bali | Bali Breeze & Everyday Ease',
+        title: 'Beach Clothing & Resort Wear — Swimwear, Cover Ups & More | Stella Bali',
         description:
-            'Effortless, breathable beachwear designed for the tropical soul. Discover lightweight essentials that bring the spirit of Bali to your everyday wardrobe.',
+            'Shop premium beach clothing including swimwear, tops, bottoms, dresses & Accessories. Stylish, comfortable & perfect for summer holidays and tropical getaways.',
         siteName: 'stellabali.com',
         locale: 'id_ID',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Stella Bali | Bali Breeze & Everyday Ease',
+        title: 'Beach Clothing & Resort Wear — Swimwear, Cover Ups & More | Stella Bali',
         description:
-            'Effortless, breathable beachwear designed for the tropical soul. Discover lightweight essentials that bring the spirit of Bali to your everyday wardrobe.',
+            'Shop premium beach clothing including swimwear, tops, bottoms, dresses & Accessories. Stylish, comfortable & perfect for summer holidays and tropical getaways.',
         creator: '@stellabaligroup',
         images: [
             {
                 url: '../../../public/Assets/Logo.png',
                 width: 1200,
                 height: 630,
-                alt: 'Stella Logo',
+                alt: 'Stella Bali Logo',
             },
         ],
     },

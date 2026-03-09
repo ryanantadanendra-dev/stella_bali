@@ -2,7 +2,7 @@ import { userAgent } from 'next/server'
 import sitemap from './sitemap'
 
 export default function robots() {
-    const baseUrl = 'stellabali.com'
+    const baseUrl = 'https://stellabali.com'
 
     return {
         rules: [

@@ -1,11 +1,3 @@
-// app/(user)/products/page.jsx
-// FIXES:
-//   - Resource load delay 3,080ms: Products now fetched server-side.
-//     Image URL is in the initial HTML, so browser starts loading it immediately.
-//   - Render-blocking CSS: inlineCss works in production builds
-//   - bfcache: removed no-store headers where possible
-//   - Preload LCP image with correct width for mobile (640px for Moto G Power)
-
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ProductsComponent from '@/components/Products'
@@ -20,8 +12,57 @@ const Sidebar = dynamic(() => import('@/components/Sidebar'), {
 export const revalidate = 3600
 
 export const metadata = {
-    title: 'Products',
-    description: 'Browse our sustainable handmade fashion collection',
+    title: 'Explore Our Various Types Of Beachwear For Your Endless Summer | Stella Bali',
+    description:
+        'Explore various kinds of beachwear including beach tops, beach bottoms, swimwear, dresses, and accessories.',
+    keywords: [
+        'Stella Bali',
+        'Bali Breeze Everyday Ease',
+        'resort wear Bali',
+        'breathable beachwear',
+        'baju pantai Bali',
+        'pakaian resort',
+        'linen clothing Bali',
+        'baju bahan linen',
+        'island essentials',
+        'brand lokal Bali',
+        'pakaian musim panas',
+    ],
+    openGraph: {
+        title: 'Explore Our Various Types Of Beachwear For Your Endless Summer | Stella Bali',
+        description:
+            'Explore various kinds of beachwear including beach tops, beach bottoms, swimwear, dresses, and accessories.',
+        siteName: 'stellabali.com',
+        locale: 'id_ID',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Explore Our Various Types Of Beachwear For Your Endless Summer | Stella Bali',
+        description:
+            'Explore various kinds of beachwear including beach tops, beach bottoms, swimwear, dresses, and accessories.',
+        creator: '@stellabaligroup',
+        images: [
+            {
+                url: '../../../public/Assets/Logo.png',
+                width: 1200,
+                height: 630,
+                alt: 'Stella Bali Logo',
+            },
+        ],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: false,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        },
+    },
 }
 
 function SidebarSkeleton() {
@@ -33,8 +74,6 @@ function SidebarSkeleton() {
     )
 }
 
-// Fetch products server-side — this is what eliminates the 3080ms delay.
-// The result is embedded in HTML so the browser knows the image URL immediately.
 async function getProducts() {
     try {
         const res = await fetch(
@@ -66,17 +105,13 @@ function ProductsLoading() {
 }
 
 export default async function ProductsPage({ searchParams }) {
-    // Await searchParams for Next.js 15 compatibility
     const params = await Promise.resolve(searchParams)
     const sort = params?.sort ?? null
     const collections = params?.collections ?? null
     const type = params?.type ?? null
 
-    // Fetch server-side — result is in HTML before client JS runs
     const products = await getProducts()
 
-    // Determine LCP image URL server-side for preload
-    // Apply same type/collections filter as client to get the actual first visible product
     let visibleProducts = products?.data ?? []
     if (type) {
         visibleProducts = visibleProducts.filter(
@@ -96,32 +131,17 @@ export default async function ProductsPage({ searchParams }) {
         ? `${lcpImageOrigin}/storage/${lcpImagePath}`
         : null
 
-    // Build the Next.js optimized image URL for preload
-    // Use w=640 — Moto G Power (Lighthouse test device) has a ~412px wide viewport
-    // at 2.6x DPR = ~1071px but we cap at next nearest deviceSize = 640
-    // (or 750 if you add it to deviceSizes in next.config.js)
     const lcpPreloadUrl = lcpImageSrc
         ? `/_next/image?url=${encodeURIComponent(lcpImageSrc)}&w=640&q=75`
         : null
 
     return (
         <>
-            {/*
-                FIX: Preload the LCP image before anything else.
-                This is what eliminates the "Resource load delay: 3,080ms" —
-                the browser starts the image fetch from the very first HTML byte,
-                not after 3 seconds of JS execution + API calls.
-
-                imagesrcset mirrors what next/image generates for this image,
-                so the browser can pick the right size early.
-            */}
             {lcpPreloadUrl && (
                 <link
                     rel="preload"
                     as="image"
                     href={lcpPreloadUrl}
-                    // Match the sizes attribute used in <Card> exactly
-                    // so the browser's preload scanner can match it to the <img>
                     imageSizes="320px"
                     imageSrcSet={[
                         `/_next/image?url=${encodeURIComponent(lcpImageSrc)}&w=320&q=75 320w`,
