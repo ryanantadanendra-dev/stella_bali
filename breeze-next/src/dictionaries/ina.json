@@ -1,0 +1,105 @@
+{
+    "home": {
+        "search": "Cari Produk",
+        "hero": "Semilir Bali, Nyaman Setiap Hari.",
+        "newarrival": "Keluaran Terbaru",
+        "viewall": "Lihat Semua",
+        "collections": "Koleksi Produk",
+        "collectionsList": [
+            "Atasan",
+            "Bawahan",
+            "Pakaian Renang",
+            "Gaun",
+            "Aksesoris"
+        ],
+        "gender": ["Pria", "Wanita"],
+        "blogs": "Berita & Artikel",
+        "blogsSub": "Jelajahi berita terbaru kami, wawasan dari para ahli, dan artikel bermanfaat untuk membuat Anda tetap terinformasi dan terinspirasi.",
+        "about": "Pelajari Tentang Kami",
+        "aboutSub": "Kenali siapa kami, apa yang kami lakukan, dan nilai-nilai yang menjadi dasar dalam setiap pekerjaan kami.",
+        "aboutBtn": "Pelajari Selengkapnya"
+    },
+    "navbar": {
+        "newarrival": "KELUARAN TERBARU",
+        "products": "PRODUK",
+        "about": "TENTANG KAMI",
+        "blogs": "BLOG"
+    },
+    "sidebar": {
+        "sort": "Sortir",
+        "options": [
+            "Keluaran Terbaru",
+            "Harga: Rendah Ke Tinggi",
+            "Harga: Tinggi Ke Rendah"
+        ],
+        "collections": "Koleksi",
+        "gender": ["Pria", "Wanita"]
+    },
+    "about": {
+        "hero": "Tentan Kami",
+        "heroSub": "Tentang semangat Bali yang berpadu dengan gaya musim panas modern",
+        "story": "Cerita Kami",
+        "storyText": "Stella Bali adalah merek fashion lokal Bali yang berakar pada kerajinan tangan, kolaborasi, dan pemberdayaan komunitas. Berawal dari usaha rumahan, brand ini berkembang menjadi UMKM kreatif yang berfokus pada produksi pakaian dengan desain yang dipikirkan secara matang, dibuat oleh para perajin rumahan terampil di Bali.\n\nSetiap produk Stella Bali dibuat secara handmade dengan perhatian pada detail, kenyamanan, dan kualitas. Kami percaya bahwa fashion lebih dari sekadar produk—ia adalah sebuah cerita yang dibentuk oleh orang-orang, proses, dan nilai-nilai di baliknya. Dengan kebanggaan terhadap budaya lokal, Stella Bali merepresentasikan merek Bali yang autentik, yang menghubungkan kerajinan tradisional dengan kebutuhan gaya hidup modern.",
+        "visionMissions": [
+            {
+                "title": "Visi Kami",
+                "text": "Menjadi merek fashion handmade berkelanjutan dari Bali yang memiliki identitas kuat serta mampu bersaing di pasar nasional dan global."
+            },
+            {
+                "title": "Misi Kami",
+                "text": [
+                    "Menciptakan produk fashion handmade berkualitas tinggi yang mencerminkan identitas lokal Bali.",
+                    "Memberdayakan pekerja rumahan melalui kemitraan yang adil, kolaboratif, dan berkelanjutan.",
+                    "Mengutamakan proses produksi yang etis, bertanggung jawab, dan memperhatikan setiap detail.",
+                    "Terus berinovasi dalam desain sambil tetap menjaga nilai-nilai lokal.",
+                    "Mendukung ekosistem UMKM yang inklusif dan kolaboratif."
+                ]
+            }
+        ],
+        "values": "Nilai yang Kami Junjung",
+        "valuesText": [
+            {
+                "title": "Lokal & Handmade",
+                "text": "Setiap produk dibuat secara handmade oleh perajin lokal dengan perhatian besar pada kualitas dan detail."
+            },
+            {
+                "title": "Pemberdayaan Komunitas",
+                "text": "Kami berkomitmen untuk memberdayakan pekerja rumahan dan menciptakan dampak sosial yang bermakna."
+            },
+            {
+                "title": "Kualitas & Kenyamanan",
+                "text": "Kenyamanan, ketahanan, dan fungsionalitas menjadi hal penting dalam setiap koleksi Stella Bali."
+            },
+            {
+                "title": "Kolaborasi",
+                "text": "Stella Bali berkembang melalui kolaborasi antara desainer, perajin, dan komunitas lokal."
+            },
+            {
+                "title": "Keberlanjutan",
+                "text": "Kami berupaya membangun praktik fashion yang bertanggung jawab dan berkelanjutan untuk jangka panjang."
+            }
+        ],
+        "productions": "Proses Produksi",
+        "productionsText": "Proses produksi dilakukan secara handmade dan didasarkan pada kolaborasi erat dengan para perajin rumahan di berbagai wilayah Bali. Setiap tahap—mulai dari pemilihan bahan, pembuatan pola, pemotongan, penjahitan, hingga proses finishing—dipantau dengan cermat untuk memastikan kualitas yang konsisten.\n\nKami memproduksi pakaian pria dan wanita dalam jumlah terbatas untuk menjaga kualitas kerajinan serta eksklusivitas setiap produk. Melalui sistem produksi berbasis rumahan ini, Stella Bali tidak hanya menciptakan produk fashion, tetapi juga mendukung mata pencaharian masyarakat lokal serta memperkuat ekonomi berbasis komunitas.\n\nSebagai brand fashion lokal Bali, Stella Bali berkomitmen untuk menghadirkan produk yang autentik, bermakna, dan memberikan dampak sosial yang positif.",
+        "cta": "Ikuti Perjalanan Kami",
+        "ctaText": "Temukan koleksi terbaru kami dan jadilah bagian dari komunitas StellaBali. Rasakan perpaduan sempurna antara gaya pulau dan fashion berkelanjutan.",
+        "shop": "Belanja Sekarang",
+        "contact": "Hubungi Kami"
+    },
+    "product": {
+        "contact": "Pesan Sekarang",
+        "description": "Deskripsi"
+    },
+    "footer": {
+        "products": "Produk",
+        "subtitle": "Pakaian musim panas dengan desain ringan dan kasual untuk liburan maupun penggunaan sehari-hari.",
+        "woman": "Pakaian Wanita",
+        "man": "Pakaian Pria",
+        "newarrival": "Keluaran Terbaru",
+        "about": "Tentang Kami",
+        "story": "Cerita Kami",
+        "visionmission": "Visi & Misi",
+        "values": "Nilai Brand",
+        "contact": "Hubungi Kami"
+    }
+}

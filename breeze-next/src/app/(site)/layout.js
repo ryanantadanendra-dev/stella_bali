@@ -9,9 +9,12 @@
 //
 // Keep Suspense ONLY if Navbar/Footer actually await data inside them.
 
+import { headers } from 'next/headers'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Suspense } from 'react'
+import { getDictionary } from '@/lib/getDictionary'
+import { DictProvider } from '@/hooks/useDict'
 
 export const metadata = {
     title: 'Stella Bali',
@@ -34,26 +37,25 @@ function FooterSkeleton() {
     return <div className="h-64 w-full bg-gray-100" aria-hidden="true" />
 }
 
-export default function UserLayout({ children }) {
+export default async function UserLayout({ children, searchParams }) {
+    const headersList = await headers()
+    const params = await searchParams
+    const lang = headersList.get('x-lang') || 'en'
+    const dict = await getDictionary(lang)
+
     return (
         <>
-            <header>
-                <Suspense fallback={<NavbarSkeleton />}>
-                    <Navbar />
+            <DictProvider dict={dict}>
+                <header>
+                    <Navbar lang={lang} />
+                </header>
+
+                <main>{children}</main>
+
+                <Suspense fallback={<FooterSkeleton />}>
+                    <Footer dict={dict} />
                 </Suspense>
-            </header>
-
-            {/*
-                FIX: Removed min-h-screen from <main>.
-                The root layout.js inline CSS already sets main { min-height: 100vh }
-                via the critical CSS block. Duplicating it here causes a specificity
-                conflict and is redundant.
-            */}
-            <main>{children}</main>
-
-            <Suspense fallback={<FooterSkeleton />}>
-                <Footer />
-            </Suspense>
+            </DictProvider>
         </>
     )
 }

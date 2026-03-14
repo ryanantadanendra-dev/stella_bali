@@ -1,12 +1,3 @@
-// components/Products.jsx
-// FIXES:
-//   - Eliminates client-side useProduct() fetch on initial render
-//     by using initialProducts from SSR. This is what causes the 3,080ms delay:
-//     the hook fetches, waits, then the image is finally known.
-//   - Only falls back to hook for subsequent filter changes
-//   - Reduces unused JS: no longer pulls in SWR/fetch logic on initial paint
-//   - CLS fix: no loading spinner on initial render (data is already there)
-
 'use client'
 
 import { useMemo, memo, useState, useEffect } from 'react'
@@ -14,8 +5,6 @@ import Card from './Card'
 
 const MemoizedCard = memo(Card)
 
-// Only mark first 2 cards as priority — they are the only ones
-// potentially above the fold on mobile (320px cards, ~2 fit)
 const PRIORITY_COUNT = 2
 
 function filterAndSort(products, { type, collections, sort }) {
@@ -44,26 +33,18 @@ function filterAndSort(products, { type, collections, sort }) {
     return result
 }
 
-const ProductsComponent = ({ sort, collections, type, initialProducts }) => {
-    // Use SSR data immediately — no loading state, no fetch delay, no CLS
-    // initialProducts.data comes from the server-side fetch in page.jsx
+const ProductsComponent = ({
+    sort,
+    collections,
+    type,
+    initialProducts,
+    dict,
+    lang,
+}) => {
     const ssrProducts = initialProducts?.data ?? []
 
-    // FIX: Only import useProduct dynamically if we need to refetch
-    // (e.g., after a filter change that SSR didn't anticipate)
-    // This avoids loading SWR/axios into the initial JS bundle
     const [dynamicProducts, setDynamicProducts] = useState(null)
     const [isError, setIsError] = useState(false)
-
-    // If you need live updates after filter changes, you can refetch here.
-    // For now, SSR data + URL-based filtering is sufficient and much faster.
-    // Uncomment and adapt this if your hook is needed:
-    //
-    // useEffect(() => {
-    //   if (/* user changed filters */ false) {
-    //     import('@/hooks/product').then(({ useProduct }) => { ... })
-    //   }
-    // }, [sort, collections, type])
 
     const products = dynamicProducts ?? ssrProducts
 
@@ -71,9 +52,6 @@ const ProductsComponent = ({ sort, collections, type, initialProducts }) => {
         () => filterAndSort(products, { type, collections, sort }),
         [products, type, collections, sort],
     )
-
-    // FIX: No loading state on initial render — data is already available from SSR
-    // This eliminates the flash/spinner that was causing CLS
 
     if (isError) {
         return (
@@ -101,6 +79,8 @@ const ProductsComponent = ({ sort, collections, type, initialProducts }) => {
                             <MemoizedCard
                                 data={product}
                                 priority={index < PRIORITY_COUNT}
+                                dict={dict}
+                                lang={lang}
                             />
                         </li>
                     ))}

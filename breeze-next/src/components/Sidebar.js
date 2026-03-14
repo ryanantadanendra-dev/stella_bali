@@ -82,7 +82,7 @@ const RadioInput = memo(({ id, value, name, checked, onClick, label }) => (
 ))
 RadioInput.displayName = 'RadioInput'
 
-const Sidebar = () => {
+const Sidebar = ({ dict }) => {
     const [sortOpen, setSortOpen] = useState(false)
     const [collectionsOpen, setCollectionsOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
@@ -239,7 +239,7 @@ const Sidebar = () => {
                                 : 'Expand sort options'
                         }>
                         <h2 className="text-xs md:text-[1.2rem] font-medium">
-                            Sort By
+                            {dict?.sidebar?.sort}
                         </h2>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +258,7 @@ const Sidebar = () => {
                             className="md:mt-8 mt-4 space-y-3"
                             role="radiogroup"
                             aria-label="Sort options">
-                            {SORT_OPTIONS.map(option => (
+                            {SORT_OPTIONS.map((option, index) => (
                                 <li key={option.id}>
                                     <RadioInput
                                         id={option.id}
@@ -268,7 +268,7 @@ const Sidebar = () => {
                                         onClick={() =>
                                             handleSortClick(option.value)
                                         }
-                                        label={option.label}
+                                        label={dict?.sidebar?.options[index]}
                                     />
                                 </li>
                             ))}
@@ -291,7 +291,7 @@ const Sidebar = () => {
                                 : 'Expand collections'
                         }>
                         <h2 className="text-xs md:text-2xl font-medium">
-                            Collections
+                            {dict?.sidebar?.collections}
                         </h2>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -310,7 +310,7 @@ const Sidebar = () => {
                             className="mt-8 space-y-3"
                             role="radiogroup"
                             aria-label="Collection types">
-                            {TYPES.map(typeValue => (
+                            {dict?.home?.gender?.map((typeValue, index) => (
                                 <li key={typeValue}>
                                     <RadioInput
                                         id={typeValue}
@@ -320,7 +320,7 @@ const Sidebar = () => {
                                         onClick={() =>
                                             handleTypeClick(typeValue)
                                         }
-                                        label={typeValue}
+                                        label={dict?.home?.gender[index]}
                                     />
 
                                     {extendCollection === typeValue &&
@@ -329,14 +329,14 @@ const Sidebar = () => {
                                                 className="mt-3 ms-5 space-y-3"
                                                 role="radiogroup"
                                                 aria-label={`${typeValue} categories`}>
-                                                {categories
-                                                    .filter(
+                                                {dict?.home?.collectionsList
+                                                    ?.filter(
                                                         cat =>
                                                             typeValue !==
                                                                 'Man' ||
                                                             cat !== 'Dresses',
                                                     )
-                                                    .map(category => (
+                                                    .map((category, i) => (
                                                         <RadioInput
                                                             key={category}
                                                             id={category}

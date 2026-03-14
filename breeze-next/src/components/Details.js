@@ -13,10 +13,11 @@ const priceFormat = price => {
     }).format(price)
 }
 
-const Details = ({ slug }) => {
+const Details = ({ slug, dict, lang }) => {
     const { products } = useProduct()
     const [isActive, setIsActive] = useState(0)
     const product = products?.find(product => product.slug == slug)
+    console.log(lang)
 
     return (
         <section className="w-screen h-full ">
@@ -47,10 +48,11 @@ const Details = ({ slug }) => {
                 </div>
                 <div className="md:w-1/2 w-full px-12 md:px-0 md:ps-12 md:pe-12 pt-8 lg:pt-8 md:pt-12">
                     <p>
-                        {product?.type} • {product?.subtype}
+                        {lang == 'en' ? product?.type : product?.type_ina} •{' '}
+                        {lang == 'en' ? product?.subtype : product?.subtype_ina}
                     </p>
                     <h1 className="text-2xl lg:text-4xl font-bold mt-2">
-                        {product?.name}
+                        {lang == 'en' ? product?.name : product?.name_ina}
                     </h1>
 
                     <p className="text-xl lg:text-3xl mt-12">
@@ -65,13 +67,20 @@ const Details = ({ slug }) => {
                                 style={{ backgroundColor: color }}></div>
                         ))}
                     </div>
-                    <WaButton product={product} />
+                    <WaButton product={product} text={dict?.product?.contact} />
                 </div>
             </div>
             <div className="px-12">
-                <p className="font-bold text-2xl mt-32">Description</p>
+                <p className="font-bold text-2xl mt-32">
+                    {dict?.product?.description}
+                </p>
                 <div
-                    dangerouslySetInnerHTML={{ __html: product?.description }}
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            lang == 'en'
+                                ? product?.description
+                                : product?.description_ina,
+                    }}
                     className="mt-10"
                 />
             </div>

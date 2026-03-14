@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero'
 import CTA from '@/components/CTA'
 import Image from 'next/image'
+import { getDictionary } from '@/lib/getDictionary'
 
 export const metadata = {
     title: 'About Stella Bali | Our Story, Vision & Craftsmanship',
@@ -111,8 +112,8 @@ const brandValues = [
     },
 ]
 
-const VisionMissionCard = ({ data }) => {
-    const isList = data.type === 'list'
+const VisionMissionCard = ({ data, icon }) => {
+    const isList = data.title === 'Our Mission' ? true : false
 
     return (
         <article className="h-full w-96 bg-white px-3 py-12 shadow-lg shadow-gray-400 md:h-[35rem] md:w-[35rem] md:py-2">
@@ -123,7 +124,7 @@ const VisionMissionCard = ({ data }) => {
                         viewBox="0 0 448 512"
                         className="h-6 w-8"
                         aria-hidden="true">
-                        <path fill="#FFFFFF" d={data.path} />
+                        <path fill="#FFFFFF" d={icon} />
                     </svg>
                 </div>
                 <h2 className="mt-8 text-center text-xl md:text-2xl font-bold">
@@ -136,13 +137,13 @@ const VisionMissionCard = ({ data }) => {
                     {data.text.map((item, i) => (
                         <li
                             key={i}
-                            className="mb-2 text-[0.8rem] md:text-[1.2rem]">
+                            className="mb-2 text-[0.8rem] md:text-[1rem]">
                             • {item}
                         </li>
                     ))}
                 </ul>
             ) : (
-                <p className="mt-10 text-left text-[0.8rem] md:text-[1.2rem]">
+                <p className="mt-10 text-left text-[0.8rem] md:text-[1rem]">
                     {data.text}
                 </p>
             )}
@@ -156,22 +157,27 @@ const ValueCard = ({ data }) => (
         <h3 className="mt-6 text-center text-[1.4rem] font-bold">
             {data.title}
         </h3>
-        <p className="mt-4 text-center text-[1.2rem]">{data.description}</p>
+        <p className="mt-4 text-center text-[1rem]">{data.text}</p>
     </article>
 )
 
-const About = () => {
+const About = async ({ searchParams }) => {
+    const params = await searchParams
+    const lang = params?.lang || 'en'
+    const dict = await getDictionary(lang)
+
     return (
         <>
-            <Hero title="About Us" />
+            <Hero title={dict?.about?.hero} subtitle={dict?.about?.heroSub} />
             <main className="pt-32">
                 {/* Our Story Section */}
                 <section className="story w-full">
                     <h2 className="text-center text-4xl font-bold">
-                        Our Story
+                        {dict?.about?.story}
                     </h2>
-                    <article className="mx-auto mt-10 px-3 text-center text-[0.8rem] md:w-[48rem] md:text-2xl">
-                        Stella Bali is a local Balinese fashion brand rooted in
+                    <article className="mx-auto mt-10 px-3 text-center text-[0.8rem] md:w-[48rem] md:text-[1rem] whitespace-pre-line">
+                        {dict?.about?.storyText}
+                        {/* Stella Bali is a local Balinese fashion brand rooted in
                         handmade craftsmanship, collaboration, and community
                         empowerment. What began as a home-based business has
                         grown into a creative UMKM that focuses on producing
@@ -185,24 +191,28 @@ const About = () => {
                         processes, and values. With a strong sense of local
                         pride, Stella Bali represents an authentic Balinese
                         brand that connects traditional craftsmanship with
-                        contemporary needs.
+                        contemporary needs. */}
                     </article>
                 </section>
 
                 {/* Vision & Mission Section */}
                 <div className="vision-mission mt-40 flex h-full w-full flex-wrap justify-center gap-12">
-                    {visionMissions.map(data => (
-                        <VisionMissionCard key={data.id} data={data} />
+                    {dict?.about?.visionMissions.map((data, index) => (
+                        <VisionMissionCard
+                            key={data.title}
+                            data={data}
+                            icon={visionMissions[index].path}
+                        />
                     ))}
                 </div>
 
                 {/* Our Values Section */}
                 <section className="mt-64 h-full w-full">
                     <h2 className="text-center text-3xl font-bold">
-                        Our Values
+                        {dict?.about?.values}
                     </h2>
                     <div className="mt-20 flex flex-wrap justify-center gap-32 md:px-12">
-                        {brandValues.map(data => (
+                        {dict?.about?.valuesText.map(data => (
                             <ValueCard key={data.id} data={data} />
                         ))}
                     </div>
@@ -222,10 +232,11 @@ const About = () => {
                     </figure>
                     <div className="w-full lg:w-1/2 lg:pe-12">
                         <h2 className="mt-5 text-center md:text-left text-4xl font-bold">
-                            Our Production
+                            {dict?.about?.productions}
                         </h2>
-                        <article className="mt-10 px-3 text-center text-[0.8rem] md:text-[1.3rem] lg:px-0 lg:text-left">
-                            <span className="font-bold">Stella Bali's </span>
+                        <article className="mt-10 px-3 text-center text-[0.8rem] md:text-[1rem] lg:px-0 lg:text-left whitespace-pre-line">
+                            {dict?.about?.productionsText}
+                            {/* <span className="font-bold">Stella Bali's </span>
                             production process is handmade and based on close
                             collaboration with home-based artisans across Bali.
                             Each stage—from material selection, pattern making,
@@ -243,14 +254,16 @@ const About = () => {
                             <br />
                             As a Balinese local fashion brand, Stella Bali is
                             committed to delivering authentic, meaningful
-                            products with positive social impact.
+                            products with positive social impact. */}
                         </article>
                     </div>
                 </section>
 
                 <CTA
-                    heading="Join Our Journey"
-                    subheading="Discover our latest collection and become part of the StellaBali community. Experience the perfect blend of island style and sustainable fashion."
+                    heading={dict?.about?.cta}
+                    subheading={dict?.about?.ctaText}
+                    shop={dict?.about?.shop}
+                    contact={dict?.about?.contact}
                 />
             </main>
         </>

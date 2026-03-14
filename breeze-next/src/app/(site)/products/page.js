@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import ProductsComponent from '@/components/Products'
 import BreadcrumbComp from '@/components/Breadcrumb'
+import { getDictionary } from '@/lib/getDictionary'
 
 // Sidebar: SSR renders structure, dynamic only for client interactivity
 const Sidebar = dynamic(() => import('@/components/Sidebar'), {
@@ -106,6 +107,8 @@ function ProductsLoading() {
 
 export default async function ProductsPage({ searchParams }) {
     const params = await Promise.resolve(searchParams)
+    const lang = params?.lang || 'en'
+    const dict = await getDictionary(lang)
     const sort = params?.sort ?? null
     const collections = params?.collections ?? null
     const type = params?.type ?? null
@@ -151,8 +154,8 @@ export default async function ProductsPage({ searchParams }) {
                 />
             )}
 
-            <main className="h-full w-screen md:flex md:pt-28 pt-20">
-                <Sidebar />
+            <main className="min-h-full w-screen md:flex md:pt-28 pt-20">
+                <Sidebar dict={dict} />
                 <div className="lg:ps-0">
                     <BreadcrumbComp />
                     <Suspense fallback={<ProductsLoading />}>
@@ -161,6 +164,8 @@ export default async function ProductsPage({ searchParams }) {
                             collections={collections}
                             type={type}
                             initialProducts={products}
+                            dict={dict}
+                            lang={lang}
                         />
                     </Suspense>
                 </div>

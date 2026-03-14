@@ -20,7 +20,7 @@ const GRID_SPANS = {
 
 const getGridSpan = index => GRID_SPANS[index] || GRID_SPANS.default
 
-const Wrapper = ({ index, category, image }) => {
+const Wrapper = ({ index, category, image, dict }) => {
     const showSubcategories = index !== 3
 
     return (
@@ -36,19 +36,19 @@ const Wrapper = ({ index, category, image }) => {
             <div className="overlay absolute inset-0 z-30" />
             <figcaption className="absolute bottom-0 z-40 flex w-full justify-between px-3 py-2 text-xl text-white md:text-6xl">
                 <span className="lg:text-5xl md:text-4xl text-lg">
-                    {category}
+                    {dict?.home?.collectionsList[index]}
                 </span>
                 {showSubcategories ? (
                     <div className="text-xs md:text-xl">
                         <Link
                             href={`/products?type=Man&collections=${category}`}
                             className="block">
-                            Man
+                            {dict?.home?.gender[0]}
                         </Link>
                         <Link
                             href={`/products?type=Woman&collections=${category}`}
                             className="block">
-                            Woman
+                            {dict?.home?.gender[1]}
                         </Link>
                     </div>
                 ) : (
@@ -56,7 +56,7 @@ const Wrapper = ({ index, category, image }) => {
                         <Link
                             href={`/products?type=Woman&collections=${category}`}
                             className="block">
-                            Woman
+                            {dict?.home?.gender[1]}
                         </Link>
                     </div>
                 )}
@@ -65,22 +65,22 @@ const Wrapper = ({ index, category, image }) => {
     )
 }
 
-const Collections = () => {
-    const { categories } = useProduct()
+const Collections = ({ dict }) => {
     const images = [Img1, Img2, Img3, Img4, Img5]
 
     return (
         <section className="w-screen px-2 py-32 md:px-12">
             <h2 className="text-center text-3xl font-bold md:text-left">
-                Product Collections
+                {dict?.home?.collections}
             </h2>
             <div className="mt-12 grid auto-rows-[200px] grid-cols-2 gap-1 md:gap-6">
-                {categories?.map((category, index) => (
+                {dict?.home?.collectionsList.map((category, index) => (
                     <Wrapper
                         key={category}
                         index={index}
                         category={category}
                         image={images[index]}
+                        dict={dict}
                     />
                 ))}
             </div>

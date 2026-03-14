@@ -2,6 +2,7 @@ import { Carousel } from '@/components/Carousel'
 import SearchBar from '@/components/SearchBar'
 import NewArrival from '@/components/NewArrival'
 import dynamic from 'next/dynamic'
+import { getDictionary } from '@/lib/getDictionary'
 
 // Lazy load non-critical components
 const Collections = dynamic(() => import('@/components/Collections'), {
@@ -68,22 +69,26 @@ export const metadata = {
 
 const datas = ['/Assets/hero1.jpg', '/Assets/hero3.jpg', '/Assets/hero2.jpg']
 
-const Home = () => {
+const Home = async ({ searchParams }) => {
+    const params = await searchParams
+    const lang = params?.lang || 'en'
+    const dict = await getDictionary(lang)
+
     return (
         <>
             <header>
                 <div className="w-screen h-screen flex flex-col items-center py-32">
-                    <SearchBar />
-                    <Carousel datas={datas} place="top" />
+                    <SearchBar dict={dict} />
+                    <Carousel datas={datas} place="top" dict={dict} />
                 </div>
             </header>
             <main className="w-screen py-12 pb-72 overflow-hidden">
                 <div className="">
-                    <NewArrival />
-                    <Collections />
-                    <Blogs />
+                    <NewArrival dict={dict} />
+                    <Collections dict={dict} />
+                    <Blogs dict={dict} />
                 </div>
-                <Carousel datas={datas} place="bottom" />
+                <Carousel datas={datas} place="bottom" dict={dict} />
             </main>
         </>
     )

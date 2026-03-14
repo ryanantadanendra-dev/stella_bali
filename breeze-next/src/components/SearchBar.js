@@ -6,7 +6,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Search from './Search'
 
-const SearchBar = () => {
+const SearchBar = ({ dict }) => {
     const { products } = useProduct()
     const [search, setSearch] = useState('')
     const [isActive, setIsActive] = useState(false)
@@ -71,7 +71,7 @@ const SearchBar = () => {
                 value={search}
                 onChange={handleChange}
                 className="w-full border-0 border-b-2 border-b-gray-300 focus:border-b-2 focus:border-b-black focus:outline-none focus:ring-0"
-                placeholder="Search Product"
+                placeholder={dict?.home?.search}
                 autoComplete="off"
             />
             <Search datas={result} isActive={isActive} />

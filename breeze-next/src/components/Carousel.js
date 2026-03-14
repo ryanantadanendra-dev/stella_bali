@@ -6,7 +6,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export function Carousel({ datas, place }) {
+export function Carousel({ datas, place, dict }) {
     // Memoize autoplay plugin to prevent recreation
     const autoplayPlugin = useMemo(() => [Autoplay({ delay: 6000 })], [])
 
@@ -57,7 +57,7 @@ export function Carousel({ datas, place }) {
                             className="embla__slide relative h-full w-full flex-[0_0_100%]">
                             <figure className="absolute inset-0 z-0">
                                 <Image
-                                    src={data}
+                                    src={data ? data : ''}
                                     alt={`Slide ${index + 1}`}
                                     fill
                                     draggable={false}
@@ -79,22 +79,21 @@ export function Carousel({ datas, place }) {
                                 }`}>
                                 {isTopPlacement ? (
                                     <h1 className="mt-auto text-4xl font-semibold leading-tight text-white md:text-6xl">
-                                        Bali Breeze Everyday Ease
+                                        {dict?.home?.hero}
                                     </h1>
                                 ) : (
                                     <>
                                         <h2 className="text-center text-4xl font-semibold leading-tight text-white md:text-6xl">
-                                            Learn About Us
+                                            {dict?.home?.about}
                                         </h2>
                                         <p className="text-center text-lg text-white">
-                                            Get to know who we are, what we do,
-                                            and the values that drive our work.
+                                            {dict?.home?.aboutSub}
                                         </p>
                                         <Link
                                             href="/about"
                                             className="mt-5 bg-white px-8 py-5 text-lg font-bold text-black transition-opacity hover:opacity-90"
                                             aria-label="Learn more about us">
-                                            Learn Here
+                                            {dict?.home?.aboutBtn}
                                         </Link>
                                     </>
                                 )}

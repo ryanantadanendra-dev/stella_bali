@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 
-const Hero = ({ title }) => {
+const Hero = ({ title, subtitle }) => {
     return (
         <header className="relative flex h-72 w-screen flex-col items-center justify-center gap-3 pt-12 text-white md:h-80">
             <Image
@@ -21,7 +21,7 @@ const Hero = ({ title }) => {
                 {title}
             </h1>
             <p className="text-white z-10 text-center text-[1rem]">
-                About Bali's Spirit meets contemporary summer style
+                {subtitle}
             </p>
         </header>
     )

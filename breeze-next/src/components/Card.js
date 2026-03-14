@@ -13,7 +13,7 @@ const priceFormat = price => {
     }).format(price)
 }
 
-const Card = ({ data, priority = false }) => {
+const Card = ({ data, priority = false, dict, lang }) => {
     const router = useRouter()
 
     const isProduct = Boolean(data?.name)
@@ -38,7 +38,12 @@ const Card = ({ data, priority = false }) => {
         }
     }
 
-    const title = data.name || data.title || 'Untitled'
+    const title =
+        data.name && lang == 'en'
+            ? data.name
+            : data.name && lang == 'ina'
+              ? data.name_ina
+              : data.title || 'Untitled'
     const subtitle = isProduct ? priceFormat(data.price) : data.subtitle
 
     return (
@@ -81,7 +86,12 @@ const Card = ({ data, priority = false }) => {
 
             {data.description && (
                 <div
-                    dangerouslySetInnerHTML={{ __html: data?.description }}
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            lang == 'en'
+                                ? data?.description
+                                : data?.description_ina,
+                    }}
                     className="line-clamp-2 text-[0.5rem] md:text-lg"
                 />
             )}

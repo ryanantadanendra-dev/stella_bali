@@ -2,19 +2,16 @@
 
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/auth'
 import Image from 'next/image'
 import Logo from '../../public/Assets/Logo.png'
 import Link from 'next/link'
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import Hamburger from './Hamburger'
-import { useProduct } from '@/hooks/product'
+import LangBtm from './LangBtn'
+import { useDict } from '@/hooks/useDict'
 
 const COLLECTIONS = ['Man', 'Woman']
 
-/**
- * UI Components extracted for readability and performance
- */
 const MenuIcon = ({ onClick }) => (
     <button
         onClick={onClick}
@@ -41,15 +38,15 @@ const ChevronIcon = ({ isOpen }) => (
     </svg>
 )
 
-const Navbar = () => {
+const Navbar = ({ lang }) => {
     const isMobile = useIsMobile(1024)
-    const { user } = useAuth({ middleware: 'guest' }) // Fix typo: middlewate -> middleware
     const router = useRouter()
-    const { categories } = useProduct()
+    const dict = useDict()
 
     const [isOpen, setIsOpen] = useState(false)
     const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false)
     const [isHovered, setIsHovered] = useState(null)
+    const collectionsList = dict?.home?.collectionsList ?? []
 
     // Handlers
     const toggleMobileMenu = useCallback(() => setIsOpen(v => !v), [])
@@ -67,20 +64,23 @@ const Navbar = () => {
         [router],
     )
 
+    const EXCLUDED = ['dresses', 'gaun']
+
     // Filtered categories: Logic fix to ensure "Dresses" only shows for Women
     const filteredCategories = useMemo(() => {
-        if (!categories) return []
-        return isHovered === 'Man'
-            ? categories.filter(c => c.toLowerCase() !== 'dresses')
-            : categories
-    }, [isHovered, categories])
+        if (!collectionsList.length) return []
+        const isMan = isHovered === dict?.home?.gender?.[0] // "Man" atau "Pria"
+        return isMan
+            ? collectionsList.filter(c => !EXCLUDED.includes(c.toLowerCase()))
+            : collectionsList
+    }, [isHovered, collectionsList])
 
     return (
         <nav className="w-full h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:px-8 fixed top-0 z-50">
             {/* Left: Logo */}
-            <div className="flex-1 lg:flex-none lg:w-1/3">
+            <div className=" lg:flex-none">
                 <Link
-                    href="/"
+                    href={`/?lang=${lang}`}
                     className="inline-block relative w-32 h-12"
                     aria-label="Home">
                     <Image
@@ -98,23 +98,23 @@ const Navbar = () => {
                 <ul className="flex gap-8 text-[0.5rem] uppercase tracking-widest font-medium w-full justify-center">
                     <li>
                         <Link
-                            href="/"
+                            href={`/?lang=${lang}`}
                             className="hover:text-gray-500 transition-colors">
                             Home
                         </Link>
                     </li>
                     <li>
                         <Link
-                            href="/products?sort=new-arrivals"
+                            href={`/products?lang=${lang}&sort=new-arrivals`}
                             className="hover:text-gray-500 transition-colors">
-                            New Arrival
+                            {dict?.navbar?.newarrival}
                         </Link>
                     </li>
                     <li className="flex items-center gap-1 group relative">
                         <Link
-                            href="/products"
+                            href={`/products?lang=${lang}`}
                             className="hover:text-gray-500 transition-colors">
-                            Products
+                            {dict?.navbar?.products}
                         </Link>
                         <button onClick={toggleDesktopMenu} className="p-1">
                             <ChevronIcon isOpen={isDesktopMenuOpen} />
@@ -122,23 +122,23 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link
-                            href="/about"
+                            href={`/about?lang=${lang}`}
                             className="hover:text-gray-500 transition-colors">
-                            About Us
+                            {dict?.navbar?.about}
                         </Link>
                     </li>
                     <li>
                         <Link
-                            href="/blogs"
+                            href={`/blogs?lang=${lang}`}
                             className="hover:text-gray-500 transition-colors">
-                            Blogs
+                            {dict?.navbar?.blogs}
                         </Link>
                     </li>
                 </ul>
             )}
 
             {/* Right: Search / User / Cart */}
-            <div className="flex-1 lg:flex-none lg:w-1/3 flex justify-end items-center gap-4">
+            <div className=" lg:flex-none flex justify-end items-center gap-4">
                 <button
                     onClick={() => router.push('/?search=true')}
                     aria-label="Search"
@@ -148,14 +148,7 @@ const Navbar = () => {
                     </svg>
                 </button>
 
-                {/* User specific items could go here */}
-                {user && (
-                    <Link
-                        href="/profile"
-                        className="text-xs uppercase font-bold">
-                        Account
-                    </Link>
-                )}
+                <LangBtm lang={lang} />
 
                 {isMobile && <MenuIcon onClick={toggleMobileMenu} />}
             </div>
@@ -173,7 +166,7 @@ const Navbar = () => {
                             : 'opacity-0 -translate-y-4 pointer-events-none'
                     }`}>
                     <div className="max-w-screen-xl mx-auto flex justify-center py-10 px-8 gap-20">
-                        {COLLECTIONS.map(type => (
+                        {dict?.home?.gender.map((type, index) => (
                             <div
                                 key={type}
                                 onMouseEnter={() => setIsHovered(type)}
@@ -181,7 +174,7 @@ const Navbar = () => {
                                 <button
                                     onClick={() =>
                                         handleNavigation(
-                                            `/products?type=${type}`,
+                                            `/products?lang=${lang}&type=${type}`,
                                         )
                                     }
                                     className={`text-lg font-bold uppercase transition-colors ${isHovered === type ? 'text-black' : 'text-gray-400'}`}>
@@ -189,12 +182,12 @@ const Navbar = () => {
                                 </button>
                                 {isHovered === type && (
                                     <ul className="flex flex-col gap-2">
-                                        {filteredCategories.map(cat => (
+                                        {filteredCategories.map((cat, i) => (
                                             <li key={cat}>
                                                 <button
                                                     onClick={() =>
                                                         handleNavigation(
-                                                            `/products?type=${type}&collections=${cat}`,
+                                                            `/products?lang=${lang}&type=${type}&collections=${cat}`,
                                                         )
                                                     }
                                                     className="text-sm text-gray-600 hover:text-black transition-colors">

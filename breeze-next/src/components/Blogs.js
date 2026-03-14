@@ -4,7 +4,7 @@ import { useBlog } from '@/hooks/blog'
 import { useMemo } from 'react'
 import Card from './Card'
 
-const Blogs = () => {
+const Blogs = ({ dict }) => {
     const { blogs } = useBlog()
 
     // Memoize sorted and sliced blogs
@@ -18,10 +18,11 @@ const Blogs = () => {
 
     return (
         <section className="w-full h-full py-32">
-            <h2 className="text-center text-3xl font-bold">News & Articles</h2>
+            <h2 className="text-center text-3xl font-bold">
+                {dict?.home?.blogs}
+            </h2>
             <p className="text-center lg:px-[20rem] md:px-0 px-8 text-xs md:text-[1rem] mt-3 leading-6">
-                Explore our latest news, expert insights, and helpful articles
-                to keep you informed and inspired.
+                {dict?.home?.blogsSub}
             </p>
             <div className="flex justify-center flex-wrap mt-8 gap-4 md:gap-12">
                 {latestBlogs.map(blog => (

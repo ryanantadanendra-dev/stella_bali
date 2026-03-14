@@ -35,7 +35,9 @@ class productsController extends Controller
     public function add(Request $request) {
         $validatedData = $request->validate([
             'name' => ['max:100', Rule::unique('products', 'name')],
+            'name_ina' => ['max:100', Rule::unique('products', 'name_ina')],
             'description' => 'required',
+            'description_ina' => 'required',
             'colors' => ['required', 'array', 'min:1'],
             'colors.*' => ['string', 'max:50'],
             'type' => 'required',
@@ -50,9 +52,49 @@ class productsController extends Controller
             'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
         ]);
 
+        $cleanContent_ina = Purifier::clean($validatedData['description_ina'], [
+            'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
+        ]);
+
+        switch ($validatedData['type']) {
+            case 'man':
+                $type_ina = 'Pria';
+                break;
+            case 'woman':
+                $type_ina = 'Wanita';
+                break;
+            default:
+                $type_ina = 'Pria';
+                break;
+        }
+
+        switch ($validatedData['subtype']) {
+            case 'Tops':
+                $subtype_ina = 'Atasab';
+                break;
+            case 'Bottoms':
+                $subtype_ina = 'Bawahan';
+                break;
+            case 'Swimsuit':
+                $subtype_ina = 'Pakaian Renang';
+                break;
+            case 'Dresses':
+                $subtype_ina = 'Gaun';
+                break;
+            case 'Accessories':
+                $subtype_ina = 'Aksesoris';
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
         $product = Product::create([
             'name' => $validatedData['name'],
+            'name_ina' => $validatedData['name_ina'],
             'description' => $cleanContent,
+            'description_ina' => $cleanContent_ina,
             'colors' => $validatedData['colors'],
             'type' => $validatedData['type'],
             'subtype' => $validatedData['subtype'],

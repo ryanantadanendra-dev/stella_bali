@@ -2,6 +2,7 @@ import BreadcrumbComp from '@/components/Breadcrumb'
 import Details from '@/components/Details'
 import getProducts from '@/lib/getProducts'
 import { notFound } from 'next/navigation'
+import { getDictionary } from '@/lib/getDictionary'
 
 export async function generateMetadata({ params }) {
     const { products } = await getProducts()
@@ -41,19 +42,21 @@ export async function generateMetadata({ params }) {
     }
 }
 
-const Product = async ({ params }) => {
+const Product = async ({ params, searchParams }) => {
+    const param = await searchParams
+    const lang = param?.lang || 'en'
+    const dict = await getDictionary(lang)
     const { slug } = params
-    const { products } = await getProducts()
 
     return (
         <div>
             <header>
                 <div className="w-screen pt-32 flex justify-center md:block md:ps-12 lg:ps-32">
-                    <BreadcrumbComp />
+                    <BreadcrumbComp dict={dict} />
                 </div>
             </header>
             <main className="w-screen h-full lg:min-h-screen pb-20 lg:pb-12 md:mt-12 lg:mt-2">
-                <Details slug={slug} />
+                <Details slug={slug} dict={dict} lang={lang} />
             </main>
         </div>
     )

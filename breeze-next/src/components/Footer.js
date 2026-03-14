@@ -3,17 +3,14 @@ import Logo from '../../public/Assets/Logo.png'
 import Image from 'next/image'
 import getContact from '@/lib/getContact'
 
-const Footer = async () => {
+const Footer = async ({ dict }) => {
     const { contact } = await getContact()
 
     return (
-        <footer className="w-screen md:h-full lg:h-96 py-12 md:px-12 lg:px-2 lg:py-0 bg-[#404040] flex lg:gap-12 md:gap-12 flex-wrap justify-between items-center text-white">
+        <footer className="w-screen md:h-full lg:h-96 py-12 md:px-12 lg:px-2 lg:py-0 bg-[#404040] flex lg:gap-12 md:gap-12 flex-wrap justify-center items-center text-white">
             <div className="lg:w-64 md:w-full lg:px-2">
                 <p className="text-5xl font-bold">StellaBali.</p>
-                <p className="mt-3 text-[0.9rem]">
-                    Bali-based summerwear with light, casual designs for
-                    holidays and everyday wear.
-                </p>
+                <p className="mt-3 text-[0.9rem]">{dict?.footer?.subtitle}</p>
                 <div className="icons-wrapper flex gap-4 mt-5">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -45,40 +42,44 @@ const Footer = async () => {
                 </div>
             </div>
             <div className="lg:w-48 w-full mt-12 lg:mt-0">
-                <p className="text-2xl font-bold">Products</p>
+                <p className="text-2xl font-bold">{dict?.footer?.products}</p>
                 <ul className="mt-5 text-lg">
                     <li>
                         <Link href={`/products?sort=new-arrivals`}>
-                            New Arrival
+                            {dict?.footer?.newarrival}
                         </Link>
                     </li>
                     <li className="mt-6">
-                        <Link href={`/products?type=Woman`}>Woman Clothes</Link>
+                        <Link href={`/products?type=Woman`}>
+                            {dict?.footer?.woman}
+                        </Link>
                     </li>
                     <li className="mt-6">
-                        <Link href={`/products?type=Man`}>Man Clothers</Link>
+                        <Link href={`/products?type=Man`}>
+                            {dict?.footer?.man}
+                        </Link>
                     </li>
                 </ul>
             </div>
-            <div className="lg:w-36 w-full mt-12 lg:mt-0">
-                <p className="text-2xl font-bold">About Us</p>
+            <div className="lg:w-48 w-full mt-12 lg:mt-0">
+                <p className="text-2xl font-bold">{dict?.footer?.about}</p>
                 <ul className="mt-5 text-[0.9rem]">
                     <li>
-                        <Link href="">Our Story</Link>
+                        <Link href="">{dict?.footer?.story}</Link>
                     </li>
                     <li className="mt-3">
-                        <Link href="">Vision & Mision</Link>
+                        <Link href="">{dict?.footer?.visionmission}</Link>
                     </li>
                     <li className="mt-3">
-                        <Link href="">Brand Values</Link>
+                        <Link href="">{dict?.footer?.values}</Link>
                     </li>
                     <li className="mt-3">
-                        <Link href="">Contact Us</Link>
+                        <Link href="">{dict?.footer?.contact}</Link>
                     </li>
                 </ul>
             </div>
-            <div className="lg:w-96 w-full mt-12 lg:mt-0">
-                <p className="text-2xl font-bold">Contact Us</p>
+            <div className="lg:w-72 w-full mt-12 lg:mt-0">
+                <p className="text-2xl font-bold">{dict?.footer?.contact}</p>
                 <ul className="mt-5 text-[0.9rem]">
                     <li className="flex items-center gap-2">
                         <svg

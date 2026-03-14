@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import WaButton from './WaButton'
 
-const CTA = ({ heading, subheading }) => {
+const CTA = ({ heading, subheading, shop, contact }) => {
     return (
         <section className="relative mt-32 flex h-96 w-screen flex-col items-center justify-center gap-3 text-white">
             <Image
@@ -29,9 +29,12 @@ const CTA = ({ heading, subheading }) => {
                     <Link
                         href="/products"
                         className="mt-4 bg-white px-8 py-4 font-bold text-black transition-transform hover:scale-105">
-                        Shop Now
+                        {shop}
                     </Link>
-                    <WaButton style="mt-4 px-8 py-4 font-bold text-white bg-transparent border-2 border-white transition-transform hover:scale-105" />
+                    <WaButton
+                        text={contact}
+                        style="mt-4 px-8 py-4 font-bold text-white bg-transparent border-2 border-white transition-transform hover:scale-105"
+                    />
                 </div>
             </div>
         </section>

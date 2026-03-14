@@ -1,0 +1,101 @@
+{
+    "home": {
+        "search": "Search Product",
+        "hero": "Bali Breeze Everyday Ease",
+        "viewall": "Lihat Semua",
+        "newarrival": "New Arrivals",
+        "collections": "Product Collections",
+        "collectionsList": [
+            "Tops",
+            "Bottoms",
+            "Swimsuitd",
+            "Dresses",
+            "Accessories"
+        ],
+        "gender": ["Man", "Woman"],
+        "blogs": "News & Articles",
+        "blogsSub": "Explore our latest news, expert insights, and helpful articles to keep you informed and inspired.",
+        "about": "Learn About Us",
+        "aboutSub": "Get to know who we are, what we do, and the values that drive our work.",
+        "aboutBtn": "Learn More"
+    },
+    "navbar": {
+        "newarrival": "NEW ARRIVALS",
+        "products": "PRODUCTS",
+        "about": "ABOUT US",
+        "blogs": "BLOGS"
+    },
+    "sidebar": {
+        "sort": "Sort By",
+        "options": ["New Arrivals", "Price: Low To High", "Price: High To Low"],
+        "collections": "Collections",
+        "gender": ["Man", "Woman"]
+    },
+    "about": {
+        "hero": "About Us",
+        "heroSub": "About Bali's Spirit meets contemporary summer style",
+        "story": "Our Story",
+        "storyText": "Stella Bali is a local Balinese fashion brand rooted in handmade craftsmanship, collaboration, and community empowerment. What began as a home-based business has grown into a creative UMKM that focuses on producing thoughtfully designed apparel made by skilled home-based artisans in Bali. \n\nEach Stella Bali piece is handcrafted with attention to detail, comfort, and quality. We believe fashion is more than a product—it is a story shaped by people, processes, and values. With a strong sense of local pride, Stella Bali represents an authentic Balinese brand that connects traditional craftsmanship with contemporary needs.",
+        "visionMissions": [
+            {
+                "title": "Our Vision",
+                "text": "To become a sustainable handmade fashion brand from Bali with a strong identity and competitive presence in both national and global markets."
+            },
+            {
+                "title": "Our Mission",
+                "text": [
+                    "To create high-quality handmade fashion products that reflect Balinese local identity.",
+                    "To empower home-based workers through fair, collaborative, and sustainable partnerships.",
+                    "To prioritize ethical, responsible, and detail-oriented production processes.",
+                    "To continuously innovate in design while preserving local values.",
+                    "To support an inclusive and collaborative UMKM ecosystem."
+                ]
+            }
+        ],
+        "values": "Our Values",
+        "valuesText": [
+            {
+                "title": "Local & Handmade",
+                "text": "Every product is handmade by local artisans with great care for quality and detail."
+            },
+            {
+                "title": "Community Empowerment",
+                "text": "We are committed to empowering home-based workers and creating meaningful social impact."
+            },
+            {
+                "title": "Quality & Comfort",
+                "text": "Comfort, durability, and functionality are essential in every Stella Bali collection."
+            },
+            {
+                "title": "Collaboration",
+                "text": "Stella Bali grows through collaboration between designers, artisans, and local communities."
+            },
+            {
+                "title": "Sustainability",
+                "text": "We strive to build a responsible and sustainable fashion practice for the long term."
+            }
+        ],
+        "productions": "Our Production",
+        "productionsText": "Stella Bali's production process is handmade and based on close collaboration with home-based artisans across Bali. Each stage—from material selection, pattern making, cutting, and sewing to finishing—is carefully monitored to ensure consistent quality.\n\nWe produce men's and women's apparel in limited quantities to maintain craftsmanship and exclusivity. Through our home-based production system, Stella Bali not only creates fashion products but also supports local livelihoods and strengthens community-based economies.\n\nAs a Balinese local fashion brand, Stella Bali is committed to delivering authentic, meaningful products with positive social impact.",
+        "cta": "Join Our Journey",
+        "ctaText": "Discover our latest collection and become part of the StellaBali community. Experience the perfect blend of island style and sustainable fashion.",
+        "shop": "Shop Now",
+        "contact": "Contact Us"
+    },
+    "product": {
+        "contact": "Order Now",
+        "description": "Description"
+    },
+    "footer": {
+        "products": "Products",
+        "subtitle": "Bali-based summerwear with light, casual designs for holidays and everyday wear.",
+        "newarrival": "New Arrival",
+        "woman": "Woman Clothes",
+        "man": "Man Clothes",
+        "about": "About Us",
+        "story": "Our Story",
+        "visionmission": "Vision & Mission",
+        "values": "Brand Values",
+        "contact": "Contact Us"
+    }
+}

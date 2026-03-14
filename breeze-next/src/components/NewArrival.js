@@ -5,7 +5,7 @@ import { useProduct } from '@/hooks/product'
 import Card from './Card'
 import { useRef } from 'react'
 
-const NewArrival = () => {
+const NewArrival = ({ dict }) => {
     const { products } = useProduct()
     const scrollRef = useRef(null)
 
@@ -26,8 +26,10 @@ const NewArrival = () => {
     return (
         <section className="w-full h-full pt-20">
             <div className="flex justify-around md:justify-between md:px-12">
-                <h2 className="text-3xl font-bold">New Arrivals</h2>
-                <Link href="/products?sort=new-arrivals">View All</Link>
+                <h2 className="text-3xl font-bold">{dict?.home?.newarrival}</h2>
+                <Link href="/products?sort=new-arrivals">
+                    {dict?.home?.viewall}
+                </Link>
             </div>
             <div className="relative mt-12 md:ms-12">
                 <button

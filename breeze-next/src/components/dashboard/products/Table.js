@@ -91,14 +91,20 @@ const Table = ({ setIsOpen }) => {
             <thead>
                 <tr>
                     <th className="px-2 py-2">Id</th>
-                    <th className=" px-2 py-2">Name</th>
-                    <th className="px-2 py-2 max-w-[160px]">Description</th>
+                    <th className=" px-2 py-2">Name (English)</th>
+                    <th className=" px-2 py-2">Name (Indonesia)</th>
+                    <th className="px-2 py-2 max-w-[160px]">
+                        Description (English)
+                    </th>
+                    <th className="px-2 py-2 max-w-[160px]">
+                        Description (Indonesia)
+                    </th>
                     <th className=" px-2 py-2">Colors</th>
                     <th className="px-2 py-2">Type</th>
                     <th className="px-2 py-2">Subtype</th>
                     <th className="px-2 py-2">Price</th>
                     <th className="px-2 py-2 text-center">Images</th>
-                    <th className="px-2 py-2">Actions</th>
+                    <th className="px-2 py-2 w-72">Actions</th>
                 </tr>
             </thead>
             <tbody className="w-full">
@@ -107,9 +113,15 @@ const Table = ({ setIsOpen }) => {
                         className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'} min-h-[80px] md:h-52`}>
                         <td className="text-center">{product.id}</td>
                         <td className="text-center">{product.name}</td>
+                        <td className="text-center">{product.name_ina}</td>
                         <td className=" max-w-[160px] h-56">
                             <div className="max-h-56 overflow-y-auto ">
                                 {product.description}
+                            </div>
+                        </td>
+                        <td className=" max-w-[160px] h-56">
+                            <div className="max-h-56 overflow-y-auto ">
+                                {product.description_ina}
                             </div>
                         </td>
                         <td className="h-52">
@@ -156,7 +168,7 @@ const Table = ({ setIsOpen }) => {
                         </td>
 
                         <td>
-                            <div className="flex justify-center gap-4">
+                            <div className="flex justify-center gap-4 w-full">
                                 <svg
                                     onClick={() => handleDelete(product?.id)}
                                     xmlns="http://www.w3.org/2000/svg"

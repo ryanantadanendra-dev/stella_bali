@@ -13,7 +13,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
-export default function BreadcrumbComp() {
+export default function BreadcrumbComp({ dict }) {
     const pathName = usePathname()
 
     // Memoize segments to prevent recalculation
