@@ -4,40 +4,41 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useProduct } from '@/hooks/product'
 
-const COLLECTIONS = ['Man', 'Woman']
-
-const Hamburger = ({ isOpen, setIsOpen }) => {
+const Hamburger = ({ isOpen, setIsOpen, dict }) => {
     const [isHovered, setIsHovered] = useState(false)
     const [isExtended, setIsExtended] = useState(false)
     const [openSubtype, setOpenSubtype] = useState('')
-    const { categories } = useProduct()
 
     useEffect(() => {
         if (!isOpen) {
             setIsExtended(false)
             setOpenSubtype(null)
         }
+    }, [isOpen])
 
+    useEffect(() => {
         if (!isExtended) {
             setOpenSubtype(null)
         }
-    }, [isOpen, isExtended])
+    }, [isExtended])
 
     const menuHeight = !isExtended
         ? 'h-[224px]'
         : openSubtype === null
           ? 'h-[313.6px]'
-          : openSubtype === 'Man'
+          : openSubtype === 0 // index 0 = Man/Pria
             ? 'h-[492.8px]'
-            : openSubtype === 'Woman'
+            : openSubtype === 1 // index 1 = Woman/Wanita
               ? 'h-[537.6px]'
               : 'h-[313.6px]'
 
     const filterCategories = () => {
-        if (openSubtype == 'Man')
-            return categories?.filter(category => category !== 'Dresses')
-
-        return categories
+        const isMan = openSubtype === 0 // index 0 selalu Man/Pria
+        if (isMan)
+            return dict?.home.collectionsList?.filter(
+                category => category !== 'Dresses' && category !== 'Gaun',
+            )
+        return dict?.home.collectionsList
     }
 
     return (
@@ -58,7 +59,7 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                         onClick={() => setIsOpen(false)}
                         href="/products?sort=new-arrivals"
                         className="ms-3">
-                        New Arrivals
+                        {dict?.home.newarrival}
                     </Link>
                 </div>
                 <div
@@ -69,7 +70,7 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                         onClick={() => setIsOpen(false)}
                         href="/products"
                         className="ms-3">
-                        Products
+                        {dict?.footer.products}
                     </Link>
                     <svg
                         onClick={() => setIsExtended(!isExtended)}
@@ -84,7 +85,7 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                 </div>
                 {isExtended && (
                     <div className="extended-menu">
-                        {COLLECTIONS.map((data, index) => (
+                        {dict?.sidebar.gender.map((data, index) => (
                             <>
                                 <div
                                     className={`link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center gap-1`}>
@@ -95,9 +96,9 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                                         {data}
                                     </Link>
                                     <svg
-                                        onClick={prev =>
+                                        onClick={() =>
                                             setOpenSubtype(prev =>
-                                                prev === data ? null : data,
+                                                prev === index ? null : index,
                                             )
                                         }
                                         xmlns="http://www.w3.org/2000/svg"
@@ -111,13 +112,15 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                                 </div>
 
                                 <ul
-                                    className={`${openSubtype == data ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+                                    className={`${openSubtype == index ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
                                     {filterCategories().map(category => (
                                         <Link
                                             href={`/products?type=${data}&collections=${category}`}
                                             onClick={() => setIsOpen(false)}
                                             key={category}
-                                            className={` block ms-8 ${openSubtype == data ? 'h-[44.8px]' : 'h-0'}`}>
+                                            className={`block ms-8 ${openSubtype == index ? 'h-[44.8px]' : 'h-0'}`}>
+                                            {' '}
+                                            {/* ← ganti data → index */}
                                             {category}
                                         </Link>
                                     ))}
@@ -132,7 +135,7 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                         href="/about"
                         onClick={() => setIsOpen(false)}
                         className="ms-3">
-                        About Us
+                        {dict?.about.hero}
                     </Link>
                 </div>
                 <div
@@ -141,7 +144,7 @@ const Hamburger = ({ isOpen, setIsOpen }) => {
                         href="/blogs"
                         onClick={() => setIsOpen(false)}
                         className="ms-3">
-                        Blogs
+                        {dict?.hamburger?.blogs}
                     </Link>
                 </div>
             </div>

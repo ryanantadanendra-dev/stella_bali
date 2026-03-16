@@ -18,7 +18,9 @@ const SearchBar = ({ dict }) => {
     useEffect(() => {
         if (searchParams.get('search') === 'true') {
             barRef.current?.focus()
-            router.replace('/', { scroll: false })
+            router.replace(`/?lang=${searchParams.get('lang') || lang}`, {
+                scroll: false,
+            })
         }
     }, [searchParams, router])
 

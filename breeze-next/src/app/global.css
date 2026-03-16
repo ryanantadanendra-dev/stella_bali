@@ -88,21 +88,22 @@ h2 {
 
 /* Content Styles */
 .content h2 {
-    @apply text-3xl font-bold mt-5;
+    @apply text-3xl font-[600] mt-5;
 }
 
 .content h3 {
-    @apply text-2xl font-medium mt-5;
+    @apply text-2xl font-[500] mt-5;
 }
 
 .content p {
     @apply text-xl;
+    text-align: justify;
+    margin-top: 5px;
 }
 
 .content li {
     @apply list-disc;
 }
-
 /* Embla Carousel - Non-critical */
 .embla {
     @apply relative w-full h-[300px];

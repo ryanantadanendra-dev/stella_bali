@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero'
 import Slider from '@/components/Slider'
 import HighlightBlogs from '@/components/HIghlighBlogs'
+import { getDictionary } from '@/lib/getDictionary'
 
 export const metadata = {
     title: 'Stella Bali Journal | Beach Style Tips & Island Stories',
@@ -54,14 +55,18 @@ export const metadata = {
     },
 }
 
-const Blogs = () => {
+const Blogs = async ({ searchParams }) => {
+    const params = await searchParams
+    const lang = params?.lang || 'en'
+    const dict = await getDictionary(lang)
+
     return (
         <>
             <header>
-                <Hero title="News & Article" />
+                <Hero title={dict?.blogs.hero} subtitle={dict?.blogs.heroSub} />
             </header>
-            <main className="w-full h-full lg:min-h-screen py-12 md:pb-12">
-                <HighlightBlogs />
+            <main className="w-full h-full lg:min-h-full py-12 md:pb-12">
+                <HighlightBlogs lang={lang} />
                 <Slider />
             </main>
         </>

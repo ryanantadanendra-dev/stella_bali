@@ -8,9 +8,8 @@ import Link from 'next/link'
 import { useState, useCallback, useMemo, useEffect } from 'react'
 import Hamburger from './Hamburger'
 import LangBtm from './LangBtn'
+import { useSearchParams } from 'next/navigation'
 import { useDict } from '@/hooks/useDict'
-
-const COLLECTIONS = ['Man', 'Woman']
 
 const MenuIcon = ({ onClick }) => (
     <button
@@ -38,10 +37,12 @@ const ChevronIcon = ({ isOpen }) => (
     </svg>
 )
 
-const Navbar = ({ lang }) => {
+const Navbar = () => {
     const isMobile = useIsMobile(1024)
     const router = useRouter()
     const dict = useDict()
+    const searchParams = useSearchParams()
+    const lang = searchParams.get('lang') || 'en'
 
     const [isOpen, setIsOpen] = useState(false)
     const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false)
@@ -95,7 +96,7 @@ const Navbar = ({ lang }) => {
 
             {/* Center: Desktop Links */}
             {!isMobile && (
-                <ul className="flex gap-8 text-[0.5rem] uppercase tracking-widest font-medium w-full justify-center">
+                <ul className="flex items-center h-full block gap-8 text-[0.5rem] uppercase tracking-widest font-medium w-full justify-center">
                     <li>
                         <Link
                             href={`/?lang=${lang}`}
@@ -140,7 +141,7 @@ const Navbar = ({ lang }) => {
             {/* Right: Search / User / Cart */}
             <div className=" lg:flex-none flex justify-end items-center gap-4">
                 <button
-                    onClick={() => router.push('/?search=true')}
+                    onClick={() => router.push(`/?search=true&lang=${lang}`)}
                     aria-label="Search"
                     className="p-2 hover:opacity-60 transition-opacity">
                     <svg viewBox="0 0 512 512" className="w-4">
@@ -203,7 +204,7 @@ const Navbar = ({ lang }) => {
                 </div>
             )}
 
-            <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
+            <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} dict={dict} />
         </nav>
     )
 }

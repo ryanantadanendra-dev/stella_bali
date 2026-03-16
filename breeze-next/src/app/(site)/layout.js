@@ -47,7 +47,7 @@ export default async function UserLayout({ children, searchParams }) {
         <>
             <DictProvider dict={dict}>
                 <header>
-                    <Navbar lang={lang} />
+                    <Navbar />
                 </header>
 
                 <main>{children}</main>

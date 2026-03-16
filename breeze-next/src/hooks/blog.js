@@ -25,8 +25,11 @@ export const useBlog = () => {
         const data = new FormData()
 
         data.append('title', formData.title)
+        data.append('title_ina', formData.title_ina)
         data.append('subtitle', formData.subtitle)
+        data.append('subtitle_ina', formData.subtitle_ina)
         data.append('content', formData.content)
+        data.append('content_ina', formData.content_ina)
         data.append('image', formData.image)
 
         const response = await axios.post('/api/dashboard/blogs/add', data, {
@@ -56,8 +59,11 @@ export const useBlog = () => {
         const data = new FormData()
 
         data.append('title', formData.title)
+        data.append('title_ina', formData.title_ina)
         data.append('subtitle', formData.subtitle)
+        data.append('subtitle_ina', formData.subtitle_ina)
         data.append('content', formData.content)
+        data.append('content_ina', formData.content_ina)
         data.append('_method', 'PUT')
 
         const response = await axios.post(

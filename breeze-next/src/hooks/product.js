@@ -131,7 +131,9 @@ export const useProduct = () => {
 
                 // Append basic fields
                 data.append('name', formData.name)
+                data.append('name_ina', formData.name_ina)
                 data.append('description', formData.description)
+                data.append('description_ina', formData.description_ina)
                 data.append('type', formData.type)
                 data.append('subtype', formData.subtype)
                 data.append('price', formData.price)

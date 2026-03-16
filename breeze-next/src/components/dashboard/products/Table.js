@@ -125,7 +125,7 @@ const Table = ({ setIsOpen }) => {
                             </div>
                         </td>
                         <td className="h-52">
-                            <div className="flex gap-2  justify-center items-center">
+                            <div className="max-w-40 flex flex-wrap gap-2  justify-center items-center">
                                 {product?.colors?.map((color, i) => (
                                     <div
                                         key={i}

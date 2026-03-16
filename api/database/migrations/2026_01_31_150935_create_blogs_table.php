@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->required()->unique();
+            $table->string('title_ina')->required()->unique();
             $table->string('subtitle');
+            $table->string('subtitle_ina');
             $table->longText('content')->required();
+            $table->longText('content_ina')->required();
             $table->string('image')->required();
             $table->string('slug')->unique();
             $table->timestamps();

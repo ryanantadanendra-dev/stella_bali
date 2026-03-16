@@ -82,13 +82,20 @@ const Home = async ({ searchParams }) => {
                     <Carousel datas={datas} place="top" dict={dict} />
                 </div>
             </header>
-            <main className="w-screen py-12 pb-72 overflow-hidden">
+            <main className="w-screen py-12 overflow-hidden">
                 <div className="">
-                    <NewArrival dict={dict} />
+                    <NewArrival dict={dict} lang={lang} />
                     <Collections dict={dict} />
-                    <Blogs dict={dict} />
+                    <Blogs dict={dict} lang={lang} />
                 </div>
-                <Carousel datas={datas} place="bottom" dict={dict} />
+                <div className="h-[27rem] md:h-[40rem] lg:h-[27rem]">
+                    <Carousel
+                        datas={datas}
+                        place="bottom"
+                        dict={dict}
+                        lang={lang}
+                    />
+                </div>
             </main>
         </>
     )

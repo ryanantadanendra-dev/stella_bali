@@ -25,6 +25,9 @@
         "about": "TENTANG KAMI",
         "blogs": "BLOG"
     },
+    "hamburger": {
+        "blogs": "Blog"
+    },
     "sidebar": {
         "sort": "Sortir",
         "options": [
@@ -36,7 +39,7 @@
         "gender": ["Pria", "Wanita"]
     },
     "about": {
-        "hero": "Tentan Kami",
+        "hero": "Tentang Kami",
         "heroSub": "Tentang semangat Bali yang berpadu dengan gaya musim panas modern",
         "story": "Cerita Kami",
         "storyText": "Stella Bali adalah merek fashion lokal Bali yang berakar pada kerajinan tangan, kolaborasi, dan pemberdayaan komunitas. Berawal dari usaha rumahan, brand ini berkembang menjadi UMKM kreatif yang berfokus pada produksi pakaian dengan desain yang dipikirkan secara matang, dibuat oleh para perajin rumahan terampil di Bali.\n\nSetiap produk Stella Bali dibuat secara handmade dengan perhatian pada detail, kenyamanan, dan kualitas. Kami percaya bahwa fashion lebih dari sekadar produk—ia adalah sebuah cerita yang dibentuk oleh orang-orang, proses, dan nilai-nilai di baliknya. Dengan kebanggaan terhadap budaya lokal, Stella Bali merepresentasikan merek Bali yang autentik, yang menghubungkan kerajinan tradisional dengan kebutuhan gaya hidup modern.",
@@ -90,6 +93,10 @@
         "contact": "Pesan Sekarang",
         "description": "Deskripsi"
     },
+    "blogs": {
+        "hero": "Berita & Artikel",
+        "heroSub": "Tetap ikuti perkembangan terbaru tentang Bali dan pakaian pantai melalui halaman blog kami."
+    },
     "footer": {
         "products": "Produk",
         "subtitle": "Pakaian musim panas dengan desain ringan dan kasual untuk liburan maupun penggunaan sehari-hari.",
@@ -101,5 +108,7 @@
         "visionmission": "Visi & Misi",
         "values": "Nilai Brand",
         "contact": "Hubungi Kami"
-    }
+    },
+    "noproduct": "Belum Ada Produk",
+    "noblog": "Belum Ada Blog"
 }

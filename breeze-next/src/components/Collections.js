@@ -69,8 +69,8 @@ const Collections = ({ dict }) => {
     const images = [Img1, Img2, Img3, Img4, Img5]
 
     return (
-        <section className="w-screen px-2 py-32 md:px-12">
-            <h2 className="text-center text-3xl font-bold md:text-left">
+        <section className="w-screen px-2 pb-12 pt-32 md:px-12">
+            <h2 className="text-center text-2xl md:text-3xl font-bold md:text-left">
                 {dict?.home?.collections}
             </h2>
             <div className="mt-12 grid auto-rows-[200px] grid-cols-2 gap-1 md:gap-6">

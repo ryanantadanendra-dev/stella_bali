@@ -70,7 +70,7 @@ class productsController extends Controller
 
         switch ($validatedData['subtype']) {
             case 'Tops':
-                $subtype_ina = 'Atasab';
+                $subtype_ina = 'Atasan';
                 break;
             case 'Bottoms':
                 $subtype_ina = 'Bawahan';
@@ -152,9 +152,18 @@ class productsController extends Controller
     public function edit($id, Request $request) {
         $product = Product::findOrFail($id);
 
-        $validate = $request->validate([
-            'name' => 'required|max:100',
+        if(Product::where('name', $request->name)->where('id', '!=', $id)->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Name Already Exists',
+            ], 400);
+        }
+
+        $validatedData = $request->validate([
+            'name' => ['max:100', 'required'],
+            'name_ina' => ['max:100', 'required'],
             'description' => 'required',
+            'description_ina' => 'required',
             'colors' => ['required', 'array', 'min:1'],
             'colors.*' => ['string', 'max:50'],
             'type' => 'required',
@@ -162,18 +171,56 @@ class productsController extends Controller
             'price' => 'required|numeric'
         ]);
 
-        $colors = $validate['colors'] ?? [];
+        $colors = $validatedData['colors'] ?? [];
 
         // create slug
         $slug = Str::slug($request->name);
 
+        switch ($validatedData['type']) {
+            case 'man':
+                $type_ina = 'Pria';
+                break;
+            case 'woman':
+                $type_ina = 'Wanita';
+                break;
+            default:
+                $type_ina = 'Pria';
+                break;
+        }
+
+        switch ($validatedData['subtype']) {
+            case 'Tops':
+                $subtype_ina = 'Atasan';
+                break;
+            case 'Bottoms':
+                $subtype_ina = 'Bawahan';
+                break;
+            case 'Swimsuit':
+                $subtype_ina = 'Pakaian Renang';
+                break;
+            case 'Dresses':
+                $subtype_ina = 'Gaun';
+                break;
+            case 'Accessories':
+                $subtype_ina = 'Aksesoris';
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
         $product->update([
-            'name' => $validate['name'],
-            'description' => $validate['description'],
+            'name' => $validatedData['name'],
+            'name_ina' => $validatedData['name_ina'],
+            'description' => $validatedData['description'],
+            'description_ina' => $validatedData['description_ina'],
             'colors' => $colors,
-            'type' => $validate['type'],
-            'subtype' => $validate['subtype'],
-            'price' => $validate['price'],
+            'type' => $validatedData['type'],
+            'type_ina' => $type_ina,
+            'subtype' => $validatedData['subtype'],
+            'subtype_ina' => $subtype_ina,
+            'price' => $validatedData['price'],
             'slug' => $slug
         ]);
 

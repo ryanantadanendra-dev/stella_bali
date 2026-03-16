@@ -6,7 +6,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export function Carousel({ datas, place, dict }) {
+export function Carousel({ datas, place, dict, lang }) {
     // Memoize autoplay plugin to prevent recreation
     const autoplayPlugin = useMemo(() => [Autoplay({ delay: 6000 })], [])
 
@@ -83,15 +83,15 @@ export function Carousel({ datas, place, dict }) {
                                     </h1>
                                 ) : (
                                     <>
-                                        <h2 className="text-center text-4xl font-semibold leading-tight text-white md:text-6xl">
+                                        <h2 className="text-center text-3xl font-semibold leading-tight text-white md:text-6xl">
                                             {dict?.home?.about}
                                         </h2>
-                                        <p className="text-center text-lg text-white">
+                                        <p className="text-center text-sm md:text-lg text-white md:px-32">
                                             {dict?.home?.aboutSub}
                                         </p>
                                         <Link
-                                            href="/about"
-                                            className="mt-5 bg-white px-8 py-5 text-lg font-bold text-black transition-opacity hover:opacity-90"
+                                            href={`/about?lang=${lang}`}
+                                            className="mt-12 bg-white px-6 py-3 md:px-8 md:py-5 text-sm md:text-lg font-bold text-black transition-opacity hover:opacity-90"
                                             aria-label="Learn more about us">
                                             {dict?.home?.aboutBtn}
                                         </Link>

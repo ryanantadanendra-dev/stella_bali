@@ -27,7 +27,13 @@ class BlogsController extends Controller
                 'max:100',
                 Rule::unique('blogs', 'title'),
             ],
+            'title_ina' =>  [
+                'required',
+                'max:100',
+                Rule::unique('blogs', 'title_ina'),
+            ],
             "subtitle" => 'required',
+            "subtitle_ina" => 'required',
             'content' => 'required',
             'image' => 'image|mimes:jpeg,jpg,png|max:2048'
         ]);
@@ -42,37 +48,70 @@ class BlogsController extends Controller
         $cleanContent = Purifier::clean($request->content, [
             'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
         ]);
+        $cleanContent_ina = Purifier::clean($request->content_ina, [
+            'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
+        ]);
 
         $blog = Blog::create([
             'title' => $validatedData['title'],
+            'title_ina' => $validatedData['title_ina'],
             'subtitle' => $validatedData['subtitle'],
+            'subtitle_ina' => $validatedData['subtitle_ina'],
             'content' => $cleanContent,
+            'content_ina' => $cleanContent_ina,
             'image' => $path,
             'slug' => $slug
         ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => "Blog Created Successfully!"
-            ], 201);
+        return response()->json([
+            'success' => true,
+            'message' => "Blog Created Successfully!"
+        ], 201);
     }
 
     public function edit($id, Request $request) {
         $blog = Blog::findOrFail($id);
 
         if($blog) {
+            if(Blog::where('title', $request->title)->where('id', '!=', $id)->exists()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Name Already Exists',
+                ], 400);
+            }
+
+            if(Blog::where('title_ina', $request->title_ina)->where('id', '!=', $id)->exists()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Name Already Exists',
+                ], 400);
+            }
+
             $validatedData = $request->validate([
                 'title' => 'required|max:100',
+                'title_ina' => 'required|max:100',
                 "subtitle" => 'max:150',
+                "subtitle_ina" => 'max:150',
                 'content' => 'required',
+                'content_ina' => 'required',
             ]);
 
             $slug = Str::slug($validatedData['title']);
 
+            $cleanContent = Purifier::clean($request->content, [
+                'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
+            ]);
+            $cleanContent_ina = Purifier::clean($request->content_ina, [
+                'HTML.Allowed' => 'p,strong,em,ul,ol,li,a[href],br,h2,h3'
+            ]);
+
             $blog->update([
                 'title' => $validatedData['title'],
+                'title_ina' => $validatedData['title_ina'],
                 'subtitle' => $validatedData['subtitle'],
-                'content' => $validatedData['content'],
+                'subtitle_ina' => $validatedData['subtitle_ina'],
+                'content' => $cleanContent,
+                'content_ina' => $cleanContent_ina,
                 'slug' => $slug
             ]);
 

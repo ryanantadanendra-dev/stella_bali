@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 
 const montserratAlternates = Montserrat_Alternates({
     subsets: ['latin'],
-    weight: '400',
+    weight: ['500', '600', '700'],
     display: 'swap',
     variable: '--font-montserrat-alternates',
 })

@@ -43,8 +43,15 @@ const Card = ({ data, priority = false, dict, lang }) => {
             ? data.name
             : data.name && lang == 'ina'
               ? data.name_ina
-              : data.title || 'Untitled'
-    const subtitle = isProduct ? priceFormat(data.price) : data.subtitle
+              : data.title && lang == 'en'
+                ? data.title
+                : data.title_ina
+
+    const subtitle = isProduct
+        ? priceFormat(data.price)
+        : data.subtitle && lang == 'en'
+          ? data.subtitle
+          : data.subtitle_ina
 
     return (
         <div
@@ -71,7 +78,7 @@ const Card = ({ data, priority = false, dict, lang }) => {
                 />
             </figure>
 
-            <h3 className="line-clamp-2 text-sm md:text-lg font-semibold">
+            <h3 className="line-clamp-2 text-lg md:text-lg font-semibold">
                 {title}
             </h3>
 
@@ -101,9 +108,9 @@ const Card = ({ data, priority = false, dict, lang }) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                     href={`/blog/${data.slug || ''}`}
-                    className="flex h-10 w-36 text-xs items-center justify-center gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
+                    className="flex h-10 w-48 text-xs items-center justify-around gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
                     aria-label={`Read more about ${title}`}>
-                    Learn More
+                    {dict?.home.aboutBtn}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 384 512"

@@ -51,13 +51,16 @@ const Table = () => {
     }
 
     return (
-        <table className="mt-12 max-w-screen mx-auto">
+        <table className="mt-12 min-w-[2000px]">
             <thead>
                 <tr>
                     <th className="lg:w-5">Id</th>
-                    <th className="lg:w-16">Title</th>
-                    <th className="lg:w-32">Subtitle</th>
-                    <th className="lg:w-44">Content</th>
+                    <th className="">Title (English)</th>
+                    <th className="">Title (Indonesia)</th>
+                    <th className="">Subtitle (English)</th>
+                    <th className="">Subtitle (Indonesia)</th>
+                    <th className="">Content (English)</th>
+                    <th className="">Content (Indonesia)</th>
                     <th className="lg:w-72">Images</th>
                     <th className="lg:w-56">Actions</th>
                 </tr>
@@ -66,13 +69,30 @@ const Table = () => {
                 {blogs?.data?.map((blog, index) => (
                     <tr
                         key={index}
-                        className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'}`}>
-                        <td className="text-center">{blog?.id}</td>
-                        <td className="text-center">{blog?.title}</td>
-                        <td className="text-center">{blog?.subtitle}</td>
+                        className={`${index % 2 == 0 ? 'bg-gray-200' : 'bg-white'} min-w-full`}>
+                        <td className="text-center w-16">
+                            <div className="w-16">{blog?.id}</div>
+                        </td>
+                        <td className="text-center">
+                            <div className="w-72">{blog?.title}</div>
+                        </td>
+                        <td className="text-center lg:w-72">
+                            <div className="w-72">{blog?.title_ina}</div>
+                        </td>
+                        <td className="text-center">
+                            <div className="w-96">{blog?.subtitle}</div>
+                        </td>
+                        <td className="text-center ">
+                            <div className="w-96">{blog?.subtitle_ina}</div>
+                        </td>
                         <td className="l">
-                            <div className="max-h-32 overflow-y-auto">
+                            <div className="max-h-32 w-96 whitespace-pre-line overflow-y-auto px-3 py-4">
                                 {blog?.content}
+                            </div>
+                        </td>
+                        <td className="l">
+                            <div className="max-h-32 w-96 whitespace-pre-line overflow-y-auto px-3 py-4 ">
+                                {blog?.content_ina}
                             </div>
                         </td>
                         <td>
@@ -96,7 +116,7 @@ const Table = () => {
                             </svg>
                         </td>
                         <td>
-                            <div className="flex justify-center gap-4">
+                            <div className="flex justify-center gap-4 w-44">
                                 <svg
                                     onClick={() => {
                                         setIsOpen(!isOpen)

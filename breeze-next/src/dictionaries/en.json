@@ -2,7 +2,7 @@
     "home": {
         "search": "Search Product",
         "hero": "Bali Breeze Everyday Ease",
-        "viewall": "Lihat Semua",
+        "viewall": "View All",
         "newarrival": "New Arrivals",
         "collections": "Product Collections",
         "collectionsList": [
@@ -24,6 +24,9 @@
         "products": "PRODUCTS",
         "about": "ABOUT US",
         "blogs": "BLOGS"
+    },
+    "hamburger": {
+        "blogs": "Blogs"
     },
     "sidebar": {
         "sort": "Sort By",
@@ -86,6 +89,10 @@
         "contact": "Order Now",
         "description": "Description"
     },
+    "blogs": {
+        "hero": "News & Articles",
+        "heroSub": "Stay updated about bali and beachwears through our blogs page"
+    },
     "footer": {
         "products": "Products",
         "subtitle": "Bali-based summerwear with light, casual designs for holidays and everyday wear.",
@@ -97,5 +104,7 @@
         "visionmission": "Vision & Mission",
         "values": "Brand Values",
         "contact": "Contact Us"
-    }
+    },
+    "noproduct": "No Product Yet",
+    "noblog": "No Blog Yet"
 }

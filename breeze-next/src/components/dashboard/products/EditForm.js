@@ -9,7 +9,9 @@ const EditForm = ({ product, setIsOpen }) => {
     const [id, setId] = useState(null)
     const [formData, setFormData] = useState({
         name: '',
+        name_ina: '',
         description: '',
+        description_ina: '',
         colors: ['#000000'],
         type: 'man',
         subtype: 'top',
@@ -20,7 +22,9 @@ const EditForm = ({ product, setIsOpen }) => {
         if (product) {
             setFormData({
                 name: product.name,
+                name_ina: product.name_ina,
                 description: product.description,
+                description_ina: product.description_ina,
                 colors: Array.isArray(product.colors)
                     ? product.colors
                     : product.colors
@@ -79,12 +83,12 @@ const EditForm = ({ product, setIsOpen }) => {
 
     return (
         <form onSubmit={handleSubmit} className="py-3 px-10">
-            <h2 className="text-center text-2xl font-bold">Add Product</h2>
+            <h2 className="text-center text-2xl font-bold">Edit Product</h2>
 
             <ul className="mt-8 max-h-[30rem] overflow-y-scroll">
                 <li className="flex items-center">
                     <label htmlFor="name" className="w-32">
-                        Name
+                        Name (English)
                     </label>
                     <input
                         type="text"
@@ -94,14 +98,38 @@ const EditForm = ({ product, setIsOpen }) => {
                         className="ms-3 w-full"
                     />
                 </li>
+                <li className="flex items-center mt-4">
+                    <label htmlFor="name_ina" className="w-32">
+                        Name (Indonesia)
+                    </label>
+                    <input
+                        type="text"
+                        name="name_ina"
+                        value={formData?.name_ina}
+                        onChange={handleChange}
+                        className="ms-3 w-full"
+                    />
+                </li>
                 <li className="mt-4 flex">
                     <label htmlFor="description" className="w-32">
-                        Description
+                        Description (English)
                     </label>
                     <textarea
                         type="description"
                         name="description"
                         value={formData.description}
+                        onChange={handleChange}
+                        className="ms-3 w-full h-32 border-2 border-black"
+                    />
+                </li>
+                <li className="mt-4 flex">
+                    <label htmlFor="description_ina" className="w-32">
+                        Description (Indonesia)
+                    </label>
+                    <textarea
+                        type="description"
+                        name="description_ina"
+                        value={formData.description_ina}
                         onChange={handleChange}
                         className="ms-3 w-full h-32 border-2 border-black"
                     />

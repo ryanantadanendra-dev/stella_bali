@@ -89,7 +89,7 @@ const ProductsComponent = ({
                 <p
                     role="status"
                     className="text-center text-lg mt-10 col-span-full">
-                    No Products Available!
+                    {dict?.noproduct}!
                 </p>
             )}
         </section>

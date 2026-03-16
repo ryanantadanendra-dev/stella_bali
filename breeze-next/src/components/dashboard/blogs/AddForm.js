@@ -9,8 +9,11 @@ const AddForm = ({ setIsOpen }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
+        title_ina: '',
         subtitle: '',
+        subtitle_ina: '',
         content: '',
+        content_ina: '',
         image: null,
     })
 
@@ -81,8 +84,11 @@ const AddForm = ({ setIsOpen }) => {
 
             setFormData({
                 title: '',
+                title_ina: '',
                 subtitle: '',
+                subtitle_ina: '',
                 content: '',
+                content_ina: '',
                 image: null,
             })
 
@@ -102,23 +108,36 @@ const AddForm = ({ setIsOpen }) => {
         <form onSubmit={handleSubmit} className="py-12 px-10">
             <h2 className="text-center text-2xl font-bold">Add Blog</h2>
 
-            <ul className="mt-8">
+            <ul className="mt-8 overflow-y-auto max-h-[25rem]">
                 <li className="flex items-center">
                     <label htmlFor="title" className="w-32">
-                        Title
+                        Title (English)
                     </label>
                     <input
                         required
                         type="text"
                         name="title"
-                        value={formData.name}
+                        value={formData.title}
+                        onChange={handleChange}
+                        className="ms-3 w-full"
+                    />
+                </li>
+                <li className="flex items-center mt-4">
+                    <label htmlFor="title_ina" className="w-32">
+                        Title (Indonesia)
+                    </label>
+                    <input
+                        required
+                        type="text"
+                        name="title_ina"
+                        value={formData.title_ina}
                         onChange={handleChange}
                         className="ms-3 w-full"
                     />
                 </li>
                 <li className="mt-8 flex">
                     <label htmlFor="subtitle" className="w-32">
-                        Subtitle
+                        Subtitle (English)
                     </label>
                     <input
                         required
@@ -130,14 +149,38 @@ const AddForm = ({ setIsOpen }) => {
                     />
                 </li>
                 <li className="mt-8 flex">
+                    <label htmlFor="subtitle_ina" className="w-32">
+                        Subtitle (Indonesia)
+                    </label>
+                    <input
+                        required
+                        type="text"
+                        name="subtitle_ina"
+                        value={formData.subtitle_ina}
+                        onChange={handleChange}
+                        className="ms-3 w-full h-10 border-2 border-black"
+                    />
+                </li>
+                <li className="mt-8 flex">
                     <label htmlFor="content" className="w-32">
-                        Content
+                        Content (English)
                     </label>
                     <textarea
                         required
                         value={formData.content}
                         onChange={handleChange}
                         name="content"
+                    />
+                </li>
+                <li className="mt-8 flex">
+                    <label htmlFor="content_ina" className="w-32">
+                        Content (Indonesia)
+                    </label>
+                    <textarea
+                        required
+                        value={formData.content_ina}
+                        onChange={handleChange}
+                        name="content_ina"
                     />
                 </li>
                 <li className="mt-8 flex">

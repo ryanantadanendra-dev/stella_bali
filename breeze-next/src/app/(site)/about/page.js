@@ -116,7 +116,7 @@ const VisionMissionCard = ({ data, icon }) => {
     const isList = data.title === 'Our Mission' ? true : false
 
     return (
-        <article className="h-full w-96 bg-white px-3 py-12 shadow-lg shadow-gray-400 md:h-[35rem] md:w-[35rem] md:py-2">
+        <article className="h-full w-96 bg-white px-3 py-12 shadow-lg shadow-gray-400 md:h-[32rem] md:w-[32rem] md:py-2">
             <div className="mt-10">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#269795] pe-1">
                     <svg

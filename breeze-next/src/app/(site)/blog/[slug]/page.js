@@ -56,8 +56,8 @@ export default async function Blog({ params }) {
 
     return (
         <article className="blog-wrapper w-screen min-h-screen py-28 text-black">
-            <header>
-                <h1 className="text-4xl md:text-5xl text-center font-bold">
+            <header className="px-32">
+                <h1 className="text-4xl md:text-5xl text-center font-extrabold">
                     {blog?.title}
                 </h1>
                 <p className="text-center text-xl md:text-2xl mt-3">
@@ -80,7 +80,7 @@ export default async function Blog({ params }) {
                 </figure>
                 <div
                     dangerouslySetInnerHTML={{ __html: blog?.content }}
-                    className="content max-w-full px-8 md:px-12 lg:px-72"
+                    className="content max-w-full px-8 md:px-12 lg:px-32 mt-12"
                 />
             </main>
         </article>
