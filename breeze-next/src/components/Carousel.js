@@ -11,7 +11,7 @@ export function Carousel({ datas, place, dict, lang }) {
     const autoplayPlugin = useMemo(() => [Autoplay({ delay: 6000 })], [])
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
-        { loop: true, watchDrag: false },
+        { loop: true, watchDrag: false, duration: 0 },
         autoplayPlugin,
     )
 

@@ -17,7 +17,6 @@ const Details = ({ slug, dict, lang }) => {
     const { products } = useProduct()
     const [isActive, setIsActive] = useState(0)
     const product = products?.find(product => product.slug == slug)
-    console.log(lang)
 
     return (
         <section className="w-screen h-full ">
@@ -58,7 +57,7 @@ const Details = ({ slug, dict, lang }) => {
                     <p className="text-xl lg:text-3xl mt-12">
                         {priceFormat(product?.price)}
                     </p>
-                    <p className="text-xl mt-9">Colors</p>
+                    <p className="text-xl mt-9">{dict?.product?.colors}</p>
                     <div className="flex gap-2 mt-3">
                         {product?.colors.map((color, index) => (
                             <div
@@ -81,7 +80,7 @@ const Details = ({ slug, dict, lang }) => {
                                 ? product?.description
                                 : product?.description_ina,
                     }}
-                    className="mt-10"
+                    className="product-desc  mt-10"
                 />
             </div>
         </section>

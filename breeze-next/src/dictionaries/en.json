@@ -8,7 +8,7 @@
         "collectionsList": [
             "Tops",
             "Bottoms",
-            "Swimsuitd",
+            "Swimsuits",
             "Dresses",
             "Accessories"
         ],
@@ -87,7 +87,9 @@
     },
     "product": {
         "contact": "Order Now",
-        "description": "Description"
+        "description": "Description",
+        "colors": "Colors",
+        "noprod": "No Product Available"
     },
     "blogs": {
         "hero": "News & Articles",

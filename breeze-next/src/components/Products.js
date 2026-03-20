@@ -10,16 +10,6 @@ const PRIORITY_COUNT = 2
 function filterAndSort(products, { type, collections, sort }) {
     let result = Array.isArray(products) ? [...products] : []
 
-    if (type) {
-        result = result.filter(
-            p => p.type?.toLowerCase() === type.toLowerCase(),
-        )
-    }
-    if (collections) {
-        result = result.filter(
-            p => p.subtype?.toLowerCase() === collections.toLowerCase(),
-        )
-    }
     if (sort === 'new-arrivals') {
         result = result
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -41,16 +31,15 @@ const ProductsComponent = ({
     dict,
     lang,
 }) => {
-    const ssrProducts = initialProducts?.data ?? []
+    const ssrProducts = Array.isArray(initialProducts)
+        ? initialProducts
+        : initialProducts?.data ?? []
 
-    const [dynamicProducts, setDynamicProducts] = useState(null)
     const [isError, setIsError] = useState(false)
 
-    const products = dynamicProducts ?? ssrProducts
-
     const filtered = useMemo(
-        () => filterAndSort(products, { type, collections, sort }),
-        [products, type, collections, sort],
+        () => filterAndSort(ssrProducts, { sort }),
+        [ssrProducts, sort],
     )
 
     if (isError) {
@@ -68,12 +57,12 @@ const ProductsComponent = ({
             <span aria-live="polite" aria-atomic="true" className="sr-only">
                 {filtered.length > 0
                     ? `${filtered.length} products found`
-                    : 'No products available'}
+                    : dict?.noprodproduct?.noproduct}
             </span>
             {filtered.length > 0 ? (
                 <ul
                     role="list"
-                    className="flex flex-wrap gap-1 md:gap-8 justify-center lg:justify=start w-full">
+                    className="flex flex-wrap gap-1 md:gap-8 justify-center lg:justify-start w-full">
                     {filtered.map((product, index) => (
                         <li key={product.id ?? product.slug}>
                             <MemoizedCard
@@ -89,7 +78,7 @@ const ProductsComponent = ({
                 <p
                     role="status"
                     className="text-center text-lg mt-10 col-span-full">
-                    {dict?.noproduct}!
+                    {dict?.product?.noprod}
                 </p>
             )}
         </section>

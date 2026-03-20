@@ -11,7 +11,7 @@ const NewArrival = ({ dict, lang }) => {
 
     const scroll = direction => {
         const container = scrollRef.current
-        const scrollAmount = 320
+        const scrollAmount = 176
 
         container.scrollBy({
             left: direction === 'left' ? -scrollAmount : scrollAmount,
@@ -37,7 +37,7 @@ const NewArrival = ({ dict, lang }) => {
                 <div className="relative mt-12 md:ms-12">
                     <button
                         onClick={() => scroll('left')}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 -translate-x-4
+                        className="absolute left-6 md:left-0 top-1/2 -translate-y-1/2 z-10 -translate-x-4
                    bg-white shadow-md rounded-full w-10 h-10 flex items-center justify-center
                    hover:bg-gray-100 transition"
                         aria-label="Scroll left">
@@ -61,7 +61,7 @@ const NewArrival = ({ dict, lang }) => {
                     </div>
                     <button
                         onClick={() => scroll('right')}
-                        className="absolute right-12 top-1/2 -translate-y-1/2 z-10 translate-x-4
+                        className="absolute right-5 md:right-12 top-1/2 -translate-y-1/2 z-10 translate-x-4
                    bg-white shadow-md rounded-full w-10 h-10 flex items-center justify-center
                    hover:bg-gray-100 transition"
                         aria-label="Scroll right">

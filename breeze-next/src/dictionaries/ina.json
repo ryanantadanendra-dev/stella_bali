@@ -91,7 +91,9 @@
     },
     "product": {
         "contact": "Pesan Sekarang",
-        "description": "Deskripsi"
+        "description": "Deskripsi",
+        "colors": "Warna",
+        "noprod": "Produk Tidak Tersedia"
     },
     "blogs": {
         "hero": "Berita & Artikel",

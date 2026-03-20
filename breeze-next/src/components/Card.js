@@ -58,7 +58,7 @@ const Card = ({ data, priority = false, dict, lang }) => {
             onKeyDown={e => e.key == 'Enter' && handleClick()}
             tabIndex={0}
             onClick={handleClick}
-            className={`flex ${isBlog ? 'h-[30rem] max-h-[30rem] max-w-72 w-72' : 'md:h-[25rem] min-w-44 max-w-44 h-[18rem] md:min-w-72'} md:min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
+            className={`flex ${isBlog ? 'md:h-[30rem] md:max-h-[30rem] md:max-w-72 md:w-72 w-64 h-96' : 'md:h-[25rem] min-w-44 max-w-52 h-[18rem] md:min-w-72'} md:min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
                 isProduct
                     ? 'cursor-pointer transition-transform hover:scale-105'
                     : ''
@@ -78,7 +78,7 @@ const Card = ({ data, priority = false, dict, lang }) => {
                 />
             </figure>
 
-            <h3 className="line-clamp-2 text-lg md:text-lg font-semibold">
+            <h3 className="line-clamp-2 text-[0.9rem] md:text-lg font-semibold">
                 {title}
             </h3>
 
@@ -108,7 +108,7 @@ const Card = ({ data, priority = false, dict, lang }) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                     href={`/blog/${data.slug || ''}`}
-                    className="flex h-10 w-48 text-xs items-center justify-around gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
+                    className="flex md:h-10 md:w-48 w-36 h-10 text-xs items-center justify-around gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
                     aria-label={`Read more about ${title}`}>
                     {dict?.home.aboutBtn}
                     <svg

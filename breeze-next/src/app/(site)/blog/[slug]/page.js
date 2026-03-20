@@ -38,12 +38,14 @@ export async function generateMetadata({ params }) {
     }
 }
 
-export default async function Blog({ params }) {
+export default async function Blog({ params, searchParams }) {
     const { blogs } = await getBlogs()
     const blog = blogs?.find(b => b.slug === params.slug)
+    const search = await searchParams
+    const lang = search?.lang || 'en'
 
     const formatedDate = new Date(blog?.created_at).toLocaleDateString(
-        'en-US',
+        lang == 'en' ? 'en-US' : 'id-ID',
         {
             weekday: 'long',
             day: '2-digit',
@@ -58,10 +60,10 @@ export default async function Blog({ params }) {
         <article className="blog-wrapper w-screen min-h-screen py-28 text-black">
             <header className="px-32">
                 <h1 className="text-4xl md:text-5xl text-center font-extrabold">
-                    {blog?.title}
+                    {lang == 'en' ? blog?.title : blog?.title_ina}
                 </h1>
                 <p className="text-center text-xl md:text-2xl mt-3">
-                    {blog?.subtitle}
+                    {lang == 'en' ? blog?.subtitle : blog?.subtitle_ina}
                 </p>
                 <time className="block text-center text-gray-400 text-[1rem] mt-10">
                     {formatedDate}
@@ -79,7 +81,10 @@ export default async function Blog({ params }) {
                     />
                 </figure>
                 <div
-                    dangerouslySetInnerHTML={{ __html: blog?.content }}
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            lang == 'en' ? blog?.content : blog?.content_ina,
+                    }}
                     className="content max-w-full px-8 md:px-12 lg:px-32 mt-12"
                 />
             </main>

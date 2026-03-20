@@ -81,7 +81,8 @@ html {
 }
 
 h1,
-h2 {
+h2,
+h3 {
     font-family: var(--font-montserrat-alternates), var(--font-montserrat),
         sans-serif;
 }
@@ -142,9 +143,12 @@ h2 {
     list-style: disc;
 }
 .product-desc strong,
-.product-desc h2,
-.product-desc h3 {
+.product-desc h2 {
     font-weight: bold;
+}
+
+.product-desc h3 {
+    font-weight: 500;
 }
 
 .product-desc h2,

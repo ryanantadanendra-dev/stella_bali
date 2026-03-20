@@ -1,13 +1,3 @@
-// components/Sidebar.jsx
-// FIXES:
-//   - CLS 0.874 → near 0: The opacity-0 class was being applied during SSR
-//     and then flipping to opacity-100 after hydration, causing a massive layout shift.
-//     Fix: use CSS visibility instead, or render with correct opacity from the start
-//     using a data attribute set before hydration (no-JS-flash pattern).
-//   - Accessibility: FilterBtn button has no accessible name (Lighthouse flagged:
-//     "main.h-full > div.ms-10 > div.sc-beqWay > button.setting-btn")
-//   - Removed extendCollection duplicate state (derived from URL)
-
 'use client'
 
 import { useEffect, useState, useCallback, useMemo, memo } from 'react'
@@ -16,13 +6,8 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import dynamic from 'next/dynamic'
 
-// FIX: FilterBtn — this component is 84 KiB which is far too large for a button.
-// Check what it's importing. If it pulls in a UI library, replace with a simple button.
-// The ssr:false is correct here since it reads window size.
 const FilterBtn = dynamic(() => import('./FilterBtn'), {
     ssr: false,
-    // FIX: Provide a server-rendered placeholder so layout doesn't shift
-    // when FilterBtn hydrates
     loading: () => (
         <button
             className="setting-btn"
@@ -86,7 +71,6 @@ const Sidebar = ({ dict }) => {
     const [sortOpen, setSortOpen] = useState(false)
     const [collectionsOpen, setCollectionsOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    // FIX: Track hydration to avoid opacity-0 CLS flash
     const [hydrated, setHydrated] = useState(false)
 
     const isMobile = useIsMobile(600)
@@ -94,8 +78,6 @@ const Sidebar = ({ dict }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
-    // FIX: Mark as hydrated after mount — prevents SSR/client mismatch
-    // that was causing the opacity-0 → opacity-100 layout shift (CLS 0.874)
     useEffect(() => {
         setHydrated(true)
     }, [])
@@ -176,21 +158,12 @@ const Sidebar = ({ dict }) => {
         setCollectionsOpen(prev => !prev)
     }, [])
 
-    // FIX: The original code used `opacity-0` during SSR which caused CLS.
-    // Instead, render sections with full opacity always, and only control
-    // mobile visibility via translate (which doesn't cause layout shift).
-    // The sections are always in the DOM with opacity-100.
     const sectionVisible = hydrated ? isOpen || !isMobile : true
 
     return (
         <>
             {isMobile && (
                 <div className="ms-10 mt-0">
-                    {/*
-                        FIX: FilterBtn must receive aria-label.
-                        Lighthouse flagged: "button.setting-btn has no accessible name"
-                        Pass aria-label and aria-expanded through to the button element.
-                    */}
                     <FilterBtn
                         setIsOpen={setIsOpen}
                         isOpen={isOpen}
@@ -200,7 +173,7 @@ const Sidebar = ({ dict }) => {
             )}
 
             <aside
-                className={`min-h-screen shadow-lg shadow-gray-400 md:w-80 w-48 bg-white pt-7 top-0 fixed z-30 md:block md:static transition-transform duration-300 ease-out ${
+                className={`min-h-screen pb-12 shadow-lg shadow-gray-400 md:w-80 w-48 bg-white pt-7 top-0 fixed z-30 md:block md:static transition-transform duration-300 ease-out ${
                     !isOpen && isMobile && hydrated
                         ? '-translate-x-full'
                         : 'translate-x-0'
@@ -222,12 +195,6 @@ const Sidebar = ({ dict }) => {
                     </div>
                 )}
 
-                {/* Sort Section */}
-                {/*
-                    FIX: Removed opacity-0/opacity-100 toggle — this was the CLS culprit.
-                    The "Sort By" section was listed explicitly as a layout shift source.
-                    Content is always visible; mobile hides the whole sidebar via translate.
-                */}
                 <section className="w-48 mt-8 md:w-64 transition-all duration-300 bg-white px-3">
                     <button
                         onClick={toggleSort}

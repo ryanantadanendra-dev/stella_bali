@@ -37,7 +37,10 @@ const SearchBar = ({ dict }) => {
             .filter(
                 product =>
                     product.name?.toLowerCase().includes(searchLower) ||
+                    product.name_ina?.toLowerCase().includes(searchLower) ||
                     product.type?.toLowerCase().includes(searchLower) ||
+                    product.type_ina?.toLowerCase().includes(searchLower) ||
+                    product.subtype_ina?.toLowerCase().includes(searchLower) ||
                     product.subtype?.toLowerCase().includes(searchLower),
             )
             .slice(0, 7)

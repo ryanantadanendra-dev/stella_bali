@@ -3,19 +3,19 @@
 import { useProduct } from '@/hooks/product'
 import Image from 'next/image'
 import Link from 'next/link'
-import Img1 from '@/../public/Assets/tops.jpg'
-import Img2 from '@/../public/Assets/bottoms.jpg'
+import Img1 from '@/../public/Assets/tops2.jpg'
+import Img2 from '@/../public/Assets/bottoms3.jpg'
 import Img3 from '@/../public/Assets/swimsuits.jpg'
-import Img4 from '@/../public/Assets/dresses.jpg'
+import Img4 from '@/../public/Assets/dresses2.jpg'
 import Img5 from '@/../public/Assets/accesories.jpg'
 
 // Grid span configuration
 const GRID_SPANS = {
     0: 'md:row-span-2',
-    1: 'md:row-span-1',
+    1: 'md:row-span-2',
     2: 'md:row-span-2',
     3: 'md:row-span-3',
-    default: 'md:row-span-2',
+    default: 'md:row-span-1',
 }
 
 const getGridSpan = index => GRID_SPANS[index] || GRID_SPANS.default

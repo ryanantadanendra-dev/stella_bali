@@ -43,7 +43,7 @@ const Hamburger = ({ isOpen, setIsOpen, dict }) => {
 
     return (
         <div
-            className={`menu-wrapper w-screen ${menuHeight} absolute bg-white transition-all duration-200 ease-out ${isOpen ? 'top-20 opacity-100' : '-top-96 opacity-0'} left-0`}>
+            className={`menu-wrapper w-screen ${menuHeight} absolute bg-white transition-all duration-200 ease-out z-0 ${isOpen ? 'top-20 opacity-100' : '-top-96 opacity-0'} left-0`}>
             <div className="link-wrapper">
                 <div className="link-wrapper h-[44.8px] text-black hover:bg-white hover:text-black flex items-center">
                     <Link

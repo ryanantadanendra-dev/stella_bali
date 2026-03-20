@@ -77,7 +77,7 @@ const Navbar = () => {
     }, [isHovered, collectionsList])
 
     return (
-        <nav className="w-full h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:px-8 fixed top-0 z-50">
+        <nav className="w-full h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:px-8 fixed top-0 z-[100]">
             {/* Left: Logo */}
             <div className=" lg:flex-none">
                 <Link

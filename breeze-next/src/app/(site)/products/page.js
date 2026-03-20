@@ -109,7 +109,7 @@ export default async function ProductsPage({ searchParams }) {
     const params = await Promise.resolve(searchParams)
     const lang = params?.lang || 'en'
     const dict = await getDictionary(lang)
-    const sort = params?.sort ?? null
+    const sort = params?.sort || null
     const collections = params?.collections ?? null
     const type = params?.type ?? null
 
@@ -118,12 +118,16 @@ export default async function ProductsPage({ searchParams }) {
     let visibleProducts = products?.data ?? []
     if (type) {
         visibleProducts = visibleProducts.filter(
-            p => p.type?.toLowerCase() === type.toLowerCase(),
+            p =>
+                p.type?.toLowerCase() === type.toLowerCase() ||
+                p.type_ina?.toLowerCase() === type.toLowerCase(),
         )
     }
     if (collections) {
         visibleProducts = visibleProducts.filter(
-            p => p.subtype?.toLowerCase() === collections.toLowerCase(),
+            p =>
+                p.subtype?.toLowerCase() === collections.toLowerCase() ||
+                p.subtype_ina?.toLowerCase() === collections.toLowerCase(),
         )
     }
 
@@ -163,7 +167,7 @@ export default async function ProductsPage({ searchParams }) {
                             sort={sort}
                             collections={collections}
                             type={type}
-                            initialProducts={products}
+                            initialProducts={visibleProducts}
                             dict={dict}
                             lang={lang}
                         />
