@@ -28,12 +28,12 @@ const CTA = ({ heading, subheading, shop, contact }) => {
                 <div className="flex gap-4">
                     <Link
                         href="/products"
-                        className="mt-4 bg-white px-8 py-4 font-bold text-black transition-transform hover:scale-105">
+                        className="mt-4 flex items-center bg-white text-[0.8rem] md:text-lg md:px-8 md:py-4 px-4 py-1 font-bold text-black transition-transform hover:scale-105">
                         {shop}
                     </Link>
                     <WaButton
                         text={contact}
-                        style="mt-4 px-8 py-4 font-bold text-white bg-transparent border-2 border-white transition-transform hover:scale-105"
+                        style="mt-4 md:px-8 md:py-4 px-4 py-2 text-[0.8rem md:text-lg font-bold text-white bg-transparent border-2 border-white transition-transform hover:scale-105"
                     />
                 </div>
             </div>

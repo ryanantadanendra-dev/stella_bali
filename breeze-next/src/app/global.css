@@ -155,3 +155,43 @@ h3 {
 .product-desc h3 {
     font-size: 1.3rem;
 }
+
+.searchbar-container {
+    --timing: 0.3s;
+    --border-height: 2px;
+    --border-color: #2f2ee9;
+    --border-radius: 30px;
+    --after-border-radius: 1px;
+    position: relative;
+    width: var(--width-of-input);
+    height: var(--height-of-input);
+    display: flex;
+    align-items: center;
+    padding-inline: 0.8em;
+    border-radius: var(--border-radius);
+    transition: border-radius 0.5s ease;
+    background: var(--input-bg, #fff);
+}
+
+.searchbar-container:before {
+    content: '';
+    position: absolute;
+    background: var(--border-color);
+    transform: scaleX(0);
+    transform-origin: center;
+    width: 100%;
+    height: var(--border-height);
+    left: 0;
+    bottom: 0;
+    border-radius: 1px;
+    transition: transform var(--timing) ease;
+}
+
+.searchbar-container:focus-within {
+    border-radius: var(--after-border-radius);
+}
+
+/* here is code of animated border */
+.searchbar-container:focus-within:before {
+    transform: scale(1);
+}

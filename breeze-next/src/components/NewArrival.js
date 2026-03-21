@@ -11,7 +11,7 @@ const NewArrival = ({ dict, lang }) => {
 
     const scroll = direction => {
         const container = scrollRef.current
-        const scrollAmount = 176
+        const scrollAmount = window.innerWidth < 550 ? 400 : 176
 
         container.scrollBy({
             left: direction === 'left' ? -scrollAmount : scrollAmount,
@@ -45,18 +45,24 @@ const NewArrival = ({ dict, lang }) => {
                     </button>
                     <div
                         ref={scrollRef}
-                        className="flex flex-nowrap gap-10 overflow-x-auto overflow-y-hidden scroll-smooth
-                   scrollbar-hide px-6"
+                        className="flex flex-nowrap md:gap-10 overflow-x-auto overflow-y-hidden scroll-smooth scrollbar-hide
+             md:px-6
+             snap-x snap-mandatory"
                         style={{
                             scrollbarWidth: 'none',
                             msOverflowStyle: 'none',
                         }}>
                         {latests?.map(latest => (
-                            <Card
-                                data={latest}
+                            <div
                                 key={latest?.slug}
-                                lang={lang}
-                            />
+                                className="snap-center shrink-0 flex items-center justify-center
+                       w-screen md:w-auto md:px-4 first:md:pl-6 last:md:pr-6">
+                                <Card
+                                    data={latest}
+                                    key={latest?.slug}
+                                    lang={lang}
+                                />
+                            </div>
                         ))}
                     </div>
                     <button

@@ -231,10 +231,10 @@ const About = async ({ searchParams }) => {
                         />
                     </figure>
                     <div className="w-full lg:w-1/2 lg:pe-12">
-                        <h2 className="mt-5 text-center md:text-left text-4xl font-bold">
+                        <h2 className="mt-5 text-center lg:text-left text-4xl font-bold">
                             {dict?.about?.productions}
                         </h2>
-                        <article className="mt-10 px-3 text-center text-[0.8rem] md:text-[1rem] lg:px-0 lg:text-left whitespace-pre-line">
+                        <article className="mt-10 px-3 md:px-32 text-center text-[0.8rem] md:text-[1rem] lg:px-0 lg:text-left whitespace-pre-line">
                             {dict?.about?.productionsText}
                             {/* <span className="font-bold">Stella Bali's </span>
                             production process is handmade and based on close

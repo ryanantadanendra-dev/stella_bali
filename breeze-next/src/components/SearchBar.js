@@ -59,7 +59,7 @@ const SearchBar = ({ dict }) => {
     const handleChange = e => setSearch(e.target.value)
 
     return (
-        <div className="relative flex h-10 w-96 justify-around px-4">
+        <div className="searchbar-container relative flex h-10 w-64 md:w-96 justify-around px-4">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -75,7 +75,7 @@ const SearchBar = ({ dict }) => {
                 name="product"
                 value={search}
                 onChange={handleChange}
-                className="w-full border-0 border-b-2 border-b-gray-300 focus:border-b-2 focus:border-b-black focus:outline-none focus:ring-0"
+                className="w-full border-0 border-b-0 focus:border-b-0 focus:outline-none focus:ring-0"
                 placeholder={dict?.home?.search}
                 autoComplete="off"
             />
