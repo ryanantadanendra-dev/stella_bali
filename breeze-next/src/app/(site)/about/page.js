@@ -225,8 +225,8 @@ const About = async ({ searchParams }) => {
                             src="/Assets/production.webp"
                             alt="Stella Bali artisans at work producing handmade fashion"
                             fill
-                            className="object-cover"
-                            quality={80}
+                            className="object-contain"
+                            quality={90}
                             sizes="(max-width: 1024px) 100vw, 50vw"
                         />
                     </figure>

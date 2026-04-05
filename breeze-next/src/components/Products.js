@@ -59,7 +59,7 @@ const ProductsComponent = ({
                     ? `${filtered.length} products found`
                     : dict?.noprodproduct?.noproduct}
             </span>
-            {filtered.length > 0 ? (
+            {filtered?.length > 0 ? (
                 <ul
                     role="list"
                     className="flex flex-wrap gap-1 md:gap-8 justify-center lg:justify-start w-full">

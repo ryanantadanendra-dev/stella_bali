@@ -78,6 +78,7 @@ const SearchBar = ({ dict }) => {
                 className="w-full border-0 border-b-0 focus:border-b-0 focus:outline-none focus:ring-0"
                 placeholder={dict?.home?.search}
                 autoComplete="off"
+                suppressHydrationWarning={true}
             />
             <Search datas={result} isActive={isActive} />
         </div>

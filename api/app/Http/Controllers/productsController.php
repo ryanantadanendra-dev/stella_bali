@@ -263,12 +263,12 @@ class productsController extends Controller
                         'product_id' => $id,
                     ]);
                 }
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Image Added successfully',
+                ], 201);
             }
     
-        return response()->json([
-            'success' => true,
-            'message' => 'Image Added successfully',
-        ], 201);
     }
 
     public function deleteImage($id) {

@@ -114,12 +114,12 @@ const Table = ({ setIsOpen }) => {
                         <td className="text-center">{product.id}</td>
                         <td className="text-center">{product.name}</td>
                         <td className="text-center">{product.name_ina}</td>
-                        <td className=" max-w-[160px] h-56">
+                        <td className="w-[28rem] h-56">
                             <div className="max-h-56 overflow-y-auto ">
                                 {product.description}
                             </div>
                         </td>
-                        <td className=" max-w-[160px] h-56">
+                        <td className="w-[28rem] h-56">
                             <div className="max-h-56 overflow-y-auto ">
                                 {product.description_ina}
                             </div>
@@ -149,6 +149,7 @@ const Table = ({ setIsOpen }) => {
                                                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${image.path}`}
                                                 alt="product image"
                                                 fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 className="object-contain"
                                             />
                                         </figure>

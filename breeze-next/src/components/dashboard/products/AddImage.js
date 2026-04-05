@@ -96,10 +96,6 @@ const AddImageForm = ({ productId, setIsOpen }) => {
                 ...formData,
                 images: [],
             })
-
-            if (fileRef.current) {
-                fileRef.current.value = ''
-            }
         } finally {
             setIsLoading(false)
         }

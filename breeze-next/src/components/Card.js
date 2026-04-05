@@ -34,7 +34,7 @@ const Card = ({ data, priority = false, dict, lang }) => {
 
     const handleClick = () => {
         if (isProduct && data?.slug) {
-            router.push(`/product/${data.slug}`)
+            router.push(`/product/${data.slug}?lang=${lang}`)
         }
     }
 
@@ -59,9 +59,7 @@ const Card = ({ data, priority = false, dict, lang }) => {
             tabIndex={0}
             onClick={handleClick}
             className={`flex ${isBlog ? 'md:h-[30rem] md:max-h-[30rem] md:max-w-72 md:w-72 w-64 h-96' : 'md:h-[25rem] min-w-72 max-w-72 h-[18rem] md:min-w-72'} md:min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
-                isProduct
-                    ? 'cursor-pointer transition-transform hover:scale-105'
-                    : ''
+                isProduct ? 'cursor-pointer transition-transform' : ''
             }`}>
             <figure className="relative h-44 md:h-56 w-full overflow-hidden">
                 <Image

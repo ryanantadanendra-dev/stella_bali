@@ -75,9 +75,9 @@ export default async function Blog({ params, searchParams }) {
                         src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${blog?.image}`}
                         alt={`${blog?.title} image`}
                         fill
-                        sizes="100px"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         priority
-                        className="object-cover"
+                        className="object-contain"
                     />
                 </figure>
                 <div

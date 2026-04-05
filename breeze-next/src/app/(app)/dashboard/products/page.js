@@ -10,7 +10,7 @@ const Products = () => {
 
     return (
         <>
-            <div className="w-screen min-h-screen overflow-x-hidden px-12 py-4">
+            <div className="w-screen min-h-screen overflow-y-hidden overflow-x-hidden px-12 py-32">
                 <h1 className="font-bold text-3xl">Products Page</h1>
                 <svg
                     onClick={() => setIsOpen(!isOpen)}
@@ -19,7 +19,7 @@ const Products = () => {
                     className="w-10 mt-7">
                     <path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                 </svg>
-                <div className=" flex md:justify-center overflow-x-auto w-full">
+                <div className="max-h-screen flex md:justify-center overflow-x-auto w-full">
                     <Table isOpen={isOpen} setIsOpen={setIsOpen} />
                 </div>
                 <Modal isOpen={isOpen} setIsOpen={setIsOpen}>

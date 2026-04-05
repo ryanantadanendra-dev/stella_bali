@@ -32,16 +32,19 @@ const Details = ({ slug, dict, lang }) => {
                                     src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${image.path}`}
                                     alt={`${product?.name} image ${index}`}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className="object-cover"
                                 />
                             </figure>
                         ))}
                     </div>
-                    <figure className="lg:w-[30rem] lg:h-[30rem] md:w-[20rem] md:h-[25rem] w-[20rem] h-[25rem] bg-black relative">
+                    <figure className="lg:w-[30rem] lg:h-[30rem] md:w-[20rem] md:h-[25rem] w-[20rem] h-[25rem] bg-transparent relative">
                         <Image
                             src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${product?.images[isActive].path}`}
                             fill
-                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                            quality={90}
+                            className="object-contain"
                         />
                     </figure>
                 </div>

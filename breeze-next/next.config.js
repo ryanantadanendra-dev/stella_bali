@@ -27,9 +27,6 @@ const nextConfig = {
     },
 
     images: {
-        // FIX: AVIF (~50% smaller than WebP) addresses "Improve image delivery: 73 KiB"
-        formats: ['image/avif', 'image/webp'],
-
         remotePatterns: [
             {
                 protocol: 'http',
@@ -37,15 +34,11 @@ const nextConfig = {
                 port: '8000',
                 pathname: '/storage/**',
             },
-            // Production:
-            // { protocol: 'https', hostname: 'your-backend.com', pathname: '/storage/**' },
         ],
 
-        // FIX: Narrow to your actual breakpoints — cards are always 320px
-        deviceSizes: [320, 640, 750, 1080, 1920],
-        imageSizes: [320, 640],
+        deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+        imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 
-        // FIX: Cache optimized images for 1 year (default is 60 seconds)
         minimumCacheTTL: 31536000,
 
         dangerouslyAllowSVG: false,

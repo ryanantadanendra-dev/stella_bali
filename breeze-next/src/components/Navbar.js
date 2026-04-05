@@ -10,6 +10,7 @@ import Hamburger from './Hamburger'
 import LangBtm from './LangBtn'
 import { useSearchParams } from 'next/navigation'
 import { useDict } from '@/hooks/useDict'
+import dynamic from 'next/dynamic'
 
 const MenuIcon = ({ onClick }) => (
     <button
@@ -89,6 +90,7 @@ const Navbar = () => {
                         alt="Stella Bali Logo"
                         fill
                         priority
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-contain"
                     />
                 </Link>
@@ -209,4 +211,6 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+const NavbarComponent = Navbar
+
+export default dynamic(() => Promise.resolve(NavbarComponent), { ssr: false })
