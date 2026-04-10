@@ -3,10 +3,10 @@
 import { useProduct } from '@/hooks/product'
 import Image from 'next/image'
 import Link from 'next/link'
-import Img1 from '@/../public/Assets/tops2.jpg'
-import Img2 from '@/../public/Assets/bottoms3.jpg'
+import Img1 from '@/../public/Assets/tops.jpg'
+import Img2 from '@/../public/Assets/bottoms.jpg'
 import Img3 from '@/../public/Assets/swimsuits.jpg'
-import Img4 from '@/../public/Assets/dresses2.jpg'
+import Img4 from '@/../public/Assets/dresses.jpg'
 import Img5 from '@/../public/Assets/accesories.jpg'
 
 // Grid span configuration
@@ -42,12 +42,12 @@ const Wrapper = ({ index, category, image, dict }) => {
                     <div className="text-xs md:text-xl">
                         <Link
                             href={`/products?type=Man&collections=${category}`}
-                            className="block">
+                            className="block hover:underline">
                             {dict?.home?.gender[0]}
                         </Link>
                         <Link
                             href={`/products?type=Woman&collections=${category}`}
-                            className="block">
+                            className="block hover:underline">
                             {dict?.home?.gender[1]}
                         </Link>
                     </div>

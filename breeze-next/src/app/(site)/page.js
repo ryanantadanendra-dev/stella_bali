@@ -67,7 +67,7 @@ export const metadata = {
     },
 }
 
-const datas = ['/Assets/hero4.jpg', '/Assets/hero5.jpg', '/Assets/hero6.jpg']
+const datas = ['/Assets/hero1.jpg', '/Assets/hero2.jpg', '/Assets/hero3.jpg']
 
 const Home = async ({ searchParams }) => {
     const params = await searchParams
