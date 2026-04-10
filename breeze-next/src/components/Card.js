@@ -58,10 +58,11 @@ const Card = ({ data, priority = false, dict, lang }) => {
             onKeyDown={e => e.key == 'Enter' && handleClick()}
             tabIndex={0}
             onClick={handleClick}
-            className={`flex ${isBlog ? 'md:h-[30rem] md:max-h-[30rem] md:max-w-72 md:w-72 w-64 h-96' : 'md:h-[25rem] min-w-72 max-w-72 h-[18rem] md:min-w-72'} md:min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
+            className={`flex ${isBlog ? 'md:h-[30rem] md:max-h-[30rem] md:max-w-72 md:w-72 max-w-44 max-h-[16rem] w-64 h-96' : 'md:h-[25rem] min-w-72 max-w-72 h-[18rem] md:min-w-72'} md:min-h-[25rem] max-h-[30rem] flex-col justify-around bg-white px-3 py-2 shadow-lg shadow-gray-300 ${
                 isProduct ? 'cursor-pointer transition-transform' : ''
             }`}>
-            <figure className="relative h-44 md:h-56 w-full overflow-hidden">
+            <figure
+                className={`relative ${isBlog ? 'h-32 md:h-56' : 'h-44 md:h-56'}  w-full overflow-hidden`}>
                 <Image
                     src={imageSrc}
                     alt=""
@@ -76,7 +77,8 @@ const Card = ({ data, priority = false, dict, lang }) => {
                 />
             </figure>
 
-            <h3 className="line-clamp-2 text-[0.9rem] md:text-lg font-semibold">
+            <h3
+                className={`line-clamp-2 ${isBlog ? 'text-[0.7rem]' : 'text-[0.9rem]'}  md:text-lg font-semibold`}>
                 {title}
             </h3>
 
@@ -84,7 +86,7 @@ const Card = ({ data, priority = false, dict, lang }) => {
                 className={
                     isProduct
                         ? 'font-bold truncate text-xs md:text-lg'
-                        : 'font-normal truncate'
+                        : 'font-normal truncate text-[0.6rem]'
                 }>
                 {subtitle}
             </p>
@@ -106,13 +108,13 @@ const Card = ({ data, priority = false, dict, lang }) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                     href={`/blog/${data.slug || ''}`}
-                    className="flex md:h-10 md:w-48 w-36 h-10 text-xs items-center justify-around gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
+                    className="flex px-1 md:px-0 md:h-10 md:w-48 w-32 h-8 text-[0.5rem] md:text-xs items-center justify-around gap-3 rounded-full border-2 border-black transition-colors hover:bg-black hover:text-white"
                     aria-label={`Read more about ${title}`}>
                     {dict?.home.aboutBtn}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 384 512"
-                        className="w-3 rotate-45"
+                        className="w-2 md:w-3 rotate-45"
                         aria-hidden="true">
                         <path
                             fill={isHovered ? '#FFFFFF' : '#000000'}

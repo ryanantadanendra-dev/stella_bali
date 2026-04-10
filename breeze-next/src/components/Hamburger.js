@@ -3,8 +3,9 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useProduct } from '@/hooks/product'
+import LangBtm from './LangBtn'
 
-const Hamburger = ({ isOpen, setIsOpen, dict }) => {
+const Hamburger = ({ isOpen, setIsOpen, dict, lang }) => {
     const [isHovered, setIsHovered] = useState(false)
     const [isExtended, setIsExtended] = useState(false)
     const [openSubtype, setOpenSubtype] = useState('')
@@ -23,14 +24,14 @@ const Hamburger = ({ isOpen, setIsOpen, dict }) => {
     }, [isExtended])
 
     const menuHeight = !isExtended
-        ? 'h-[224px]'
+        ? 'h-[268.8px]'
         : openSubtype === null
-          ? 'h-[313.6px]'
+          ? 'h-[358.4px]'
           : openSubtype === 0 // index 0 = Man/Pria
-            ? 'h-[492.8px]'
+            ? 'h-[537.6px]'
             : openSubtype === 1 // index 1 = Woman/Wanita
-              ? 'h-[537.6px]'
-              : 'h-[313.6px]'
+              ? 'h-[582.4px]'
+              : 'h-[358.4px]'
 
     const filterCategories = () => {
         const isMan = openSubtype === 0 // index 0 selalu Man/Pria
@@ -146,6 +147,10 @@ const Hamburger = ({ isOpen, setIsOpen, dict }) => {
                         className="ms-3">
                         {dict?.hamburger?.blogs}
                     </Link>
+                </div>
+                <div
+                    className={`link-wrapper h-[44.8px] ps-3 pb-3 flex items-center`}>
+                    <LangBtm lang={lang} />
                 </div>
             </div>
         </div>
