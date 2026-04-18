@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Logo from '../../public/Assets/Logo.png'
 
-const ApplicationLogo = () => (
-    <figure className="relative w-72 h-12">
+const ApplicationLogo = ({ isNavbar }) => (
+    <figure className={`relative ${isNavbar ? 'w-32' : 'w-72'} h-12`}>
         <Image
             src={Logo ? Logo : ''}
             fill

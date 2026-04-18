@@ -8,12 +8,13 @@ const EditImageForm = ({ id, setIsOpen }) => {
     const [formData, setFormData] = useState({
         image: null,
     })
+    console.log(id)
 
     const handleFileChange = e => {
         const file = e.target.files[0]
         const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/jpg']
 
-        if (!ALLOWED_TYPES.includes(file.type)) {
+        if (!ALLOWED_TYPES.includes(file?.type)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

@@ -7,6 +7,8 @@ import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import Link from 'next/link'
+import ApplicationLogo from '@/components/ApplicationLogo'
 
 const Navigation = ({ user }) => {
     const { logout } = useAuth()
@@ -22,37 +24,45 @@ const Navigation = ({ user }) => {
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         {/* Logo */}
-                        {/* <div className="flex-shrink-0 flex items-center">
+                        <div className="flex-shrink-0 flex items-center">
                             <Link href="/dashboard">
-                                <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
+                                <figure className="w-32">
+                                    <ApplicationLogo isNavbar={true} />
+                                </figure>
                             </Link>
-                        </div> */}
+                        </div>
 
                         {/* Navigation Links */}
-                        <div className="text-black gap-1 md:gap-8 sm:-my-px lg:ml-10 flex">
-                            <NavLink
-                                href="/dashboard"
-                                active={usePathname() === '/dashboard'}>
-                                Dashboard
-                            </NavLink>
-                            <NavLink
-                                href="/dashboard/products"
-                                active={
-                                    usePathname() === '/dashboard/products'
-                                }>
-                                Products
-                            </NavLink>
-                            <NavLink
-                                href="/dashboard/blogs"
-                                active={usePathname() === '/dashboard/blogs'}>
-                                Blogs
-                            </NavLink>
-                            <NavLink
-                                href="/dashboard/contact"
-                                active={usePathname() === '/dashboard/contact'}>
-                                Contact
-                            </NavLink>
-                        </div>
+                        {window.innerWidth > 550 && (
+                            <div className="text-black gap-1 md:gap-8 sm:-my-px lg:ml-10 flex">
+                                <NavLink
+                                    href="/dashboard"
+                                    active={usePathname() === '/dashboard'}>
+                                    Dashboard
+                                </NavLink>
+                                <NavLink
+                                    href="/dashboard/products"
+                                    active={
+                                        usePathname() === '/dashboard/products'
+                                    }>
+                                    Products
+                                </NavLink>
+                                <NavLink
+                                    href="/dashboard/blogs"
+                                    active={
+                                        usePathname() === '/dashboard/blogs'
+                                    }>
+                                    Blogs
+                                </NavLink>
+                                <NavLink
+                                    href="/dashboard/contact"
+                                    active={
+                                        usePathname() === '/dashboard/contact'
+                                    }>
+                                    Contact
+                                </NavLink>
+                            </div>
+                        )}
                     </div>
 
                     {/* Settings Dropdown */}
@@ -121,13 +131,34 @@ const Navigation = ({ user }) => {
             {/* Responsive Navigation Menu */}
             {open && (
                 <div className="block sm:hidden">
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/dashboard"
-                            active={usePathname() === '/dashboard'}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
+                    {window.innerWidth < 550 && (
+                        <div className="pt-2 pb-3 space-y-1">
+                            <ResponsiveNavLink
+                                href="/dashboard"
+                                active={usePathname() === '/dashboard'}
+                                setOpen={setOpen}>
+                                Dashboard
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href="/dashboard/products"
+                                active={usePathname() === '/dashboard/products'}
+                                setOpen={setOpen}>
+                                Products
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href="/dashboard/blogs"
+                                active={usePathname() === '/dashboard/contact'}
+                                setOpen={setOpen}>
+                                Blogs
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink
+                                href="/dashboard/contact"
+                                active={usePathname() === '/dashboard/contact'}
+                                setOpen={setOpen}>
+                                Contact
+                            </ResponsiveNavLink>
+                        </div>
+                    )}
 
                     {/* Responsive Settings Options */}
                     <div className="pt-4 pb-1 border-t border-gray-200">

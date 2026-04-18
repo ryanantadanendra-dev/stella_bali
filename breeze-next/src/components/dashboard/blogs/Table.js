@@ -13,6 +13,7 @@ const Table = () => {
     const [isLoading, setIsLoading] = useState(false)
     const { blogs, deleteData } = useBlog()
     const [modalName, setModalName] = useState('')
+    const [targetId, setTargetId] = useState(0)
 
     const handleDelete = async id => {
         Swal.fire({
@@ -109,6 +110,7 @@ const Table = () => {
                                 onClick={() => {
                                     setIsOpen(!isOpen)
                                     setModalName('edit-image')
+                                    setTargetId(blog?.id)
                                 }}
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512"
@@ -146,7 +148,7 @@ const Table = () => {
                             ) : modalName == 'edit-image' ? (
                                 <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
                                     <EditImageForm
-                                        id={blog?.id}
+                                        id={targetId}
                                         setIsOpen={setIsOpen}
                                     />
                                 </Modal>

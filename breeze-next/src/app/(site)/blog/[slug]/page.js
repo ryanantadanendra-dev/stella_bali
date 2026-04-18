@@ -97,10 +97,10 @@ export default async function Blog({ params, searchParams }) {
             </article>
             <div className="mt-2 py-12">
                 <p className="text-center">Read More</p>
-                <div className="flex justify-center">
+                <div className="flex justify-center gap-5">
                     {blogs
                         ?.filter(b => b.title !== blog.title)
-                        .slice(0, 3)
+                        .slice(0, 5)
                         ?.map(blog => (
                             <Card
                                 key={blog.id || blog.slug}
