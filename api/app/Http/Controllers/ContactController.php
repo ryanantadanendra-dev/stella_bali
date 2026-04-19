@@ -21,7 +21,7 @@ class ContactController extends Controller
 
         if($contact) {
             $validatedData = $request->validate([
-                'phone' => 'required|phone:ID,INTERNATIONAL'
+                'phone' => ['required', 'regex:/^(\+62|62|0)8[1-9][0-9]{6,10}$/']
             ]);
 
             $contact->update([

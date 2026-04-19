@@ -33,9 +33,10 @@ const AddImageForm = ({ productId, setIsOpen }) => {
             e.target.value = null
 
             setFormData({
-                ...formData,
-                image: null,
+                images: [],
             })
+
+            return
         }
 
         if (files?.some(file => file.size > 2 * 1024 * 1024)) {
@@ -48,15 +49,15 @@ const AddImageForm = ({ productId, setIsOpen }) => {
             e.target.value = null
 
             setFormData({
-                ...formData,
-                image: null,
+                images: [],
             })
+
+            return
         }
 
         if (files) {
             {
                 setFormData({
-                    ...formData,
                     images: files,
                 })
             }
@@ -68,32 +69,28 @@ const AddImageForm = ({ productId, setIsOpen }) => {
         setIsLoading(true)
 
         try {
-            await addImage(id, formData)
+            const res = await addImage(id, formData)
 
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
-                text: 'Added Product Successfully!',
+                text: res.data?.message,
             })
+
+            if (inputRef.current) inputRef.current.value = null
 
             setFormData({
-                ...formData,
                 images: [],
             })
-
-            if (fileRef.current) {
-                fileRef.current.value = ''
-            }
 
             setIsOpen(false)
         } catch (error) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: error.response?.data.message,
+                text: error,
             })
             setFormData({
-                ...formData,
                 images: [],
             })
         } finally {

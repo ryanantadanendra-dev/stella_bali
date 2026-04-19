@@ -46,7 +46,11 @@ const Table = () => {
 
             setIsOpen(false)
         } catch (error) {
-        } finally {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error?.response?.data?.message || 'Something went wrong',
+            })
         }
     }
 
@@ -67,7 +71,7 @@ const Table = () => {
                         <svg
                             onClick={() => {
                                 setIsOpen(!isOpen)
-                                setCId(contact.data.id)
+                                setCId(contact?.data?.id)
                             }}
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"

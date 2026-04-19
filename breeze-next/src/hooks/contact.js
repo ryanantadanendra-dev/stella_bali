@@ -26,12 +26,10 @@ export const useContact = () => {
         const data = new FormData()
 
         data.append('phone', formData.phone)
-        data.append('_method', 'PUT')
 
-        const response = await axios.post(
-            `/api/dashboard/contact/edit/${id}`,
-            data,
-        )
+        const response = await axios.put(`/api/dashboard/contact/edit/${id}`, {
+            phone: formData.phone,
+        })
 
         if (response.status === 201) mutate()
 
@@ -41,5 +39,7 @@ export const useContact = () => {
     return {
         contact,
         edit,
+        isLoading,
+        error,
     }
 }

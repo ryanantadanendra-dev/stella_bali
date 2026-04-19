@@ -442,66 +442,6 @@ export const useProductOptimistic = () => {
         [csrf, mutate],
     )
 
-    const addImage = useCallback(
-        async (id, formData) => {
-            try {
-                await csrf()
-
-                const formDataObj = new FormData()
-
-                if (!formData.images || formData.images.length === 0) {
-                    throw new Error('No images provided')
-                }
-
-                formData.images.forEach(image =>
-                    formDataObj.append('images[]', image),
-                )
-
-                const response = await axios.post(
-                    `/api/dashboard/product/add/image/${id}`,
-                    formDataObj,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    },
-                )
-
-                if (response.status === 201) {
-                    await mutate()
-                }
-
-                return response
-            } catch (error) {
-                console.error('Error adding image:', error)
-                throw error
-            }
-        },
-        [csrf, mutate],
-    )
-
-    const deleteImage = useCallback(
-        async id => {
-            try {
-                await csrf()
-
-                const response = await axios.delete(
-                    `/api/dashboard/product/delete/image/${id}`,
-                )
-
-                if (response.status === 201) {
-                    await mutate()
-                }
-
-                return response
-            } catch (error) {
-                console.error('Error deleting image:', error)
-                throw error
-            }
-        },
-        [csrf, mutate],
-    )
-
     return {
         products,
         categories,

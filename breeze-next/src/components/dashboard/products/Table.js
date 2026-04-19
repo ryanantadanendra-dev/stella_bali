@@ -27,12 +27,12 @@ const Table = ({ setIsOpen }) => {
             if (result.isConfirmed) {
                 setIsLoading(true)
                 try {
-                    await deleteData(id)
+                    const res = await deleteData(id)
 
                     if (result) {
                         Swal.fire({
                             title: 'Deleted!',
-                            text: 'Your file has been deleted.',
+                            text: res.data?.message,
                             icon: 'success',
                         })
                         setIsOpen(false)
@@ -63,12 +63,12 @@ const Table = ({ setIsOpen }) => {
             if (result.isConfirmed) {
                 setIsLoading(true)
                 try {
-                    await deleteImage(id)
+                    const res = await deleteImage(id)
 
                     if (result) {
                         Swal.fire({
                             title: 'Deleted!',
-                            text: 'Your file has been deleted.',
+                            text: res.data?.message,
                             icon: 'success',
                         })
                         setIsOpen(false)

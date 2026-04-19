@@ -21,33 +21,39 @@ const Details = ({ slug, dict, lang }) => {
     return (
         <section className="w-screen h-full ">
             <div className="flex flex-wrap">
-                <div className="md:w-1/2 w-full flex flex-col-reverse gap-3 md:flex-row h-96 items-center justify-center mt-12 md:mt-20">
-                    <div className="md:h-[25rem] lg:h-[30rem] h-44 w-96 lg:px-3 flex justify-center mx-auto gap-5 md:block md:w-1/4 overflow-x-scroll overflow-y-hidden md:overflow-x-hidden md:overflow-y-scroll">
-                        {product?.images.map((image, index) => (
-                            <figure
-                                onClick={() => setIsActive(index)}
-                                key={index}
-                                className={`md:w-28 md:h-32 min-w-32 h-44 relative mt-5 ${isActive == index ? 'opacity-100' : 'opacity-50'}`}>
-                                <Image
-                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${image.path}`}
-                                    alt={`${product?.name} image ${index}`}
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    className="object-cover"
-                                />
-                            </figure>
-                        ))}
+                {product?.images.length > 0 ? (
+                    <div className="md:w-1/2 w-full flex flex-col-reverse gap-3 md:flex-row h-96 items-center justify-center mt-12 md:mt-20">
+                        <div className="md:h-[25rem] lg:h-[30rem] h-44 w-96 lg:px-3 flex justify-center mx-auto gap-5 md:block md:w-1/4 overflow-x-scroll overflow-y-hidden md:overflow-x-hidden md:overflow-y-scroll">
+                            {product?.images?.map((image, index) => (
+                                <figure
+                                    onClick={() => setIsActive(index)}
+                                    key={index}
+                                    className={`md:w-28 md:h-32 min-w-32 h-44 relative mt-5 ${isActive == index ? 'opacity-100' : 'opacity-50'}`}>
+                                    <Image
+                                        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${image?.path}`}
+                                        alt={`${product?.name} image ${index}`}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        className="object-cover"
+                                    />
+                                </figure>
+                            ))}
+                        </div>
+                        <figure className="lg:w-[30rem] lg:h-[30rem] md:w-[20rem] md:h-[25rem] w-[20rem] h-[25rem] bg-transparent relative">
+                            <Image
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${product?.images?.[isActive] ?? product.images[isActive].path}`}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                                quality={90}
+                                className="object-contain"
+                            />
+                        </figure>
                     </div>
-                    <figure className="lg:w-[30rem] lg:h-[30rem] md:w-[20rem] md:h-[25rem] w-[20rem] h-[25rem] bg-transparent relative">
-                        <Image
-                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${product?.images[isActive].path}`}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-                            quality={90}
-                            className="object-contain"
-                        />
-                    </figure>
-                </div>
+                ) : (
+                    <div className="md:w-1/2 w-full flex justify-center items-center">
+                        <p className="text-center">No Image Yet!</p>
+                    </div>
+                )}
                 <div className="md:w-1/2 w-full px-12 md:px-0 md:ps-12 md:pe-12 pt-8 lg:pt-8 md:pt-12">
                     <p>
                         {lang == 'en' ? product?.type : product?.type_ina} •{' '}
