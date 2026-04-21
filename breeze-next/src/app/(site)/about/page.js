@@ -222,10 +222,10 @@ const About = async ({ searchParams }) => {
                 <section className="productions mt-56 flex h-full w-full flex-col gap-12 lg:flex-row">
                     <figure className="relative mx-auto h-[20rem] w-[20rem] md:h-[30rem] md:w-[40rem] lg:mx-0 lg:h-[80vh] lg:w-[50vw]">
                         <Image
-                            src="/Assets/production.webp"
+                            src="/Assets/production.jpg"
                             alt="Stella Bali artisans at work producing handmade fashion"
                             fill
-                            className="object-contain"
+                            className="object-cover"
                             quality={90}
                             sizes="(max-width: 1024px) 100vw, 50vw"
                         />
