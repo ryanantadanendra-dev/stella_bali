@@ -41,7 +41,7 @@ const Details = ({ slug, dict, lang }) => {
                         </div>
                         <figure className="lg:w-[30rem] lg:h-[30rem] md:w-[20rem] md:h-[25rem] w-[20rem] h-[25rem] bg-transparent relative">
                             <Image
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${product?.images?.[isActive] ?? product.images[isActive].path}`}
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${product?.images?.[isActive].path ?? product?.images[isActive]?.path}`}
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                                 quality={90}
